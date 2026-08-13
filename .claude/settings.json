@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(timeout 150 node geo.js '[\"/\"]' '[\".hnet__mark\",\".hnet__name\"]')"
+    ]
+  }
+}

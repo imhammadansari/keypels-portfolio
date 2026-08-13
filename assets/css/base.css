@@ -1,0 +1,585 @@
+/* ==========================================================================
+   KeyPels — base.css
+   Design tokens, reset, typography, buttons, shared primitives, utilities.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand */
+  --indigo-300: #a5b4fc;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --violet-400: #a78bfa;
+  --violet-500: #8b5cf6;
+  --cyan-400: #22d3ee;
+
+  /* Dark surfaces */
+  --ink-900: #05060c;
+  --ink-800: #080a14;
+  --ink-700: #0c0f1d;
+  --ink-600: #121527;
+  --ink-500: #1a1e33;
+
+  /* Light surfaces */
+  --paper: #ffffff;
+  --paper-alt: #f5f6fb;
+  --paper-line: #e7e9f2;
+
+  /* Text */
+  --text-dark: #0b0d1a;
+  --text-dark-soft: #4c5168;
+  --text-light: #f4f5fb;
+  --text-light-soft: rgba(226, 230, 245, 0.66);
+
+  /* Effects */
+  --brand-grad: linear-gradient(120deg, #818cf8 0%, #a78bfa 46%, #22d3ee 100%);
+  --btn-grad: linear-gradient(120deg, #4f46e5 0%, #7c3aed 52%, #4f46e5 100%);
+  --hairline-dark: rgba(255, 255, 255, 0.10);
+  --hairline-light: rgba(11, 13, 26, 0.08);
+  --glow-indigo: 0 0 0 1px rgba(99, 102, 241, .35), 0 18px 50px -18px rgba(99, 102, 241, .65);
+
+  --shadow-sm: 0 1px 2px rgba(11, 13, 26, .05), 0 6px 16px -10px rgba(11, 13, 26, .18);
+  --shadow-md: 0 2px 6px rgba(11, 13, 26, .05), 0 22px 50px -26px rgba(11, 13, 26, .3);
+  --shadow-lg: 0 40px 90px -40px rgba(11, 13, 26, .38);
+
+  /* Radii */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-2xl: 40px;
+  --r-pill: 999px;
+
+  /* Rhythm */
+  --gutter: clamp(20px, 5vw, 40px);
+  --maxw: 1240px;
+  --section-y: clamp(72px, 9vw, 140px);
+  --section-yy: clamp(72px, 9vw, 0px);
+
+  /* Motion */
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --dur: .45s;
+
+  /* Type */
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-head: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Roboto, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
+/* html owns the canvas colour (so overscroll stays dark); body paints the
+   light "page" that shows through the rounded corners of dark sections. */
+html {
+  background: var(--ink-900);
+}
+
+body {
+  margin: 0;
+  background: var(--paper-alt);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.033em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(139, 92, 246, .32);
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo-400);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout primitives
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section--dark {
+  background: var(--ink-900);
+  color: var(--text-light);
+  position: relative;
+}
+
+.section--light {
+  background: var(--paper-alt);
+  color: var(--text-dark);
+  position: relative;
+}
+
+/* Dark blocks that sit between light ones get sculpted corners */
+.section--rounded {
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  transform: translateY(-160%);
+  background: var(--indigo-600);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  transition: transform .25s var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 90;
+  pointer-events: none;
+  background: transparent;
+}
+
+.scroll-progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--brand-grad);
+  box-shadow: 0 0 14px rgba(139, 92, 246, .8);
+}
+
+/* --------------------------------------------------------------------------
+   4. Type helpers
+   -------------------------------------------------------------------------- */
+.grad {
+  background: var(--brand-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 220% 100%;
+  animation: gradShift 9s var(--ease) infinite alternate;
+}
+
+@keyframes gradShift {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.section-head {
+  max-width: 760px;
+  margin-bottom: clamp(40px, 5vw, 68px);
+}
+
+.section-head--split {
+  max-width: none;
+  display: grid;
+  gap: clamp(20px, 3vw, 56px);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  align-items: end;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--indigo-600);
+  margin-bottom: 22px;
+}
+
+.eyebrow__line {
+  width: 30px;
+  height: 1px;
+  background: currentColor;
+  opacity: .5;
+}
+
+.eyebrow--light {
+  color: var(--indigo-300);
+}
+
+.section-title {
+  font-size: clamp(2.1rem, 4.4vw, 3.6rem);
+}
+
+.section-title--light {
+  color: #fff;
+}
+
+.section-lead {
+  margin-top: 20px;
+  font-size: clamp(1.02rem, 1.35vw, 1.16rem);
+  color: var(--text-dark-soft);
+  max-width: 62ch;
+}
+
+.section-lead--light {
+  color: var(--text-light-soft);
+}
+
+.section-lead a {
+  color: var(--indigo-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.section-lead--light a {
+  color: var(--indigo-300);
+}
+
+/* --------------------------------------------------------------------------
+   5. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  --btn-py: 12px;
+  --btn-px: 22px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: var(--btn-py) var(--btn-px);
+  border-radius: var(--r-pill);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: .95rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  isolation: isolate;
+  /* clips the .btn--primary sheen, which starts parked outside the button */
+  overflow: hidden;
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease), background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+
+.btn>span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn__arrow {
+  position: relative;
+  z-index: 2;
+  transition: transform .35s var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(.99);
+}
+
+.btn--sm {
+  --btn-py: 10px;
+  --btn-px: 18px;
+  font-size: .9rem;
+}
+
+.btn--lg {
+  --btn-py: 15px;
+  --btn-px: 30px;
+  font-size: 1rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Primary — gradient with travelling sheen */
+.btn--primary {
+  color: #fff;
+  background: var(--btn-grad);
+  background-size: 200% 100%;
+  box-shadow: 0 10px 30px -12px rgba(79, 70, 229, .85), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, .3) 45%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .8s var(--ease-out);
+}
+
+.btn--primary:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -14px rgba(124, 58, 237, .9), inset 0 1px 0 rgba(255, 255, 255, .28);
+}
+
+.btn--primary:hover::after {
+  transform: translateX(120%);
+}
+
+/* Ghost — on dark */
+.btn--ghost {
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .03);
+}
+
+.btn--ghost:hover {
+  border-color: rgba(165, 180, 252, .55);
+  background: rgba(99, 102, 241, .12);
+  transform: translateY(-2px);
+}
+
+/* Glass — on gradient panels */
+.btn--glass {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .28);
+  background: rgba(255, 255, 255, .08);
+  backdrop-filter: blur(10px);
+}
+
+.btn--glass:hover {
+  background: rgba(255, 255, 255, .16);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   6. Shared decorative primitives
+   -------------------------------------------------------------------------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px 8px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .04);
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--text-light-soft);
+}
+
+.pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 4px rgba(52, 211, 153, .16);
+  animation: livePulse 2.4s var(--ease) infinite;
+}
+
+@keyframes livePulse {
+  50% {
+    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+  }
+}
+
+.badge {
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  text-transform: uppercase;
+}
+
+.badge--ok {
+  color: #6ee7b7;
+  background: rgba(52, 211, 153, .14);
+  border: 1px solid rgba(52, 211, 153, .28);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--indigo-400);
+}
+
+.dot--live {
+  background: #34d399;
+  animation: livePulse 2.4s var(--ease) infinite;
+}
+
+/* Ambient gradient orbs.
+   Softness comes from the radial-gradient itself rather than filter: blur() —
+   large blur radii are expensive to composite and tile badly on software raster. */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: .6;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Faint technical grid overlay */
+.grid-veil {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Scroll reveal
+   -------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity .75s var(--ease-out) var(--reveal-delay, 0ms),
+    transform .75s var(--ease-out) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero headline lines mask upward */
+.hero__title .line {
+  display: block;
+  overflow: hidden;
+  /* breathing room so the mask never clips descenders */
+  padding-bottom: .09em;
+  margin-bottom: -.09em;
+  opacity: 1;
+  transform: none;
+}
+
+.hero__title .line>span {
+  display: block;
+  transform: translate3d(0, 108%, 0);
+  transition: transform .95s var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.hero__title .line.is-visible>span {
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   8. Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero__title .line>span {
+    transform: none !important;
+  }
+}

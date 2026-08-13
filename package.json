@@ -1,0 +1,14 @@
+{
+  "name": "keypels-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KeyPels — software development and AI solutions agency website. Static output, zero runtime dependencies.",
+  "scripts": {
+    "build": "node tools/build.js",
+    "serve": "npx --yes serve .",
+    "dev": "npm run build && npm run serve"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
