@@ -22,7 +22,9 @@ const portfolios = SERVICE_SLUGS.map((slug) => require(`./portfolio/${slug}`));
 /* --------------------------------------------------------------------------
    Shared <head>
    -------------------------------------------------------------------------- */
-const FAVICON = `<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='.55' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2308091a'/%3E%3Cpath d='M20 15h7v14.5L40 15h9L34.5 31.5 49 49h-9L27 33.5V49h-7z' fill='url(%23g)'/%3E%3C/svg%3E">`;
+const favicon = (rel) => `<link rel="icon" type="image/png" href="${rel}assets/img/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="${rel}assets/img/icon-192.png">
+<link rel="apple-touch-icon" href="${rel}assets/img/apple-touch-icon.png">`;
 
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +37,7 @@ function head(o) {
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${title}</title>
 <meta name="description" content="${description}">
-<meta name="theme-color" content="#05060c">
+<meta name="theme-color" content="#080807">
 <meta name="color-scheme" content="dark light">
 <link rel="canonical" href="${url}">
 
@@ -48,7 +50,7 @@ function head(o) {
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${description}">
 
-${FAVICON}
+${favicon(rel)}
 
 ${FONTS}
 
@@ -173,7 +175,7 @@ function buildServicePage(s) {
 /* --------------------------------------------------------------------------
    Portfolio pages
    -------------------------------------------------------------------------- */
-const PORTFOLIO_ORDER = ['hero', 'work', 'approach', 'outcomes', 'cta', 'more'];
+const PORTFOLIO_ORDER = ['hero', 'work', 'approach', 'outcomes', 'cta'];
 
 function buildPortfolioPage(p) {
   const rel = '../../';

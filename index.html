@@ -5,23 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KeyPels — Software Development &amp; AI Solutions Agency</title>
 <meta name="description" content="KeyPels builds powerful digital products and AI-powered solutions — web, mobile, CRM, AI automation, AI agents and chatbots — that help businesses move faster, operate smarter and scale with confidence.">
-<meta name="theme-color" content="#05060c">
+<meta name="theme-color" content="#080807">
 <meta name="color-scheme" content="dark light">
-<link rel="canonical" href="https://keypels.com/">
+<link rel="canonical" href="https://www.keypels.com/">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KeyPels">
 <meta property="og:title" content="KeyPels — Build Smarter. Automate Faster. Grow Further.">
 <meta property="og:description" content="A premium  for software development and AI solutions: web, mobile, CRM, AI automation, AI agents and chatbots.">
-<meta property="og:url" content="https://keypels.com/">
+<meta property="og:url" content="https://www.keypels.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="KeyPels — Software Development &amp; AI Solutions">
 <meta name="twitter:description" content="Digital products and AI-powered systems built for businesses that want to move faster.">
 
-<!-- Inline SVG favicon: no extra request -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='.55' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2308091a'/%3E%3Cpath d='M20 15h7v14.5L40 15h9L34.5 31.5 49 49h-9L27 33.5V49h-7z' fill='url(%23g)'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2308091a'/%3E%3Cpath d='M20 15h7v14.5L40 15h9L34.5 31.5 49 49h-9L27 33.5V49h-7z' fill='%238b5cf6'/%3E%3C/svg%3E">
+<!-- Favicon: 96px so Google accepts it (must be 48 or a multiple) -->
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon-192.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,14 +31,54 @@
 
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/sections.css">
+<!-- the media frames and portfolio previews used in the services and
+     selected-work grids live here, shared with the service pages -->
+<link rel="stylesheet" href="assets/css/service.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.keypels.com/#website",
+      "url": "https://www.keypels.com/",
+      "name": "KeyPels",
+      "alternateName": "KeyPels Agency",
+      "description": "Software development and AI solutions agency building web, mobile, CRM, AI automation, AI agents and chatbot systems.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://www.keypels.com/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.keypels.com/#organization",
+      "name": "KeyPels",
+      "url": "https://www.keypels.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.keypels.com/assets/img/icon-192.png",
+        "width": 192,
+        "height": 192
+      },
+      "image": "https://www.keypels.com/assets/img/icon-192.png",
+      "email": "contact@keypels.com",
+      "description": "Software development and AI solutions agency building web, mobile, CRM, AI automation, AI agents and chatbot systems.",
+      "sameAs": [
+        "https://www.linkedin.com/",
+        "https://www.instagram.com/",
+        "https://x.com/"
+      ]
+    }
+  ]
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "KeyPels",
   "description": "Software development and AI solutions agency building web, mobile, CRM, AI automation, AI agents and chatbot systems.",
-  "url": "https://keypels.com/",
+  "url": "https://www.keypels.com/",
   "email": "contact@keypels.com",
   "areaServed": "Worldwide",
   "makesOffer": [
@@ -61,14 +102,7 @@
   <div class="container header__inner">
     <a class="brand" href="index.html" aria-label="KeyPels — home">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
-          <defs>
-            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#818cf8"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/>
-            </linearGradient>
-          </defs>
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>
       <span class="brand__word">KeyPels</span>
     </a>
@@ -349,8 +383,8 @@
     <svg class="hnet__links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="hnetLine" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#818cf8" stop-opacity=".55"/>
-          <stop offset="1" stop-color="#22d3ee" stop-opacity=".28"/>
+          <stop offset="0" stop-color="#b3b4b6" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#ebebec" stop-opacity=".28"/>
         </linearGradient>
       </defs>
       <g class="hnet__base" stroke="url(#hnetLine)" fill="none">
@@ -361,7 +395,7 @@
         <path d="M50 50 L18 70" vector-effect="non-scaling-stroke"/>
         <path d="M50 50 L18 30" vector-effect="non-scaling-stroke"/>
       </g>
-      <g class="hnet__pulse" stroke="#a5b4fc" fill="none" stroke-linecap="round">
+      <g class="hnet__pulse" stroke="#d0d1d3" fill="none" stroke-linecap="round">
         <path d="M50 50 L50 10" pathLength="100" vector-effect="non-scaling-stroke" style="--d:0.00s"/>
         <path d="M50 50 L82 30" pathLength="100" vector-effect="non-scaling-stroke" style="--d:0.55s"/>
         <path d="M50 50 L82 70" pathLength="100" vector-effect="non-scaling-stroke" style="--d:1.10s"/>
@@ -375,9 +409,7 @@
       <span class="hnet__rings" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="hnet__core">
         <span class="hnet__mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="26" height="26" focusable="false">
-            <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-          </svg>
+          <img src="assets/img/keypels-mark.png" width="26" height="26" alt="" decoding="async">
         </span>
         <span class="hnet__name">KeyPels</span>
         <span class="hnet__sub"></span>
@@ -515,9 +547,24 @@
           <div class="mock mock--browser" aria-hidden="true">
             <div class="mock__bar"><i></i><i></i><i></i><span class="mock__url">keypels.com</span></div>
             <div class="mock__body">
-              <div class="mock__hero"></div>
-              <div class="mock__rows"><i></i><i></i><i></i></div>
-              <div class="mock__cards"><i></i><i></i><i></i></div>
+              <div class="mock__nav">
+                <b class="mock__logo">KeyPels</b>
+                <span>Work</span><span>Services</span><span>About</span>
+                <u>Let's Talk</u>
+              </div>
+              <div class="mock__hero">
+                <strong>Build Smarter.<br>Grow Further.</strong>
+                <p>Websites engineered to convert.</p>
+                <u>Start a project</u>
+              </div>
+              <div class="mock__rows">
+                <i>Trusted by teams shipping fast</i>
+              </div>
+              <div class="mock__cards">
+                <i><b>98</b>Speed</i>
+                <i><b>2.4x</b>Leads</i>
+                <i><b>AA</b>Access</i>
+              </div>
             </div>
           </div>
         </div>
@@ -539,9 +586,17 @@
             <div class="phone">
               <span class="phone__notch"></span>
               <div class="phone__screen">
-                <div class="phone__top"><i></i><b></b></div>
-                <div class="phone__balance"><span></span><b></b></div>
-                <div class="phone__list"><i></i><i></i><i></i></div>
+                <div class="phone__top"><i>9:41</i><b></b></div>
+                <div class="phone__balance">
+                  <span>Total balance</span>
+                  <b>$12,480.50</b>
+                  <em>+2.4% this week</em>
+                </div>
+                <div class="phone__list">
+                  <i><s></s><em>Spotify</em><b>-$9.99</b></i>
+                  <i><s></s><em>Payout</em><b>+$420.00</b></i>
+                  <i><s></s><em>Uber</em><b>-$18.40</b></i>
+                </div>
                 <div class="phone__tabs"><i></i><i></i><i></i><i></i></div>
               </div>
             </div>
@@ -564,9 +619,18 @@
           <div class="mock mock--crm" aria-hidden="true">
             <div class="crm__side"><i></i><i></i><i></i><i></i></div>
             <div class="crm__main">
-              <div class="crm__kpis"><i></i><i></i><i></i></div>
-              <div class="crm__chart"><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:47%"></i><i style="--h:80%"></i><i style="--h:56%"></i><i style="--h:92%"></i></div>
-              <div class="crm__rows"><i></i><i></i></div>
+              <div class="crm__kpis">
+                <i><b>1,284</b>Leads</i>
+                <i><b>$84.6k</b>Pipeline</i>
+                <i><b>38%</b>Win rate</i>
+              </div>
+              <div class="crm__chart">
+                <i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:47%"></i><i style="--h:80%"></i><i style="--h:56%"></i><i style="--h:92%"></i>
+              </div>
+              <div class="crm__rows">
+                <i><s>AR</s><em>Ayesha Raza</em><u>Won</u></i>
+                <i><s>MK</s><em>Marcus Kane</em><u class="is-warm">Proposal</u></i>
+              </div>
             </div>
           </div>
         </div>
@@ -585,16 +649,25 @@
       <article class="s-card" data-reveal data-delay="0">
         <div class="s-card__visual">
           <div class="mock mock--flow" aria-hidden="true">
-            <svg viewBox="0 0 260 150" class="flowmini">
-              <g stroke="rgba(99,102,241,.45)" fill="none" stroke-width="1.5">
-                <path d="M40 40 H120 V75 H210"/><path d="M40 110 H120"/><path d="M120 110 V75"/>
+            <svg viewBox="0 0 208 118" class="flowmini" role="img" aria-label="Webhook to validate to AI agent, producing a scored lead and a sheet row">
+              <g stroke="rgba(212, 158, 23,.45)" fill="none" stroke-width="1.5">
+                <path d="M62 24 H74"/><path d="M134 24 H146"/><path d="M176 40 V56 H32 V78"/><path d="M62 94 H74"/>
               </g>
-              <g class="flowmini__dash" stroke="#6366f1" fill="none" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 10">
-                <path d="M40 40 H120 V75 H210"/>
+              <g class="flowmini__dash" stroke="#c9971a" fill="none" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 10">
+                <path d="M62 24 H74"/><path d="M134 24 H146"/><path d="M62 94 H74"/>
               </g>
-              <g class="flowmini__nodes">
-                <rect x="16" y="26" width="48" height="28" rx="9"/><rect x="16" y="96" width="48" height="28" rx="9"/>
-                <rect x="98" y="61" width="46" height="28" rx="9"/><rect x="188" y="61" width="48" height="28" rx="9"/>
+              <g class="flowmini__nodes"><rect x="2" y="8" width="60" height="32" rx="8"/><rect x="74" y="8" width="60" height="32" rx="8"/><rect x="146" y="8" width="60" height="32" rx="8"/><rect x="2" y="78" width="60" height="32" rx="8"/><rect x="74" y="78" width="60" height="32" rx="8"/></g>
+              <g class="flowmini__labels">
+                <text class="flowmini__t" x="32" y="22" text-anchor="middle">Webhook</text>
+                <text class="flowmini__d" x="32" y="32" text-anchor="middle">POST /lead</text>
+                <text class="flowmini__t" x="104" y="22" text-anchor="middle">Validate</text>
+                <text class="flowmini__d" x="104" y="32" text-anchor="middle">6 fields</text>
+                <text class="flowmini__t" x="176" y="22" text-anchor="middle">AI agent</text>
+                <text class="flowmini__d" x="176" y="32" text-anchor="middle">scores lead</text>
+                <text class="flowmini__t" x="32" y="92" text-anchor="middle">Lead</text>
+                <text class="flowmini__d" x="32" y="102" text-anchor="middle">score 87</text>
+                <text class="flowmini__t" x="104" y="92" text-anchor="middle">Sheet</text>
+                <text class="flowmini__d" x="104" y="102" text-anchor="middle">row added</text>
               </g>
             </svg>
           </div>
@@ -857,22 +930,21 @@
 
     <div class="work__grid">
 
-      <article class="p-card" data-reveal>
-        <a class="p-card__link" href="#contact" aria-label="AI Operations Platform — start a similar project">
-          <div class="p-card__visual p-card__visual--a">
-            <div class="ui ui--ops" aria-hidden="true">
-              <div class="ui__top"><span class="ui__dots"><i></i><i></i><i></i></span><span class="ui__pill">Operations</span></div>
-              <div class="ui__grid">
-                <div class="ui__panel"><span class="ui__label"></span><div class="ui__chart"><i style="--h:44%"></i><i style="--h:70%"></i><i style="--h:55%"></i><i style="--h:86%"></i><i style="--h:66%"></i></div></div>
-                <div class="ui__panel"><span class="ui__label"></span><span class="ui__ring"></span></div>
-                <div class="ui__panel ui__panel--wide"><span class="ui__row"></span><span class="ui__row"></span><span class="ui__row"></span></div>
+      <article class="p-card p-card--pv" data-pv-card data-reveal data-delay="0">
+        <a class="p-card__link" href="#contact" aria-label="Luxury Hospitality Website — start a similar project">
+          <div class="p-card__visual p-card__visual--a p-card__visual--pv">
+            <div class="pv pv--site" data-preview style="--pv-dur:3.17s">
+              <span class="pv__chrome" aria-hidden="true"><i></i><i></i><i></i><b>postodipace.it</b></span>
+              <div class="pv__port">
+                <img class="pv__shot" src="assets/img/preview/web/postodipace.webp" width="500" height="1562"
+                     loading="lazy" decoding="async" alt="Luxury Hospitality Website preview">
               </div>
             </div>
           </div>
           <div class="p-card__meta">
-            <span class="p-card__cat">Project 01 &middot; AI Automation</span>
-            <h3 class="p-card__title">AI Operations Platform</h3>
-            <p class="p-card__text">AI-powered workflow automation platform.</p>
+            <span class="p-card__cat">Project 01 &middot; Web Development</span>
+            <h3 class="p-card__title">Luxury Hospitality Website</h3>
+            <p class="p-card__text">A boutique villa site with a direct-booking journey and its own produce shop.</p>
             <span class="p-card__arrow" aria-hidden="true">
               <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
@@ -880,25 +952,20 @@
         </a>
       </article>
 
-      <article class="p-card" data-reveal data-delay="60">
-        <a class="p-card__link" href="#contact" aria-label="FinTech Mobile Experience — start a similar project">
-          <div class="p-card__visual p-card__visual--b">
-            <div class="ui ui--fin" aria-hidden="true">
-              <div class="fin-phone">
-                <div class="fin-phone__screen">
-                  <span class="fin__label"></span>
-                  <span class="fin__amount"></span>
-                  <div class="fin__chart"><svg viewBox="0 0 120 44" preserveAspectRatio="none"><path d="M0 34 L20 26 L40 30 L60 14 L80 20 L100 8 L120 12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                  <div class="fin__rows"><i></i><i></i><i></i></div>
-                </div>
+      <article class="p-card p-card--pv" data-pv-card data-reveal data-delay="60">
+        <a class="p-card__link" href="#contact" aria-label="Flight Booking App — start a similar project">
+          <div class="p-card__visual p-card__visual--b p-card__visual--pv">
+            <div class="pv pv--app" data-preview data-screens="8">
+              <div class="pv__phone">
+                <span class="pv__notch" aria-hidden="true"></span>
+                <div class="pv__port"><div class="pv__track"><img class="pv__screen" src="assets/img/preview/app/lifti/01.webp" width="300" height="650" loading="lazy" decoding="async" alt="Flight Booking App screen 1"><img class="pv__screen" data-src="assets/img/preview/app/lifti/02.webp" width="300" height="650" decoding="async" alt=""><img class="pv__screen" data-src="assets/img/preview/app/lifti/03.webp" width="300" height="650" decoding="async" alt=""><img class="pv__screen" data-src="assets/img/preview/app/lifti/04.webp" width="300" height="650" decoding="async" alt=""><img class="pv__screen" data-src="assets/img/preview/app/lifti/05.webp" width="300" height="650" decoding="async" alt=""><img class="pv__screen" data-src="assets/img/preview/app/lifti/06.webp" width="300" height="650" decoding="async" alt=""><img class="pv__screen" data-src="assets/img/preview/app/lifti/07.webp" width="300" height="650" decoding="async" alt=""><img class="pv__screen" data-src="assets/img/preview/app/lifti/08.webp" width="300" height="650" decoding="async" alt=""></div></div>
               </div>
-              <div class="fin-card"><span></span><b></b></div>
             </div>
           </div>
           <div class="p-card__meta">
             <span class="p-card__cat">Project 02 &middot; Mobile App</span>
-            <h3 class="p-card__title">FinTech Mobile Experience</h3>
-            <p class="p-card__text">Modern mobile financial management application.</p>
+            <h3 class="p-card__title">Flight Booking App</h3>
+            <p class="p-card__text">Flight search, booking and a peer-to-peer luggage marketplace in one app.</p>
             <span class="p-card__arrow" aria-hidden="true">
               <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
@@ -906,22 +973,18 @@
         </a>
       </article>
 
-      <article class="p-card" data-reveal data-delay="120">
-        <a class="p-card__link" href="#contact" aria-label="Sales Intelligence CRM — start a similar project">
-          <div class="p-card__visual p-card__visual--c">
-            <div class="ui ui--crm" aria-hidden="true">
-              <div class="ui__top"><span class="ui__dots"><i></i><i></i><i></i></span><span class="ui__pill">Pipeline</span></div>
-              <div class="board">
-                <div class="board__col"><span class="board__head"></span><i></i><i></i></div>
-                <div class="board__col"><span class="board__head"></span><i></i><i class="is-hot"></i><i></i></div>
-                <div class="board__col"><span class="board__head"></span><i></i></div>
-              </div>
+      <article class="p-card p-card--pv" data-pv-card data-reveal data-delay="120">
+        <a class="p-card__link" href="#contact" aria-label="Sales Operations CRM — start a similar project">
+          <div class="p-card__visual p-card__visual--c p-card__visual--pv">
+            <div class="pv pv--crm" data-preview data-screens="4">
+              <span class="pv__chrome" aria-hidden="true"><i></i><i></i><i></i><b>Salex</b></span>
+              <div class="pv__port"><div class="pv__track"><img class="pv__page" src="assets/img/preview/crm/salex-crm/01.webp" width="620" height="388" loading="lazy" decoding="async" alt="Sales Operations CRM screen 1"><img class="pv__page" data-src="assets/img/preview/crm/salex-crm/02.webp" width="620" height="388" decoding="async" alt=""><img class="pv__page" data-src="assets/img/preview/crm/salex-crm/03.webp" width="620" height="388" decoding="async" alt=""><img class="pv__page" data-src="assets/img/preview/crm/salex-crm/04.webp" width="620" height="388" decoding="async" alt=""></div></div>
             </div>
           </div>
           <div class="p-card__meta">
             <span class="p-card__cat">Project 03 &middot; CRM Platform</span>
-            <h3 class="p-card__title">Sales Intelligence CRM</h3>
-            <p class="p-card__text">Custom CRM and analytics platform.</p>
+            <h3 class="p-card__title">Sales Operations CRM</h3>
+            <p class="p-card__text">Overview, activity, per-rep performance and a rolling forecast against target.</p>
             <span class="p-card__arrow" aria-hidden="true">
               <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
@@ -929,30 +992,28 @@
         </a>
       </article>
 
-      <article class="p-card" data-reveal data-delay="180">
-        <a class="p-card__link" href="#contact" aria-label="AI Customer Support — start a similar project">
-          <div class="p-card__visual p-card__visual--d">
-            <div class="ui ui--support" aria-hidden="true">
-              <div class="sup__thread">
-                <span class="sup__msg sup__msg--in"></span>
-                <span class="sup__msg sup__msg--out"></span>
-                <span class="sup__msg sup__msg--in sup__msg--short"></span>
-                <span class="sup__msg sup__msg--out sup__msg--short"></span>
+      <article class="p-card p-card--pv" data-pv-card data-reveal data-delay="180">
+        <a class="p-card__link" href="#contact" aria-label="Lead Generation Pipeline — start a similar project">
+          <div class="p-card__visual p-card__visual--d p-card__visual--pv">
+            <div class="pv pv--flow pv--pans" data-preview style="--pv-pan:31.40%;--pv-dur:3.47s">
+              <div class="pv__port">
+                <img class="pv__canvas" src="assets/img/portfolio/google-maps-lead-gen.webp" width="1100" height="393"
+                     loading="lazy" decoding="async" alt="Lead Generation Pipeline workflow">
+                <span class="pv__veil" aria-hidden="true"></span>
+                <span class="pv__scan" aria-hidden="true"></span>
               </div>
-              <div class="sup__panel"><span class="sup__stat"></span><span class="sup__stat sup__stat--sm"></span><span class="sup__stat sup__stat--sm"></span></div>
             </div>
           </div>
           <div class="p-card__meta">
-            <span class="p-card__cat">Project 04 &middot; AI Agents</span>
-            <h3 class="p-card__title">AI Customer Support</h3>
-            <p class="p-card__text">Intelligent conversational support system.</p>
+            <span class="p-card__cat">Project 04 &middot; AI Automation</span>
+            <h3 class="p-card__title">Lead Generation Pipeline</h3>
+            <p class="p-card__text">Harvests prospects, enriches every record and scores it before sales sees it.</p>
             <span class="p-card__arrow" aria-hidden="true">
               <svg viewBox="0 0 16 16" width="16" height="16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
           </div>
         </a>
       </article>
-
     </div>
     <p class="work__note" data-reveal>Illustrative concepts representing the platforms we build. Client work shared on request.</p>
   </div>
@@ -1129,8 +1190,16 @@
     </div>
 
     <div class="contact__formwrap" data-reveal data-delay="100">
-      <!-- Wire `action` to your form endpoint (e.g. Formspree, Resend, your API) to deliver submissions. -->
-      <form class="form" data-form novalidate>
+      <form class="form" data-form novalidate
+            action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms. The key identifies the destination inbox
+             (contact@keypels.com) and is public by design; it grants nothing
+             but the right to post to that inbox. -->
+        <input type="hidden" name="access_key" value="c9cf9507-6b19-4c3c-ae6a-cbad1f87da88">
+        <input type="hidden" name="from_name" value="KeyPels website enquiry">
+        <!-- honeypot: real people never see it, bots fill it in -->
+        <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true"
+               style="display:none !important" autocomplete="off">
         <div class="field">
           <label for="f-name">Name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jordan Rivera" required>
@@ -1199,9 +1268,7 @@
       <div class="footer__brand">
         <a class="brand brand--footer" href="index.html" aria-label="KeyPels — home">
           <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>
           <span class="brand__word">KeyPels</span>
         </a>

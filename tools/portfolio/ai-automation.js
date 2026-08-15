@@ -21,54 +21,151 @@ module.exports = {
   work: {
     h2: 'Our Work',
     lead: 'A selection of the automation programmes we deliver for operations teams across industries.',
+    note:
+      'Production automation builds. Each preview is the live workflow canvas — hover any card to watch it run left to right.',
     projects: [
       {
-        category: 'Finance Ops',
-        tags: ['OCR', 'Extraction', 'ERP write-back'],
-        name: 'Ledgerflow',
-        sub: 'Invoice Processing',
-        body: 'Supplier invoices read, validated against purchase orders and written into the finance system, with confidence thresholds routing anything ambiguous to a review queue.',
-        visual: 'document-flow'
+        category: 'Lead Gen',
+        tags: ['n8n', 'Google Maps', 'Enrichment'],
+        name: 'Google Maps Lead Gen',
+        sub: 'Local Business Prospecting',
+        body: 'A prospecting pipeline that harvests businesses from Maps, enriches each record and scores it before anything reaches the sales inbox.',
+        preview: 'flow',
+        src: 'google-maps-lead-gen',
+        w: 1100,
+        h: 393
       },
       {
-        category: 'HR & People',
-        tags: ['Orchestration', 'Approvals', 'Provisioning'],
-        name: 'Onboardly',
-        sub: 'Employee Onboarding',
-        body: 'A single orchestrated flow across contracts, e-signature, account provisioning, equipment requests and first-week scheduling, with escalation when a step stalls.',
-        visual: 'flow-detail'
+        category: 'Lead Gen',
+        tags: ['n8n', 'Apify', 'CRM sync'],
+        name: 'Lead Scraper',
+        sub: 'Multi-Source Lead Pipeline',
+        body: 'An end-to-end scraping pipeline that collects prospects, dedupes them against the CRM and pushes only new, complete records downstream.',
+        preview: 'flow',
+        src: 'lead-scraper',
+        w: 1100,
+        h: 218
       },
       {
-        category: 'Insurance',
-        tags: ['Classification', 'Triage', 'Guardrails'],
-        name: 'Claimsort',
-        sub: 'Claims Triage',
-        body: 'Inbound claims classified, enriched from policy data and routed by complexity and value, with hard rules keeping anything above threshold in human hands.',
-        visual: 'support-console'
+        category: 'Sales',
+        tags: ['n8n', 'LLM', 'Slack'],
+        name: 'AI Lead Qualification',
+        sub: 'Automated Lead Scoring',
+        body: 'A qualification workflow that scores and categorises each inbound lead against an ideal-customer profile and alerts the team on the hot ones.',
+        preview: 'flow',
+        src: 'ai-lead-qualification',
+        w: 735,
+        h: 379
       },
       {
-        category: 'Commerce',
-        tags: ['Sync', 'Reconciliation', 'Webhooks'],
-        name: 'Orderbridge',
-        sub: 'Order-to-Cash Sync',
-        body: 'Two-way synchronisation between storefront, warehouse and accounting, with reconciliation checks that surface mismatches before they become month-end problems.',
-        visual: 'integration'
+        category: 'Sales',
+        tags: ['n8n', 'Apify', 'Google Sheets'],
+        name: 'LinkedIn Enrichment',
+        sub: 'Profile Enrichment Loop',
+        body: 'A batched enrichment loop that reads profile URLs from a sheet, respects API rate limits and writes the enriched data back row by row.',
+        preview: 'flow',
+        src: 'linkedin-enrichment',
+        w: 1078,
+        h: 321
       },
       {
-        category: 'Compliance',
-        tags: ['Scheduling', 'Evidence', 'Audit trail'],
-        name: 'Auditline',
-        sub: 'Compliance Reporting',
-        body: 'Evidence gathered continuously from source systems and assembled into audit-ready reports, replacing the fortnight of manual collation before each inspection.',
-        visual: 'reporting'
+        category: 'Sales',
+        tags: ['n8n', 'Calendar', 'News API'],
+        name: 'Pre-Call Research',
+        sub: 'Meeting Prep Briefings',
+        body: 'A morning workflow that reads the day’s calendar, researches each company and emails a prepared briefing before the first call.',
+        preview: 'flow',
+        src: 'pre-call-research',
+        w: 1100,
+        h: 324
       },
       {
-        category: 'Sales Ops',
-        tags: ['Generation', 'Pricing rules', 'CRM'],
-        name: 'Quotesmith',
-        sub: 'Quote Generation',
-        body: 'Configured quotes generated from CRM opportunity data and pricing rules, produced as branded documents and logged back against the deal automatically.',
-        visual: 'app-console'
+        category: 'Email',
+        tags: ['n8n', 'Gmail', 'Classification'],
+        name: 'Email Reply Classifier',
+        sub: 'Outreach Response Triage',
+        body: 'A classifier that reads every reply to an outreach campaign, labels the intent and drafts a suggested response for the rep to approve.',
+        preview: 'flow',
+        src: 'email-reply-classifier',
+        w: 1100,
+        h: 270
+      },
+      {
+        category: 'Email',
+        tags: ['n8n', 'Gmail', 'Google Sheets'],
+        name: 'Bulk Email Sender',
+        sub: 'Scheduled Campaign Sender',
+        body: 'A scheduled sender that works a queue from Sheets, merges per-recipient fields and marks each row sent so nothing goes out twice.',
+        preview: 'flow',
+        src: 'bulk-email-sender',
+        w: 901,
+        h: 360
+      },
+      {
+        category: 'Scheduling',
+        tags: ['n8n', 'Cal.com', 'Webhooks'],
+        name: 'Cal.com Booking API',
+        sub: 'Availability & Booking Service',
+        body: 'A webhook service that checks live availability and books the slot in Cal.com, answering the caller synchronously with the result.',
+        preview: 'flow',
+        src: 'calcom-booking-api',
+        w: 987,
+        h: 513
+      },
+      {
+        category: 'Scheduling',
+        tags: ['n8n', 'Calendly', 'Slack'],
+        name: 'Calendly Link Generator',
+        sub: 'Personalised Booking Links',
+        body: 'A workflow that builds single-use, personalised Calendly links on demand, logs them to Sheets and notifies the owner in Slack.',
+        preview: 'flow',
+        src: 'calendly-link-generator',
+        w: 1100,
+        h: 378
+      },
+      {
+        category: 'CRM',
+        tags: ['n8n', 'Salesforce', 'Dedupe'],
+        name: 'Salesforce Account Sync',
+        sub: 'Account Deduplication Sync',
+        body: 'A sync that reconciles a company sheet against Salesforce, merges duplicates and creates only the accounts and contacts that are genuinely new.',
+        preview: 'flow',
+        src: 'salesforce-account-sync',
+        w: 1100,
+        h: 394
+      },
+      {
+        category: 'E-Commerce',
+        tags: ['n8n', 'WooCommerce', 'Mautic'],
+        name: 'WooCommerce Mautic Sync',
+        sub: 'Customer Marketing Sync',
+        body: 'A sync that mirrors WooCommerce customers into Mautic, creating or updating each contact so marketing lists never drift from the store.',
+        preview: 'flow',
+        src: 'woocommerce-mautic-sync',
+        w: 829,
+        h: 450
+      },
+      {
+        category: 'Marketing',
+        tags: ['n8n', 'Multi-channel', 'Approval'],
+        name: 'Social Content Pipeline',
+        sub: 'Multi-Platform Publishing',
+        body: 'A content pipeline that generates the post and visual, routes it for approval, then publishes to every channel and logs the result.',
+        preview: 'flow',
+        src: 'social-content-pipeline',
+        w: 1050,
+        h: 438
+      },
+      {
+        category: 'Reporting',
+        tags: ['n8n', 'Search Console', 'Sheets'],
+        name: 'Search Console Reporting',
+        sub: 'Automated SEO Reporting',
+        body: 'A scheduled reporting job that pulls query, page and date dimensions from Search Console and refreshes a live sheet for the whole team.',
+        preview: 'flow',
+        src: 'search-console-reporting',
+        w: 930,
+        h: 469
       }
     ]
   },

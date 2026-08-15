@@ -7,7 +7,14 @@ module.exports = {
   icon: 'web',
   number: '01',
   accent: ['#6366f1', '#8b5cf6'],
-  heroVisual: 'browser-stack',
+  heroVisual: {
+    img: 'preview/web/steela.webp',
+    kind: 'browser',
+    label: 'steela.com.au',
+    alt: 'Steela storefront',
+    w: 500,
+    h: 1562
+  },
   cardVisual: 'browser',
 
   meta: {
@@ -16,7 +23,7 @@ module.exports = {
       'KeyPels designs and builds fast, scalable, conversion-focused websites and custom web applications — from marketing sites and eCommerce to complex internal platforms.'
   },
 
-  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'tech', 'faq', 'cta', 'more'],
+  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'faq', 'cta'],
 
   hero: {
     eyebrow: 'Web Development',
@@ -45,7 +52,14 @@ module.exports = {
       { icon: 'layers', title: 'Content your team can edit', body: 'Editors get a proper CMS with real components — no rebuilding pages in a rich-text box.' },
       { icon: 'shield', title: 'Secure and observable', body: 'Hardened headers, dependency policy, error tracking and uptime alerting configured on day one.' }
     ],
-    visual: 'browser-detail'
+    visual: {
+      img: 'preview/web/artisanelectrics.webp',
+      kind: 'browser',
+      label: 'artisanelectrics.co.uk',
+      alt: 'Artisan Electrics site',
+      w: 500,
+      h: 1562
+    }
   },
 
   offerings: {
@@ -61,7 +75,14 @@ module.exports = {
         body:
           'Marketing sites built to convert: sharp messaging, considered motion and a page-speed profile that keeps paid traffic cheap. Editors get reusable blocks so new campaigns ship without a developer.',
         bullets: ['Design system & component library', 'Headless CMS with editable blocks', 'Analytics, events and conversion tracking', 'On-page SEO and schema markup'],
-        visual: 'browser-detail'
+        visual: {
+          img: 'preview/web/mcgqs.webp',
+          kind: 'browser',
+          label: 'mcgqs.com.au',
+          alt: 'MCG Quantity Surveyors business site',
+          w: 500,
+          h: 1562
+        }
       },
       {
         key: 'ecommerce',
@@ -71,7 +92,14 @@ module.exports = {
         body:
           'Storefronts engineered around checkout completion. We tune catalogue browsing, search, cart and payments, and integrate the stock, tax and fulfilment systems you already run on.',
         bullets: ['Headless storefronts on Shopify or custom', 'Payment, tax and shipping integrations', 'Faceted search and merchandising rules', 'Checkout instrumentation and A/B testing'],
-        visual: 'commerce'
+        visual: {
+          img: 'preview/web/erewhon.webp',
+          kind: 'browser',
+          label: 'erewhon.com',
+          alt: 'Erewhon storefront',
+          w: 500,
+          h: 1562
+        }
       },
       {
         key: 'web-apps',
@@ -81,7 +109,14 @@ module.exports = {
         body:
           'Dashboards, portals, booking systems and internal tools — the software your operation depends on. Multi-tenant where you need it, role-aware throughout, and designed for daily use rather than a demo.',
         bullets: ['Role-based access and audit trails', 'Real-time data and background jobs', 'Reporting, exports and admin tooling', 'Documented APIs for future integrations'],
-        visual: 'app-console'
+        visual: {
+          img: 'preview/web/inspecttrack.webp',
+          kind: 'browser',
+          label: 'inspecttrack.com',
+          alt: 'InspectNTrack web application',
+          w: 500,
+          h: 1562
+        }
       },
       {
         key: 'support',
@@ -91,7 +126,14 @@ module.exports = {
         body:
           'A retainer that keeps the site fast, patched and improving: monitored uptime, dependency updates, performance regressions caught early, and a prioritised queue for the changes your team asks for.',
         bullets: ['Uptime, error and performance monitoring', 'Security patching and dependency upgrades', 'Monthly performance and SEO reporting', 'Agreed response times for fixes and changes'],
-        visual: 'monitoring'
+        visual: {
+          img: 'preview/web/mremergency.webp',
+          kind: 'browser',
+          label: 'mremergency.com.au',
+          alt: 'Mr Emergency site under maintenance',
+          w: 500,
+          h: 1562
+        }
       }
     ]
   },

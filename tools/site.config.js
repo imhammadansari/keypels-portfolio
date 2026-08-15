@@ -22,7 +22,7 @@ const BRAND = {
     { key: 'studio', label: 'Delivery Studio', city: 'Engineering studio', lines: ['KeyPels Studio', 'Address line one', 'City, Postcode', 'Country'] }
   ],
 
-  origin: 'https://keypels.com',
+  origin: 'https://www.keypels.com',
   year: 2026
 };
 

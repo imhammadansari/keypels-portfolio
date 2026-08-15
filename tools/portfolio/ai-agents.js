@@ -21,54 +21,74 @@ module.exports = {
   work: {
     h2: 'Our Work',
     lead: 'A selection of the agent patterns we put into production across industries.',
+    note:
+      'Production agent builds. Each preview is the live workflow canvas — hover any card to watch it run left to right.',
     projects: [
       {
-        category: 'Customer Support',
-        tags: ['Tool use', 'Policy RAG', 'Value limits'],
-        name: 'Resolve',
-        sub: 'Refund & Returns Agent',
-        body: 'Verifies the order, checks eligibility against live policy, issues the refund within a hard value limit and updates the CRM — escalating anything unusual with context attached.',
-        visual: 'agent-detail'
+        category: 'Voice AI',
+        tags: ['n8n', 'Gemini', 'Calendar API'],
+        name: 'Voice Booking Agent',
+        sub: 'Dental Appointment Agent',
+        body: 'A voice agent that answers calls, checks live availability, books the appointment and writes the patient record back — memory and tools wired to one reasoning loop.',
+        preview: 'flow',
+        src: 'voice-booking-agent',
+        w: 583,
+        h: 279
       },
       {
-        category: 'Internal Ops',
-        tags: ['Slack', 'Permission-aware', 'Actions'],
-        name: 'Deskmate',
-        sub: 'Internal Team Copilot',
-        body: 'An assistant embedded where the team already works, answering from internal documentation, drafting documents and completing the admin steps around a request.',
-        visual: 'copilot'
+        category: 'Personal AI',
+        tags: ['n8n', 'Telegram', 'Google Workspace'],
+        name: 'Personal Assistant Agent',
+        sub: 'Voice & Text Executive Assistant',
+        body: 'An assistant that takes voice or text over Telegram, transcribes it, then creates tasks, drafts email and manages the calendar through a shared tool set.',
+        preview: 'flow',
+        src: 'personal-assistant-agent',
+        w: 1100,
+        h: 270
       },
       {
-        category: 'Revenue Ops',
-        tags: ['Enrichment', 'CRM hygiene', 'Drafting'],
-        name: 'Qualify',
-        sub: 'Lead Qualification Agent',
-        body: 'Qualifies and enriches inbound leads, keeps records current, drafts follow-ups in your voice for approval and flags deals that have gone quiet before the forecast does.',
-        visual: 'revops'
+        category: 'Data AI',
+        tags: ['n8n', 'OpenAI', 'PostgreSQL'],
+        name: 'Database Chat Agent',
+        sub: 'Natural Language to SQL',
+        body: 'A conversational agent that answers business questions by querying Postgres directly, holding session memory so follow-up questions keep their context.',
+        preview: 'flow',
+        src: 'database-chat-agent',
+        w: 871,
+        h: 511
       },
       {
-        category: 'Procurement',
-        tags: ['Multi-source', 'Citations', 'Scheduled'],
-        name: 'Scout',
-        sub: 'Supplier Research Agent',
-        body: 'Monitors sources, extracts structured supplier and pricing data into your systems and produces cited briefs, flagging what changed since the last run.',
-        visual: 'research'
+        category: 'Email AI',
+        tags: ['n8n', 'Claude', 'Gmail API'],
+        name: 'Gmail Email Agent',
+        sub: 'Inbox Triage & Reply Agent',
+        body: 'An agent that reads incoming mail, decides whether to file, escalate or answer it, and drafts the reply through a structured output parser.',
+        preview: 'flow',
+        src: 'gmail-email-agent',
+        w: 1014,
+        h: 570
       },
       {
-        category: 'Service Desk',
-        tags: ['Triage', 'Routing', 'Escalation'],
-        name: 'Frontline',
-        sub: 'Tier-1 Triage Agent',
-        body: 'Classifies and routes inbound tickets, gathers the diagnostic detail an engineer would ask for first, and resolves the repetitive cases entirely within policy.',
-        visual: 'support-console'
+        category: 'Commerce AI',
+        tags: ['n8n', 'Telegram', 'WooCommerce'],
+        name: 'WooCommerce Ops Agent',
+        sub: 'Store Operations Agent',
+        body: 'A store agent reachable over Telegram that reads orders, updates products and reports on stock, with its own operating brief held in memory.',
+        preview: 'flow',
+        src: 'woocommerce-ops-agent',
+        w: 1075,
+        h: 487
       },
       {
-        category: 'Legal Ops',
-        tags: ['Extraction', 'Clause review', 'Human gate'],
-        name: 'Clausewise',
-        sub: 'Contract Review Agent',
-        body: 'Extracts key terms, compares clauses against your playbook and surfaces deviations for a reviewer — never approving or committing to anything on its own.',
-        visual: 'document-flow'
+        category: 'Coaching AI',
+        tags: ['n8n', 'LLM', 'Multi-step'],
+        name: 'AI Coaching Agent',
+        sub: 'Client Coaching Workflow',
+        body: 'A multi-stage coaching agent that intakes client context, plans a programme and follows up on progress across a long-running conversation.',
+        preview: 'flow',
+        src: 'ai-coaching-agent',
+        w: 1056,
+        h: 607
       }
     ]
   },

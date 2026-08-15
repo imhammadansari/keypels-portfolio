@@ -20,16 +20,12 @@ const serviceUrl = (rel, slug) => `${rel}services/${slug}/`;
 /* ==========================================================================
    Brand mark
    ========================================================================== */
-function brandMark(defs) {
+/* The mark is the supplied logo asset (assets/img/keypels-mark.png), served at
+   32px and shipped at 128px so it stays crisp on high-density screens. `rel`
+   is the path prefix back to the site root. */
+function brandMark(rel) {
   return `<span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">${defs ? `
-          <defs>
-            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#818cf8"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/>
-            </linearGradient>
-          </defs>` : ''}
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="${rel || ''}assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>`;
 }
 
@@ -85,7 +81,7 @@ function header(ctx) {
   return `<header class="header" data-header>
   <div class="container header__inner">
     <a class="brand" href="${rel}index.html" aria-label="${BRAND.name} — home">
-      ${brandMark(true)}
+      ${brandMark(rel)}
       <span class="brand__word">${BRAND.name}</span>
     </a>
 
@@ -181,7 +177,7 @@ function footer(ctx) {
     <div class="footer__top">
       <div class="footer__brand">
         <a class="brand brand--footer" href="${rel}index.html" aria-label="${BRAND.name} — home">
-          ${brandMark(false)}
+          ${brandMark(rel)}
           <span class="brand__word">${BRAND.name}</span>
         </a>
         <p class="footer__tag">${BRAND.tagline}</p>
@@ -292,7 +288,7 @@ ${chips}
 
     <div class="shero__visual" data-reveal data-delay="220">
       <div class="shero__stage" data-tilt>
-        ${renderVisual(s.heroVisual)}
+        ${renderVisual(s.heroVisual, ctx.rel)}
       </div>
     </div>
   </div>
@@ -316,7 +312,7 @@ function serviceIntro(ctx, s) {
   return `<section class="sintro section--light" aria-labelledby="intro-title">
   <div class="container sintro__inner">
     <div class="sintro__visual" data-reveal>
-      <div class="sintro__frame">${renderVisual(i.visual)}</div>
+      <div class="sintro__frame">${renderVisual(i.visual, ctx.rel)}</div>
     </div>
     <div class="sintro__copy">
       <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(i.eyebrow)}</p>
@@ -350,7 +346,7 @@ function offerings(ctx, s) {
             </ul>
             <a class="opanel__cta" href="${ctx.rel}${CONTACT_PATH}"><span>Discuss this</span>${linkArrow(14)}</a>
           </div>
-          <div class="opanel__visual">${renderVisual(it.visual)}</div>
+          <div class="opanel__visual">${renderVisual(it.visual, ctx.rel)}</div>
         </div>`).join('');
 
   return `<section class="offerings section--dark section--rounded" id="offerings" aria-labelledby="offerings-title">
@@ -474,30 +470,6 @@ function benefits(ctx, s) {
 </section>`;
 }
 
-function techSection(ctx, s) {
-  const t = s.tech;
-  const groups = t.groups.map((g, i) => `
-      <article class="tcol" data-reveal data-delay="${i * 60}">
-        <span class="tcol__icon">${ICONS[g.icon]}</span>
-        <h3>${esc(g.name)}</h3>
-        <ul>${g.items.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
-      </article>`).join('');
-
-  return `<section class="stech section--light" aria-labelledby="tech-title">
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(t.eyebrow)}</p>
-        <h2 class="section-title" id="tech-title" data-reveal data-delay="60">${esc(t.h2)}</h2>
-      </div>
-      <p class="section-lead" data-reveal data-delay="120">${esc(t.lead)}</p>
-    </header>
-    <div class="tgrid">${groups}
-    </div>
-  </div>
-</section>`;
-}
-
 function pricing(ctx, s) {
   const p = s.pricing;
   const tiers = p.tiers.map((t, i) => `
@@ -582,34 +554,6 @@ function ctaSection(ctx, s) {
 </section>`;
 }
 
-function moreServices(ctx, s) {
-  const others = ctx.services.filter((x) => x.slug !== s.slug);
-  const cards = others.map((o, i) => `
-      <li data-reveal data-delay="${(i % 3) * 60}">
-        <a class="scard" href="${serviceUrl(ctx.rel, o.slug)}">
-          <span class="scard__num">${o.number}</span>
-          <span class="scard__icon">${ICONS[o.icon]}</span>
-          <h3>${esc(o.navTitle)}</h3>
-          <p>${esc(o.navDesc)}</p>
-          <span class="scard__arrow">${linkArrow(15)}</span>
-        </a>
-      </li>`).join('');
-
-  return `<section class="more section--dark" aria-labelledby="more-title">
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Keep exploring</p>
-        <h2 class="section-title section-title--light" id="more-title" data-reveal data-delay="60">Other Services</h2>
-      </div>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">Most engagements combine two or three. <a href="${ctx.rel}services/">See all services</a>.</p>
-    </header>
-    <ul class="sgrid">${cards}
-    </ul>
-  </div>
-</section>`;
-}
-
 /* ==========================================================================
    Homepage hero — KeyPels service network
    Six nodes (one per registered service) orbit a central hub, joined by
@@ -651,14 +595,14 @@ function heroNetwork(ctx) {
     <svg class="hnet__links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="hnetLine" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#818cf8" stop-opacity=".55"/>
-          <stop offset="1" stop-color="#22d3ee" stop-opacity=".28"/>
+          <stop offset="0" stop-color="#b3b4b6" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#ebebec" stop-opacity=".28"/>
         </linearGradient>
       </defs>
       <g class="hnet__base" stroke="url(#hnetLine)" fill="none">
 ${base}
       </g>
-      <g class="hnet__pulse" stroke="#a5b4fc" fill="none" stroke-linecap="round">
+      <g class="hnet__pulse" stroke="#d0d1d3" fill="none" stroke-linecap="round">
 ${pulses}
       </g>
     </svg>
@@ -667,9 +611,7 @@ ${pulses}
       <span class="hnet__rings" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="hnet__core">
         <span class="hnet__mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="26" height="26" focusable="false">
-            <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-          </svg>
+          <img src="${ctx.rel}assets/img/keypels-mark.png" width="26" height="26" alt="" decoding="async">
         </span>
         <span class="hnet__name">${BRAND.name}</span>
         <span class="hnet__sub"></span>
@@ -937,7 +879,16 @@ ${facts}
 
     <div class="ctform__panel" data-reveal data-delay="100">
       <!-- Add an action attribute pointing at your form endpoint (Formspree, Resend, your own API) to deliver submissions. -->
-      <form class="form" data-form novalidate>
+      <form class="form" data-form novalidate
+            action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms. The key identifies the destination inbox
+             (contact@keypels.com) and is public by design; it grants nothing
+             but the right to post to that inbox. -->
+        <input type="hidden" name="access_key" value="c9cf9507-6b19-4c3c-ae6a-cbad1f87da88">
+        <input type="hidden" name="from_name" value="KeyPels website enquiry">
+        <!-- honeypot: real people never see it, bots fill it in -->
+        <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true"
+               style="display:none !important" autocomplete="off">
         <div class="field">
           <label for="f-name">Full Name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jordan Rivera" required>
@@ -1115,7 +1066,7 @@ ${lines}
     </div>
     <div class="shero__visual" data-reveal data-delay="220">
       <div class="shero__stage" data-tilt>
-        ${renderVisual(p.heroVisual)}
+        ${renderVisual(p.heroVisual, ctx.rel)}
       </div>
     </div>
   </div>
@@ -1128,10 +1079,111 @@ ${caps}
 </section>`;
 }
 
+/* --------------------------------------------------------------------------
+   Portfolio previews
+   Three interchangeable renderers behind one `pr.preview` switch, so every card
+   in every portfolio grid gets its animation from the same place:
+
+     site  a tall page capture that scrolls from the hero down on hover
+     app   the app's own store screens, swiped right-to-left on hover
+     flow  a workflow canvas revealed left to right, node after node
+
+   All three animate `transform` only. The heavy assets are declared through
+   `data-src` and hydrated by main.js the first time a card is engaged, so a
+   grid of 26 cards costs one image each on load rather than all of them.
+   -------------------------------------------------------------------------- */
+
+/* constant scroll speed (px of capture per second) rather than a fixed
+   duration, so a short page and a tall one feel the same to scrub. */
+const PV_SPEED = 430;
+
+function previewSite(ctx, pr) {
+  const travel = Math.max(0, pr.h - 200);
+  const dur = Math.max(2.6, Math.min(9, travel / PV_SPEED)).toFixed(2);
+  return `<div class="pv pv--site" data-preview style="--pv-dur:${dur}s">
+            <span class="pv__chrome" aria-hidden="true"><i></i><i></i><i></i><b>${esc(pr.domain || '')}</b></span>
+            <div class="pv__port">
+              <img class="pv__shot" src="${ctx.rel}assets/img/preview/web/${pr.src}.webp"
+                   width="${pr.w}" height="${pr.h}" loading="lazy" decoding="async"
+                   alt="${esc(pr.name)} website preview">
+            </div>
+          </div>`;
+}
+
+function previewApp(ctx, pr) {
+  const screens = Array.from({ length: pr.screens }, (_, i) => {
+    const n = String(i + 1).padStart(2, '0');
+    const src = `${ctx.rel}assets/img/preview/app/${pr.src}/${n}.webp`;
+    /* screen 1 loads with the card; the rest wait for the first hover */
+    return i === 0
+      ? `<img class="pv__screen" src="${src}" width="${pr.w}" height="${pr.h}" loading="lazy" decoding="async" alt="${esc(pr.name)} app screen 1">`
+      : `<img class="pv__screen" data-src="${src}" width="${pr.w}" height="${pr.h}" decoding="async" alt="">`;
+  }).join('');
+
+  return `<div class="pv pv--app" data-preview data-screens="${pr.screens}">
+            <div class="pv__phone">
+              <span class="pv__notch" aria-hidden="true"></span>
+              <div class="pv__port">
+                <div class="pv__track">${screens}</div>
+              </div>
+            </div>
+          </div>`;
+}
+
+/* Four pages walked from the product's own left sidebar, paged through on
+   hover. Same track mechanic as the app swipe — only the frame differs. */
+function previewCrm(ctx, pr) {
+  const pages = Array.from({ length: pr.screens }, (_, i) => {
+    const n = String(i + 1).padStart(2, '0');
+    const src = `${ctx.rel}assets/img/preview/crm/${pr.src}/${n}.webp`;
+    return i === 0
+      ? `<img class="pv__page" src="${src}" width="${pr.w}" height="${pr.h}" loading="lazy" decoding="async" alt="${esc(pr.name)} — screen 1">`
+      : `<img class="pv__page" data-src="${src}" width="${pr.w}" height="${pr.h}" decoding="async" alt="">`;
+  }).join('');
+
+  return `<div class="pv pv--crm" data-preview data-screens="${pr.screens}">
+            <span class="pv__chrome" aria-hidden="true"><i></i><i></i><i></i><b>${esc(pr.name)}</b></span>
+            <div class="pv__port">
+              <div class="pv__track">${pages}</div>
+            </div>
+          </div>`;
+}
+
+/* The canvas fills the frame, so a wide workflow is cropped at rest. `--pv-pan`
+   is how far it has to travel for its right-hand end to reach the frame edge —
+   the hover animation walks that distance, so the nodes come past in the order
+   the workflow runs. Canvases that already fit get 0 and fall back to the
+   left-to-right reveal instead. */
+const PV_FRAME_RATIO = 1.92;   // the card visual's own width / height
+
+function previewFlow(ctx, pr) {
+  const ratio = pr.w / pr.h;
+  const overflow = ratio > PV_FRAME_RATIO ? (ratio - PV_FRAME_RATIO) / ratio : 0;
+  const pan = (overflow * 100).toFixed(2);
+  const dur = (2.4 + overflow * 3.4).toFixed(2);
+
+  return `<div class="pv pv--flow${overflow ? ' pv--pans' : ''}" data-preview style="--pv-pan:${pan}%;--pv-dur:${dur}s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="${ctx.rel}assets/img/portfolio/${pr.src}.webp"
+                   width="${pr.w}" height="${pr.h}" loading="lazy" decoding="async"
+                   alt="${esc(pr.name)} workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div>`;
+}
+
+const PREVIEWS = { site: previewSite, app: previewApp, flow: previewFlow, crm: previewCrm };
+
+function cardVisual(ctx, pr) {
+  const render = PREVIEWS[pr.preview];
+  return render ? render(ctx, pr) : renderVisual(pr.visual, ctx.rel);
+}
+
 function workGrid(ctx, p) {
   const cards = p.work.projects.map((pr, i) => `
-      <article class="pfcard" data-reveal data-delay="${(i % 3) * 70}">
-        <div class="pfcard__visual">${renderVisual(pr.visual)}</div>
+      <article class="pfcard${pr.preview ? ' pfcard--pv' : ''}"${pr.preview ? ' data-pv-card' : ''} data-reveal data-delay="${(i % 3) * 70}">
+        <div class="pfcard__visual${pr.preview ? ' pfcard__visual--pv' : ''}">${cardVisual(ctx, pr)}</div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">${String(i + 1).padStart(2, '0')}</span>
@@ -1155,8 +1207,8 @@ function workGrid(ctx, p) {
     <div class="pfgrid">${cards}
     </div>
     <p class="pfnote" data-reveal>
-      Representative project profiles showing the scope, stack and complexity we deliver in ${esc(p.service.toLowerCase())}.
-      Named client work and references are shared under NDA on request.
+      ${p.work.note ? esc(p.work.note) : `Representative project profiles showing the scope, stack and complexity we deliver in ${esc(p.service.toLowerCase())}.
+      Named client work and references are shared under NDA on request.`}
     </p>
   </div>
 </section>`;
@@ -1207,41 +1259,12 @@ function outcomesGrid(ctx, p) {
 </section>`;
 }
 
-function morePortfolio(ctx, p) {
-  const others = ctx.services.filter((x) => x.slug !== p.slug);
-  const cards = others.map((o, i) => `
-      <li data-reveal data-delay="${(i % 3) * 60}">
-        <a class="scard" href="${ctx.rel}portfolio/${o.slug}/">
-          <span class="scard__num">${o.number}</span>
-          <span class="scard__icon">${ICONS[o.icon]}</span>
-          <h3>${esc(o.navTitle)}</h3>
-          <p>${esc(o.portfolioDesc || o.navDesc)}</p>
-          <span class="scard__arrow">${linkArrow(15)}</span>
-        </a>
-      </li>`).join('');
-
-  return `<section class="more section--dark" aria-labelledby="more-title">
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Keep exploring</p>
-        <h2 class="section-title section-title--light" id="more-title" data-reveal data-delay="60">Other Portfolios</h2>
-      </div>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">See the work behind our other service lines. <a href="${ctx.rel}portfolio/">All portfolio work</a>.</p>
-    </header>
-    <ul class="sgrid">${cards}
-    </ul>
-  </div>
-</section>`;
-}
-
 const PORTFOLIO_SECTIONS = {
   hero: portfolioHero,
   work: workGrid,
   approach: approachGrid,
   outcomes: outcomesGrid,
-  cta: ctaSection,
-  more: morePortfolio
+  cta: ctaSection
 };
 
 /* Tone of each section, used by the generator to square off the corners where
@@ -1255,11 +1278,9 @@ const TONES = {
   process: 'dark-rounded',
   differentiators: 'light',
   benefits: 'dark-rounded',
-  tech: 'light',
   pricing: 'dark-rounded',
   faq: 'light',
-  cta: 'light',
-  more: 'dark'
+  cta: 'light'
 };
 
 const SECTIONS = {
@@ -1270,11 +1291,9 @@ const SECTIONS = {
   process: processSection,
   differentiators,
   benefits,
-  tech: techSection,
   pricing,
   faq,
   cta: ctaSection,
-  more: moreServices
 };
 
 module.exports = {

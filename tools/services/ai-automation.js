@@ -7,7 +7,13 @@ module.exports = {
   icon: 'automation',
   number: '04',
   accent: ['#6366f1', '#22d3ee'],
-  heroVisual: 'flow-canvas',
+  heroVisual: {
+    img: 'portfolio/social-content-pipeline.webp',
+    kind: 'canvas',
+    alt: 'Multi-platform publishing workflow',
+    w: 1050,
+    h: 438
+  },
   cardVisual: 'flow',
 
   meta: {
@@ -16,7 +22,7 @@ module.exports = {
       'KeyPels automates repetitive business processes with AI-powered workflows — document handling, data entry, routing, approvals and reporting — with humans kept in the loop where it matters.'
   },
 
-  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'benefits', 'faq', 'cta', 'more'],
+  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'benefits', 'faq', 'cta'],
 
   hero: {
     eyebrow: 'AI Automation',
@@ -45,7 +51,13 @@ module.exports = {
       { icon: 'shield', title: 'Auditable by design', body: 'Every run is logged with inputs, outputs and decisions — reviewable long after the fact.' },
       { icon: 'refresh', title: 'Built to be maintained', body: 'Documented, monitored and owned by you, with alerting when a downstream system changes.' }
     ],
-    visual: 'flow-detail'
+    visual: {
+      img: 'portfolio/google-maps-lead-gen.webp',
+      kind: 'canvas',
+      alt: 'Lead prospecting workflow',
+      w: 1100,
+      h: 393
+    }
   },
 
   offerings: {
@@ -61,7 +73,13 @@ module.exports = {
         body:
           'Invoices, contracts, forms, statements and scanned paperwork read, understood and turned into structured records in the systems that need them — with confidence scores and a review queue for anything ambiguous.',
         bullets: ['Invoice, contract and form extraction', 'Validation rules and confidence thresholds', 'Human review queue for exceptions', 'Direct write-back to finance or CRM'],
-        visual: 'document-flow'
+        visual: {
+          img: 'portfolio/email-reply-classifier.webp',
+          kind: 'canvas',
+          alt: 'Document and data extraction workflow',
+          w: 1100,
+          h: 270
+        }
       },
       {
         key: 'workflow',
@@ -71,7 +89,13 @@ module.exports = {
         body:
           'Multi-step business processes — onboarding, approvals, renewals, dispatch — orchestrated end to end, with branching logic, retries, escalations and a live view of everything in flight.',
         bullets: ['Multi-step orchestration with branching', 'Approval gates and escalation paths', 'Retries, timeouts and failure handling', 'Live operational dashboard'],
-        visual: 'flow-detail'
+        visual: {
+          img: 'portfolio/salesforce-account-sync.webp',
+          kind: 'canvas',
+          alt: 'Process automation workflow',
+          w: 1100,
+          h: 394
+        }
       },
       {
         key: 'integration',
@@ -81,7 +105,13 @@ module.exports = {
         body:
           'The connective tissue between tools that were never designed to talk: CRM to finance, forms to fulfilment, spreadsheets to warehouse — kept in sync reliably instead of by a person on Monday mornings.',
         bullets: ['Two-way sync between core systems', 'Middleware for systems without APIs', 'Scheduled and event-driven pipelines', 'Data quality checks and alerting'],
-        visual: 'integration'
+        visual: {
+          img: 'portfolio/woocommerce-mautic-sync.webp',
+          kind: 'canvas',
+          alt: 'Integration and data sync workflow',
+          w: 829,
+          h: 450
+        }
       },
       {
         key: 'reporting',
@@ -91,7 +121,13 @@ module.exports = {
         body:
           'The weekly deck somebody rebuilds by hand, generated automatically — pulled from source systems, checked for anomalies, summarised in plain language and delivered where your team already works.',
         bullets: ['Scheduled report generation and delivery', 'Anomaly detection and threshold alerts', 'Plain-language summaries of the numbers', 'Slack, email and dashboard distribution'],
-        visual: 'reporting'
+        visual: {
+          img: 'portfolio/search-console-reporting.webp',
+          kind: 'canvas',
+          alt: 'Automated reporting workflow',
+          w: 930,
+          h: 469
+        }
       }
     ]
   },

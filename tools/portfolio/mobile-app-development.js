@@ -21,54 +21,92 @@ module.exports = {
   work: {
     h2: 'Our Work',
     lead: 'A selection of the mobile products we deliver for clients across industries.',
+    note:
+      'Shipped iOS and Android products. Each preview uses the app’s own store screens — hover any card to swipe through them.',
     projects: [
       {
-        category: 'FinTech',
-        tags: ['iOS', 'Android', 'Open Banking'],
-        name: 'Ledgerly',
-        sub: 'Personal Finance App',
-        body: 'A multi-currency budgeting and investment tracker with open-banking aggregation, real-time portfolio analysis and biometric authentication on both platforms.',
-        visual: 'phone-detail'
-      },
-      {
-        category: 'Healthcare',
-        tags: ['React Native', 'Telehealth', 'EMR'],
-        name: 'Clinicly',
-        sub: 'Healthcare Scheduling',
-        body: 'A patient-facing booking and telehealth application integrated with clinic EMR systems, handling high monthly booking volume with strict data-handling requirements.',
-        visual: 'support-console'
-      },
-      {
-        category: 'E-Commerce',
-        tags: ['Flutter', 'Apple Pay', 'AR'],
-        name: 'Cartway',
-        sub: 'Commerce App',
-        body: 'A headless commerce app spanning hundreds of product categories, with AR try-on, saved payment methods and a one-tap checkout that survives a dropped connection.',
-        visual: 'commerce-app'
-      },
-      {
-        category: 'Health & Fitness',
-        tags: ['SwiftUI', 'HealthKit', 'watchOS'],
-        name: 'Cadence',
-        sub: 'Fitness & Coaching',
-        body: 'A personalised workout and nutrition coaching app with Apple Watch integration, a streamed trainer video library and adaptive programme generation.',
-        visual: 'cross-platform'
+        category: 'Travel',
+        tags: ['Android', 'iOS', 'Flight booking'],
+        name: 'LIFTi',
+        sub: 'Flight Booking & Luggage Sharing',
+        body: 'A travel app that pairs flight search and booking with a peer-to-peer luggage-sharing marketplace, matching senders to travellers already on the route.',
+        preview: 'app',
+        src: 'lifti',
+        screens: 8,
+        w: 300,
+        h: 650
       },
       {
         category: 'EdTech',
-        tags: ['Kotlin', 'Offline-first', 'AI'],
-        name: 'Studypath',
-        sub: 'Learning Platform',
-        body: 'An adaptive learning app for school-age students with gamified progression, offline course downloads and AI-generated practice questions per topic.',
-        visual: 'android-detail'
+        tags: ['Android', 'Live video', 'Adaptive learning'],
+        name: 'Vedantu',
+        sub: 'Live Online Learning',
+        body: 'A live-class learning platform for JEE, NEET and school syllabi, streaming interactive lessons with in-class testing and personalised mentoring.',
+        preview: 'app',
+        src: 'vedantu',
+        screens: 8,
+        w: 300,
+        h: 650
       },
       {
-        category: 'Logistics',
-        tags: ['Cross-platform', 'Maps', 'Offline sync'],
-        name: 'Routewise',
-        sub: 'Fleet Management',
-        body: 'Real-time fleet tracking and driver management with route optimisation, fuel logging and maintenance scheduling — built offline-first for poor-signal depots.',
-        visual: 'enterprise-app'
+        category: 'Health & Fitness',
+        tags: ['iOS', 'HealthKit', 'Dashboards'],
+        name: 'FitnessView',
+        sub: 'Activity & Health Tracking',
+        body: 'An activity dashboard that consolidates steps, workouts, hydration and health metrics into readable daily, weekly and monthly views.',
+        preview: 'app',
+        src: 'fitnessview',
+        screens: 8,
+        w: 300,
+        h: 650
+      },
+      {
+        category: 'Mobility',
+        tags: ['Android', 'iOS', 'Real-time routing'],
+        name: 'iRide',
+        sub: 'Drive & Ride Platform',
+        body: 'A two-sided ride-hailing app with rider booking, driver onboarding and real-time route and fare calculation across a single codebase.',
+        preview: 'app',
+        src: 'iride',
+        screens: 8,
+        w: 300,
+        h: 650
+      },
+      {
+        category: 'FinTech',
+        tags: ['Android', 'Crypto', 'Wallet'],
+        name: 'PayRemit',
+        sub: 'Crypto Wallet & Payments',
+        body: 'A multi-asset wallet for buying, selling and swapping crypto alongside everyday bill payments, airtime and data top-ups.',
+        preview: 'app',
+        src: 'payremit',
+        screens: 6,
+        w: 300,
+        h: 650
+      },
+      {
+        category: 'Healthcare',
+        tags: ['Android', 'Telehealth', 'Bookings'],
+        name: 'BigOHealth',
+        sub: 'Instant Doctor Consultations',
+        body: 'A telehealth app connecting patients to specialists for video consultation, second opinions, lab tests and surgery scheduling.',
+        preview: 'app',
+        src: 'bigohealth',
+        screens: 6,
+        w: 300,
+        h: 650
+      },
+      {
+        category: 'EdTech',
+        tags: ['iOS', 'Android', 'Adaptive QBank'],
+        name: 'King of the Curve',
+        sub: 'Medical Exam Prep',
+        body: 'A gamified pre-med exam-prep app with an adaptive question bank, spaced repetition and performance analytics per subject.',
+        preview: 'app',
+        src: 'kingofthecurve',
+        screens: 5,
+        w: 300,
+        h: 650
       }
     ]
   },

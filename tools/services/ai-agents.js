@@ -7,7 +7,13 @@ module.exports = {
   icon: 'agent',
   number: '05',
   accent: ['#8b5cf6', '#6366f1'],
-  heroVisual: 'agent-console',
+  heroVisual: {
+    img: 'portfolio/gmail-email-agent.webp',
+    kind: 'canvas',
+    alt: 'Email agent with tools and memory',
+    w: 1014,
+    h: 570
+  },
   cardVisual: 'agent',
 
   meta: {
@@ -16,7 +22,7 @@ module.exports = {
       'KeyPels builds AI agents that handle tasks end to end — reading requests, querying your systems, taking action and escalating to people when judgement is required.'
   },
 
-  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'differentiators', 'process', 'tech', 'faq', 'cta', 'more'],
+  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'differentiators', 'process', 'faq', 'cta'],
 
   hero: {
     eyebrow: 'AI Agents',
@@ -45,7 +51,13 @@ module.exports = {
       { icon: 'shield', title: 'Guardrails you control', body: 'Value limits, approval gates, blocked actions and confidence thresholds set by you, enforced in code.' },
       { icon: 'search', title: 'Observable by default', body: 'Every step, tool call and decision recorded and replayable — for debugging and for audit.' }
     ],
-    visual: 'agent-detail'
+    visual: {
+      img: 'portfolio/ai-coaching-agent.webp',
+      kind: 'canvas',
+      alt: 'Multi-stage coaching agent',
+      w: 1056,
+      h: 607
+    }
   },
 
   offerings: {
@@ -61,7 +73,13 @@ module.exports = {
         body:
           'Agents that resolve tickets rather than deflect them: verifying accounts, checking order state, issuing refunds or replacements within policy, and escalating anything unusual with the context already gathered.',
         bullets: ['Ticket triage, tagging and routing', 'Account and order verification', 'Policy-bounded resolution actions', 'Clean escalation with full context'],
-        visual: 'agent-detail'
+        visual: {
+          img: 'portfolio/voice-booking-agent.webp',
+          kind: 'canvas',
+          alt: 'Customer support voice agent',
+          w: 583,
+          h: 279
+        }
       },
       {
         key: 'internal',
@@ -71,7 +89,13 @@ module.exports = {
         body:
           'Agents embedded where your team already works — Slack, Teams, your admin tools — answering from internal knowledge, preparing documents, and completing the admin steps around a task.',
         bullets: ['Grounded answers from internal knowledge', 'Document drafting and summarisation', 'Actions inside your internal tools', 'Permission-aware per user and team'],
-        visual: 'copilot'
+        visual: {
+          img: 'portfolio/personal-assistant-agent.webp',
+          kind: 'canvas',
+          alt: 'Internal team copilot',
+          w: 1100,
+          h: 270
+        }
       },
       {
         key: 'revops',
@@ -81,7 +105,13 @@ module.exports = {
         body:
           'Agents that qualify inbound leads, enrich records, keep the CRM current, draft follow-ups in your voice and flag the deals that have gone quiet before the forecast does.',
         bullets: ['Lead qualification and enrichment', 'Automatic CRM hygiene and updates', 'Drafted follow-ups for human approval', 'Pipeline risk detection and alerts'],
-        visual: 'revops'
+        visual: {
+          img: 'portfolio/woocommerce-ops-agent.webp',
+          kind: 'canvas',
+          alt: 'Sales and revenue operations agent',
+          w: 1075,
+          h: 487
+        }
       },
       {
         key: 'research',
@@ -91,7 +121,13 @@ module.exports = {
         body:
           'Agents that gather, verify and summarise information at a scale people cannot sustain — monitoring sources, extracting structured data and producing briefs with citations you can check.',
         bullets: ['Multi-source gathering and monitoring', 'Structured extraction into your systems', 'Cited briefs and change alerts', 'Scheduled or event-triggered runs'],
-        visual: 'research'
+        visual: {
+          img: 'portfolio/database-chat-agent.webp',
+          kind: 'canvas',
+          alt: 'Data and research agent querying a database',
+          w: 871,
+          h: 511
+        }
       }
     ]
   },

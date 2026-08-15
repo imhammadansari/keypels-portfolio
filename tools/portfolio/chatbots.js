@@ -21,54 +21,85 @@ module.exports = {
   work: {
     h2: 'Our Work',
     lead: 'A selection of the conversational assistants we deliver across industries.',
+    note:
+      'Production chatbot builds. Each preview is the live workflow canvas — hover any card to watch it run left to right.',
     projects: [
       {
-        category: 'SaaS',
-        tags: ['RAG', 'Citations', 'Web widget'],
-        name: 'Guidepost',
-        sub: 'Website Product Assistant',
-        body: 'A pre-sales guide trained on the product documentation and pricing pages, comparing plans, answering technical questions with sources and routing to demo booking.',
-        visual: 'chat-detail'
+        category: 'WhatsApp',
+        tags: ['n8n', 'WhatsApp API', 'RAG'],
+        name: 'WhatsApp RAG Support',
+        sub: 'Knowledge-Grounded Support Bot',
+        body: 'A support bot that answers on WhatsApp from a vector-indexed knowledge base, so replies stay grounded in the documentation rather than invented.',
+        preview: 'flow',
+        src: 'whatsapp-rag-support',
+        w: 1100,
+        h: 337
       },
       {
-        category: 'Retail',
-        tags: ['Order lookup', 'Handover', 'Ticketing'],
-        name: 'Frontdoor',
-        sub: 'Support Deflection Bot',
-        body: 'First-line support handling order status, returns policy and account questions with live system lookups, escalating with the full transcript when it should.',
-        visual: 'support-console'
+        category: 'WhatsApp',
+        tags: ['n8n', 'Vision', 'Multimodal'],
+        name: 'WhatsApp Multimodal Chatbot',
+        sub: 'Image, Voice & Text Bot',
+        body: 'A chatbot that handles image, audio and text messages on one thread, routing each media type down its own processing branch before replying in context.',
+        preview: 'flow',
+        src: 'whatsapp-multimodal-chatbot',
+        w: 777,
+        h: 744
       },
       {
-        category: 'Professional Services',
-        tags: ['Qualification', 'Calendar', 'CRM'],
-        name: 'Intake',
-        sub: 'Lead Generation Bot',
-        body: 'Qualifies interest in conversation rather than through a seven-field form, books against live calendar availability and writes a complete record into the CRM.',
-        visual: 'revops'
+        category: 'WhatsApp',
+        tags: ['n8n', 'Google Sheets', 'Escalation'],
+        name: 'WhatsApp Support Bot',
+        sub: 'Automated Customer Support',
+        body: 'A first-line support bot grounded in company knowledge, with a 24-hour window check and human hand-off when it cannot answer confidently.',
+        preview: 'flow',
+        src: 'whatsapp-support-bot',
+        w: 981,
+        h: 243
       },
       {
-        category: 'Internal Ops',
-        tags: ['Slack', 'Teams', 'Permission-aware'],
-        name: 'Helpline',
-        sub: 'Internal Helpdesk Bot',
-        body: 'Answers the HR, IT and process questions asked twenty times a week, grounded in internal documentation and aware of which team the person asking belongs to.',
-        visual: 'copilot'
+        category: 'WhatsApp',
+        tags: ['n8n', 'Airtable', 'Bookings'],
+        name: 'Restaurant WhatsApp Chatbot',
+        sub: 'Table Booking Assistant',
+        body: 'A restaurant bot that answers menu questions and takes table bookings over WhatsApp, writing confirmed reservations straight into the venue system.',
+        preview: 'flow',
+        src: 'restaurant-whatsapp-chatbot',
+        w: 979,
+        h: 351
       },
       {
-        category: 'Commerce',
-        tags: ['Multilingual', 'Catalogue', 'WhatsApp'],
-        name: 'Concierge',
-        sub: 'Multilingual Shopping Assistant',
-        body: 'One assistant answering across web and WhatsApp in the languages customers actually use, with catalogue search, sizing guidance and order tracking built in.',
-        visual: 'commerce'
+        category: 'Web',
+        tags: ['n8n', 'OpenAI', 'Session memory'],
+        name: 'Lead Capture Chatbot',
+        sub: 'Conversational Lead Collection',
+        body: 'A site chatbot that collects name, phone, email and intent conversationally, saving to Sheets only once the full lead record is complete.',
+        preview: 'flow',
+        src: 'lead-capture-chatbot',
+        w: 826,
+        h: 375
       },
       {
         category: 'Healthcare',
-        tags: ['Booking', 'Triage rules', 'Human gate'],
-        name: 'Bookwell',
-        sub: 'Appointment Assistant',
-        body: 'Handles booking, rescheduling and preparation instructions against live availability, with clinical questions routed straight to a person by design rather than by exception.',
-        visual: 'phone-detail'
+        tags: ['n8n', 'Google Calendar', 'Sheets'],
+        name: 'Dental Scheduling Chatbot',
+        sub: 'Clinic Booking Assistant',
+        body: 'A clinic chatbot that checks calendar availability, creates the appointment and logs the patient detail without a receptionist in the loop.',
+        preview: 'flow',
+        src: 'dental-scheduling-chatbot',
+        w: 976,
+        h: 577
+      },
+      {
+        category: 'Discord',
+        tags: ['n8n', 'Webhooks', 'Routing'],
+        name: 'Discord AI Bot',
+        sub: 'Community Triage Bot',
+        body: 'A community bot that classifies each incoming request and routes it to the right department channel — success, IT or helpdesk — or stays silent.',
+        preview: 'flow',
+        src: 'discord-ai-bot',
+        w: 1008,
+        h: 597
       }
     ]
   },

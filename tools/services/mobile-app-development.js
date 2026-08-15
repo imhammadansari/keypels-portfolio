@@ -7,7 +7,13 @@ module.exports = {
   icon: 'mobile',
   number: '02',
   accent: ['#8b5cf6', '#22d3ee'],
-  heroVisual: 'phone-duo',
+  heroVisual: {
+    img: 'preview/app/lifti/03.webp',
+    kind: 'phone',
+    alt: 'LIFTi flight booking screen',
+    w: 300,
+    h: 650
+  },
   cardVisual: 'phone',
 
   meta: {
@@ -16,7 +22,7 @@ module.exports = {
       'KeyPels designs and develops modern iOS and Android applications — native and cross-platform — with the performance, polish and release discipline a real product needs.'
   },
 
-  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'differentiators', 'benefits', 'faq', 'cta', 'more'],
+  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'differentiators', 'benefits', 'faq', 'cta'],
 
   hero: {
     eyebrow: 'Mobile App Development',
@@ -45,7 +51,13 @@ module.exports = {
       { icon: 'lock', title: 'Secure by construction', body: 'Encrypted storage, secure auth flows, certificate pinning and platform privacy requirements handled up front.' },
       { icon: 'refresh', title: 'Built to keep releasing', body: 'Automated builds, staged rollouts, crash reporting and analytics wired in from the very first version.' }
     ],
-    visual: 'phone-detail'
+    visual: {
+      img: 'preview/app/fitnessview/01.webp',
+      kind: 'phone',
+      alt: 'FitnessView activity dashboard',
+      w: 300,
+      h: 650
+    }
   },
 
   offerings: {
@@ -61,7 +73,13 @@ module.exports = {
         body:
           'Swift and SwiftUI applications built to Apple’s guidelines and reviewed with App Store submission in mind from the beginning — so approval is a formality rather than a scramble.',
         bullets: ['Swift, SwiftUI and UIKit', 'Human Interface Guidelines compliance', 'App Store submission and review support', 'Widgets, notifications and deep links'],
-        visual: 'phone-detail'
+        visual: {
+          img: 'preview/app/iride/03.webp',
+          kind: 'phone',
+          alt: 'iRide iOS ride screen',
+          w: 300,
+          h: 650
+        }
       },
       {
         key: 'android',
@@ -71,7 +89,13 @@ module.exports = {
         body:
           'Kotlin and Jetpack Compose applications tuned for the range of devices and screen sizes Android actually ships on, with Play Console delivery and staged rollouts handled for you.',
         bullets: ['Kotlin and Jetpack Compose', 'Material design implementation', 'Play Console delivery and staged rollout', 'Device-matrix testing on real hardware'],
-        visual: 'android-detail'
+        visual: {
+          img: 'preview/app/vedantu/04.webp',
+          kind: 'phone',
+          alt: 'Vedantu Android class screen',
+          w: 300,
+          h: 650
+        }
       },
       {
         key: 'cross-platform',
@@ -81,7 +105,13 @@ module.exports = {
         body:
           'React Native and Flutter builds that share one codebase across iOS and Android without the tell-tale compromises — native modules where they matter, shared logic everywhere else.',
         bullets: ['React Native and Flutter', 'Shared business logic, native modules', 'Single release pipeline for both stores', 'Faster path to a two-platform launch'],
-        visual: 'cross-platform'
+        visual: {
+          img: 'preview/app/kingofthecurve/03.webp',
+          kind: 'phone',
+          alt: 'King of the Curve cross-platform screen',
+          w: 300,
+          h: 650
+        }
       },
       {
         key: 'commerce-apps',
@@ -91,7 +121,13 @@ module.exports = {
         body:
           'Shopping experiences engineered around repeat purchase: fast catalogue browsing, saved payment methods, push-driven re-engagement and a checkout that survives a bad connection.',
         bullets: ['Catalogue, search and merchandising', 'Apple Pay, Google Pay and card checkout', 'Push notifications and lifecycle messaging', 'Order tracking and account management'],
-        visual: 'commerce-app'
+        visual: {
+          img: 'preview/app/payremit/02.webp',
+          kind: 'phone',
+          alt: 'PayRemit wallet and checkout screen',
+          w: 300,
+          h: 650
+        }
       },
       {
         key: 'enterprise',
@@ -101,7 +137,13 @@ module.exports = {
         body:
           'Field, logistics and internal-operations apps that work offline, sync cleanly when signal returns, and satisfy the security and device-management requirements your IT team will ask about.',
         bullets: ['Offline-first data and conflict handling', 'SSO, MDM and device policy support', 'Integration with ERP, CRM and internal APIs', 'Role-based permissions and audit trails'],
-        visual: 'enterprise-app'
+        visual: {
+          img: 'preview/app/bigohealth/04.webp',
+          kind: 'phone',
+          alt: 'BigOHealth enterprise consultation screen',
+          w: 300,
+          h: 650
+        }
       }
     ]
   },

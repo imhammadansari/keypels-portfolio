@@ -7,43 +7,61 @@
    1. Tokens
    -------------------------------------------------------------------------- */
 :root {
-  /* Brand */
-  --indigo-300: #a5b4fc;
-  --indigo-400: #818cf8;
-  --indigo-500: #6366f1;
-  --indigo-600: #4f46e5;
-  --violet-400: #a78bfa;
-  --violet-500: #8b5cf6;
-  --cyan-400: #22d3ee;
+  /* Brand — gold on charcoal.
+       primary #D4A017   dark #171717   background #FAF8F2
+       text    #222222   accent #B8860B  hover #E0B52A
+     The token names are historical. The 300/400 end of the ramp is the light
+     gold used on charcoal; the 500/600 end is the deeper gold used on the warm
+     paper — which is how they were already used, so nothing else had to move. */
+  --gold: #D4A017;
+  --gold-hover: #E0B52A;
+  --gold-accent: #B8860B;
+  /* text that sits on a gold fill */
+  --on-gold: #171717;
 
-  /* Dark surfaces */
-  --ink-900: #05060c;
-  --ink-800: #080a14;
-  --ink-700: #0c0f1d;
-  --ink-600: #121527;
-  --ink-500: #1a1e33;
+  --indigo-300: #E0B52A;
+  --indigo-400: #D4A017;
+  --indigo-500: #C9971A;
+  --indigo-600: #B8860B;
+  --violet-400: #E0B52A;
+  --violet-500: #D4A017;
+  --cyan-400: #E8C34A;
 
-  /* Light surfaces */
+  /* Dark surfaces — charcoal ramp off #171717 */
+  --ink-900: #171717;
+  --ink-800: #1c1c1c;
+  --ink-700: #222222;
+  --ink-600: #2a2a2a;
+  --ink-500: #333333;
+
+  /* Light surfaces — warm off-white */
   --paper: #ffffff;
-  --paper-alt: #f5f6fb;
-  --paper-line: #e7e9f2;
+  --paper-alt: #FAF8F2;
+  --paper-line: #E8E3D6;
 
   /* Text */
-  --text-dark: #0b0d1a;
-  --text-dark-soft: #4c5168;
-  --text-light: #f4f5fb;
-  --text-light-soft: rgba(226, 230, 245, 0.66);
+  --text-dark: #222222;
+  --text-dark-soft: #5A554A;
+  --text-light: #FAF8F2;
+  --text-light-soft: rgba(250, 248, 242, 0.68);
 
   /* Effects */
-  --brand-grad: linear-gradient(120deg, #818cf8 0%, #a78bfa 46%, #22d3ee 100%);
-  --btn-grad: linear-gradient(120deg, #4f46e5 0%, #7c3aed 52%, #4f46e5 100%);
+  --brand-grad: linear-gradient(120deg, #E0B52A 0%, #D4A017 46%, #B8860B 100%);
+  --brand-grad-ink: linear-gradient(120deg, #B8860B 0%, #D4A017 52%, #B8860B 100%);
+  --btn-grad: linear-gradient(120deg, #D4A017 0%, #E0B52A 52%, #D4A017 100%);
   --hairline-dark: rgba(255, 255, 255, 0.10);
-  --hairline-light: rgba(11, 13, 26, 0.08);
-  --glow-indigo: 0 0 0 1px rgba(99, 102, 241, .35), 0 18px 50px -18px rgba(99, 102, 241, .65);
+  --hairline-light: rgba(34, 34, 34, 0.08);
+  --glow-indigo: 0 0 0 1px rgba(212, 160, 23, .35), 0 18px 50px -18px rgba(212, 160, 23, .55);
 
-  --shadow-sm: 0 1px 2px rgba(11, 13, 26, .05), 0 6px 16px -10px rgba(11, 13, 26, .18);
-  --shadow-md: 0 2px 6px rgba(11, 13, 26, .05), 0 22px 50px -26px rgba(11, 13, 26, .3);
-  --shadow-lg: 0 40px 90px -40px rgba(11, 13, 26, .38);
+  /* Glass — thin warm borders over a barely-there tint */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-strong: rgba(255, 255, 255, 0.07);
+  --glass-line: rgba(224, 181, 42, 0.16);
+  --glass-line-hi: rgba(224, 181, 42, 0.30);
+
+  --shadow-sm: 0 1px 2px rgba(34, 34, 34, .05), 0 6px 16px -10px rgba(34, 34, 34, .18);
+  --shadow-md: 0 2px 6px rgba(34, 34, 34, .05), 0 22px 50px -26px rgba(34, 34, 34, .3);
+  --shadow-lg: 0 40px 90px -40px rgba(34, 34, 34, .38);
 
   /* Radii */
   --r-sm: 10px;
@@ -153,7 +171,7 @@ button {
 }
 
 ::selection {
-  background: rgba(139, 92, 246, .32);
+  background: rgba(212, 158, 23, .32);
 }
 
 :focus-visible {
@@ -210,7 +228,7 @@ button {
   z-index: 200;
   transform: translateY(-160%);
   background: var(--indigo-600);
-  color: #fff;
+  color: var(--on-gold);
   padding: 10px 16px;
   border-radius: var(--r-sm);
   font-weight: 600;
@@ -236,7 +254,7 @@ button {
   height: 100%;
   width: 0%;
   background: var(--brand-grad);
-  box-shadow: 0 0 14px rgba(139, 92, 246, .8);
+  box-shadow: 0 0 14px rgba(212, 158, 23, .8);
 }
 
 /* --------------------------------------------------------------------------
@@ -249,6 +267,17 @@ button {
   color: transparent;
   background-size: 220% 100%;
   animation: gradShift 9s var(--ease) infinite alternate;
+}
+
+/* On paper the light end of the gold ramp washes out, so the same class swaps
+   to the deeper gold; dark panels nested inside a light section swap back. */
+.section--light .grad {
+  background-image: var(--brand-grad-ink);
+}
+
+.section--dark .grad,
+.cta__panel .grad {
+  background-image: var(--brand-grad);
 }
 
 @keyframes gradShift {
@@ -384,10 +413,10 @@ button {
 
 /* Primary — gradient with travelling sheen */
 .btn--primary {
-  color: #fff;
+  color: var(--on-gold);
   background: var(--btn-grad);
   background-size: 200% 100%;
-  box-shadow: 0 10px 30px -12px rgba(79, 70, 229, .85), inset 0 1px 0 rgba(255, 255, 255, .22);
+  box-shadow: 0 10px 30px -12px rgba(177, 132, 18, .85), inset 0 1px 0 rgba(255, 255, 255, .22);
 }
 
 .btn--primary::after {
@@ -404,7 +433,7 @@ button {
 .btn--primary:hover {
   background-position: 100% 0;
   transform: translateY(-2px);
-  box-shadow: 0 18px 40px -14px rgba(124, 58, 237, .9), inset 0 1px 0 rgba(255, 255, 255, .28);
+  box-shadow: 0 18px 40px -14px rgba(177, 132, 18, .9), inset 0 1px 0 rgba(255, 255, 255, .28);
 }
 
 .btn--primary:hover::after {
@@ -419,8 +448,8 @@ button {
 }
 
 .btn--ghost:hover {
-  border-color: rgba(165, 180, 252, .55);
-  background: rgba(99, 102, 241, .12);
+  border-color: rgba(235, 212, 154, .55);
+  background: rgba(212, 158, 23, .12);
   transform: translateY(-2px);
 }
 
@@ -457,14 +486,14 @@ button {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #34d399;
-  box-shadow: 0 0 0 4px rgba(52, 211, 153, .16);
+  background: #d49e17;
+  box-shadow: 0 0 0 4px rgba(212, 158, 23, .16);
   animation: livePulse 2.4s var(--ease) infinite;
 }
 
 @keyframes livePulse {
   50% {
-    box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+    box-shadow: 0 0 0 8px rgba(212, 158, 23, 0);
   }
 }
 
@@ -478,9 +507,9 @@ button {
 }
 
 .badge--ok {
-  color: #6ee7b7;
-  background: rgba(52, 211, 153, .14);
-  border: 1px solid rgba(52, 211, 153, .28);
+  color: #e8bb4a;
+  background: rgba(212, 158, 23, .14);
+  border: 1px solid rgba(212, 158, 23, .28);
 }
 
 .dot {
@@ -491,7 +520,7 @@ button {
 }
 
 .dot--live {
-  background: #34d399;
+  background: #d49e17;
   animation: livePulse 2.4s var(--ease) infinite;
 }
 

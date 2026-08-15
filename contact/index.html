@@ -5,20 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Contact KeyPels — Start a Project</title>
 <meta name="description" content="Talk to KeyPels about web development, mobile apps, CRM platforms, AI automation, AI agents and chatbots. Email contact@keypels.com or send a project enquiry.">
-<meta name="theme-color" content="#05060c">
+<meta name="theme-color" content="#080807">
 <meta name="color-scheme" content="dark light">
-<link rel="canonical" href="https://keypels.com/contact/">
+<link rel="canonical" href="https://www.keypels.com/contact/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KeyPels">
 <meta property="og:title" content="Contact KeyPels — Start a Project">
 <meta property="og:description" content="Talk to KeyPels about web development, mobile apps, CRM platforms, AI automation, AI agents and chatbots. Email contact@keypels.com or send a project enquiry.">
-<meta property="og:url" content="https://keypels.com/contact/">
+<meta property="og:url" content="https://www.keypels.com/contact/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Contact KeyPels — Start a Project">
 <meta name="twitter:description" content="Talk to KeyPels about web development, mobile apps, CRM platforms, AI automation, AI agents and chatbots. Email contact@keypels.com or send a project enquiry.">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='.55' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2308091a'/%3E%3Cpath d='M20 15h7v14.5L40 15h9L34.5 31.5 49 49h-9L27 33.5V49h-7z' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/img/icon-192.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,12 +39,12 @@
       "@type": "ContactPage",
       "name": "Contact KeyPels",
       "description": "Talk to KeyPels about web development, mobile apps, CRM platforms, AI automation, AI agents and chatbots. Email contact@keypels.com or send a project enquiry.",
-      "url": "https://keypels.com/contact/"
+      "url": "https://www.keypels.com/contact/"
     },
     {
       "@type": "Organization",
       "name": "KeyPels",
-      "url": "https://keypels.com/",
+      "url": "https://www.keypels.com/",
       "email": "contact@keypels.com",
       "contactPoint": [
         {
@@ -114,13 +116,13 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://keypels.com/"
+          "item": "https://www.keypels.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Contact",
-          "item": "https://keypels.com/contact/"
+          "item": "https://www.keypels.com/contact/"
         }
       ]
     }
@@ -137,14 +139,7 @@
   <div class="container header__inner">
     <a class="brand" href="../index.html" aria-label="KeyPels — home">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
-          <defs>
-            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#818cf8"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/>
-            </linearGradient>
-          </defs>
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="../assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>
       <span class="brand__word">KeyPels</span>
     </a>
@@ -467,7 +462,16 @@
 
     <div class="ctform__panel" data-reveal data-delay="100">
       <!-- Add an action attribute pointing at your form endpoint (Formspree, Resend, your own API) to deliver submissions. -->
-      <form class="form" data-form novalidate>
+      <form class="form" data-form novalidate
+            action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms. The key identifies the destination inbox
+             (contact@keypels.com) and is public by design; it grants nothing
+             but the right to post to that inbox. -->
+        <input type="hidden" name="access_key" value="c9cf9507-6b19-4c3c-ae6a-cbad1f87da88">
+        <input type="hidden" name="from_name" value="KeyPels website enquiry">
+        <!-- honeypot: real people never see it, bots fill it in -->
+        <input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true"
+               style="display:none !important" autocomplete="off">
         <div class="field">
           <label for="f-name">Full Name</label>
           <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Jordan Rivera" required>
@@ -688,9 +692,7 @@
       <div class="footer__brand">
         <a class="brand brand--footer" href="../index.html" aria-label="KeyPels — home">
           <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="../assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>
           <span class="brand__word">KeyPels</span>
         </a>

@@ -21,54 +21,80 @@ module.exports = {
   work: {
     h2: 'Our Work',
     lead: 'A selection of the customer platforms we deliver for clients across industries.',
+    note:
+      'Live CRM builds. Each preview walks four screens from the product\u2019s own sidebar — hover any card to page through them.',
     projects: [
       {
-        category: 'B2B Sales',
-        tags: ['PostgreSQL', 'Forecasting', 'Email sync'],
-        name: 'Pipetrack',
-        sub: 'Sales Intelligence CRM',
-        body: 'A pipeline platform with custom deal stages, automatic activity capture from email and calendar, quota tracking and a forecast built on consistent stage definitions.',
-        visual: 'crm-detail'
+        category: 'Customer CRM',
+        tags: ['Bootstrap 5', 'Dashboards', 'Role-based access'],
+        name: 'Relay CRM',
+        sub: 'Customer Management Suite',
+        body: 'A full customer management console — pipeline dashboard, lead scoring, company records and contact profiles behind one role-aware navigation.',
+        preview: 'crm',
+        src: 'dreams-crm',
+        screens: 4,
+        w: 620,
+        h: 388
       },
       {
-        category: 'Customer Service',
-        tags: ['SLAs', 'Queues', 'Knowledge base'],
-        name: 'Helmdesk',
-        sub: 'Service & Support CRM',
-        body: 'Case management with queue routing, SLA timers and escalation paths, joined to the same customer record sales works from so nobody asks a customer to repeat themselves.',
-        visual: 'support-console'
+        category: 'Deal Management',
+        tags: ['Kanban', 'Forecasting', 'Activity log'],
+        name: 'Relay Deals',
+        sub: 'Deal & Pipeline Workspace',
+        body: 'The deal side of the same platform: a record view with the full activity trail, a stage dashboard, a drag-and-drop board and the pipeline table behind it.',
+        preview: 'crm',
+        src: 'deals-crm',
+        screens: 4,
+        w: 620,
+        h: 388
       },
       {
-        category: 'Financial Services',
-        tags: ['Compliance', 'Audit trail', 'Documents'],
-        name: 'Brokerbase',
-        sub: 'Brokerage Platform',
-        body: 'A bespoke platform for a business that does not look like a sales funnel — multi-party relationships, document generation, e-signature and a full regulatory audit trail.',
-        visual: 'app-console'
+        category: 'Sales Analytics',
+        tags: ['Charts', 'Reporting', 'Exports'],
+        name: 'Relay Insight',
+        sub: 'Sales Reporting Layer',
+        body: 'A reporting layer over the CRM — revenue summary, analytics, lead attribution and pipeline-stage reporting, each exportable for the weekly sales review.',
+        preview: 'crm',
+        src: 'sales-crm',
+        screens: 4,
+        w: 620,
+        h: 388
       },
       {
-        category: 'Professional Services',
-        tags: ['Resourcing', 'Time tracking', 'Billing'],
-        name: 'Studioline',
-        sub: 'Agency Delivery CRM',
-        body: 'Opportunities, resourcing and delivery in one system, so a signed proposal turns into a staffed project plan and an invoice schedule without three separate re-keyings.',
-        visual: 'reporting'
+        category: 'Property CRM',
+        tags: ['Tailwind', 'Listings', 'Media upload'],
+        name: 'Estate Desk',
+        sub: 'Real Estate CRM',
+        body: 'A property-focused CRM where listings, viewings and agent activity share a record — including the full add and edit flows for a new property.',
+        preview: 'crm',
+        src: 'property-crm',
+        screens: 4,
+        w: 620,
+        h: 388
       },
       {
-        category: 'Logistics',
-        tags: ['Accounts', 'Rate cards', 'ERP sync'],
-        name: 'Freightview',
-        sub: 'Account Management CRM',
-        body: 'Account, contract and rate-card management for a freight operator, synchronised two-way with the ERP so commercial teams and operations never disagree on terms.',
-        visual: 'integration'
+        category: 'Sales CRM',
+        tags: ['Dashboards', 'Forecasting', 'Rep performance'],
+        name: 'Salex',
+        sub: 'Sales Operations Platform',
+        body: 'A sales operations console covering overview, activity, per-rep performance and a rolling forecast against target for the quarter.',
+        preview: 'crm',
+        src: 'salex-crm',
+        screens: 4,
+        w: 620,
+        h: 388
       },
       {
-        category: 'Membership',
-        tags: ['Renewals', 'Segmentation', 'Payments'],
-        name: 'Circlebase',
-        sub: 'Membership CRM',
-        body: 'A membership platform handling joins, renewals, lapses and win-back journeys, with segmentation driving automated communications and a self-service member portal.',
-        visual: 'revops'
+        category: 'Enterprise CRM',
+        tags: ['Analytics', 'Reporting', 'Multi-module'],
+        name: 'Duralux',
+        sub: 'Enterprise CRM Console',
+        body: 'A multi-module enterprise console — customer dashboard, traffic analytics, sales reporting and lead reporting under a single shell.',
+        preview: 'crm',
+        src: 'duralux-crm',
+        screens: 4,
+        w: 620,
+        h: 388
       }
     ]
   },

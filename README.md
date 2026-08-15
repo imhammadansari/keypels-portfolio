@@ -41,7 +41,8 @@ npm run dev       # both
 ```
 
 There is no bundler and no framework. `tools/build.js` writes plain HTML; the browser
-loads three CSS files and one JS file.
+loads three CSS files and one JS file. `index.html` loads `service.css` too — the media
+frames and portfolio previews in its services and selected-work grids live there.
 
 ### Adding a service
 
@@ -85,19 +86,17 @@ sharing a layout:
 | `process` | `processSection` — 4–7 numbered steps | all |
 | `differentiators` | accordion | mobile, agents |
 | `benefits` | `benefits` — icon card grid | mobile, crm, automation, chatbots |
-| `tech` | `techSection` — grouped stack | web, crm, agents |
 | `pricing` | `pricing` — three engagement models | web, mobile, crm, automation, chatbots |
 | `faq` | `faq` — accordion + FAQPage schema | all |
 | `cta` | `ctaSection` | all |
-| `more` | `moreServices` | all |
 
-Portfolio pages share the header, footer, CTA panel and illustration library, and add four
-components of their own in the same design language:
+Portfolio pages share the header, footer and CTA panel, and add three components of their
+own in the same design language:
 
 | Section | Component | Contents |
 |---|---|---|
 | `hero` | `portfolioHero` | Breadcrumb, title, lead, cover illustration, capability pills |
-| `work` | `workGrid` | Six project cards — number, category, illustration, title, description, tech tags |
+| `work` | `workGrid` | Project cards — number, category, live preview, title, description, tech tags |
 | `approach` | `approachGrid` | Six methodology steps with icons |
 | `outcomes` | `outcomesGrid` | Five common-challenge cards |
 
@@ -126,15 +125,97 @@ Everything visual is driven by the custom properties at the top of `assets/css/b
 no new tokens, no new type scale and no new button styles; they reuse `.btn`,
 `.section-head`, `.eyebrow`, `.accordion` and the `.cta` panel from the homepage.
 
+The palette is gold on charcoal:
+
+| | |
+|---|---|
+| `--gold` `#D4A017` | primary |
+| `--gold-hover` `#E0B52A` | hover / the light end of the ramp, used on charcoal |
+| `--gold-accent` `#B8860B` | accent / the deep end, used on paper |
+| `--ink-900` `#171717` | dark surfaces |
+| `--paper-alt` `#FAF8F2` | page background |
+| `--text-dark` `#222222` | body text |
+| `--on-gold` `#171717` | text on a gold fill — white on gold is only 2.3:1 |
+
+The `--indigo-*` / `--violet-*` / `--cyan-*` token names are historical and now hold
+points on the gold ramp. The 300/400 end is the light gold used on charcoal, the 500/600
+end the deep gold used on paper — which is how they were already used, so re-theming was
+a values-only change.
+
 Fonts (Plus Jakarta Sans / Inter) load asynchronously from Google Fonts behind a full
 system fallback stack, so the page still renders correctly offline.
 
 ## Illustrations
 
-There are no image files anywhere in the site. Every device mockup, dashboard, workflow
-canvas, agent log and chat panel is hand-built markup in `tools/visuals.js` styled by
-`service.css` — nothing to optimise, nothing that can 404, and each composition is
-service-specific rather than stock.
+Every device mockup, dashboard, workflow canvas, agent log and chat panel used on the
+service pages is hand-built markup in `tools/visuals.js` styled by `service.css` —
+nothing to optimise, nothing that can 404, and each composition is service-specific
+rather than stock.
+
+Two things are the exception, and both show real captures rather than a drawing of one:
+
+- the **portfolio work grids**, via the preview components below;
+- the **service-page frames** — hero, intro and every offering tab — plus the homepage
+  work cards. Each declares its visual as an object instead of a library key:
+
+  ```js
+  heroVisual: { img: 'preview/web/steela.webp', kind: 'browser',
+                label: 'steela.com.au', alt: '…', w: 500, h: 1562 }
+  ```
+
+  `kind` picks the chrome — `browser` for sites and CRM consoles, `phone` for app screens,
+  `canvas` for workflow canvases (whose plate takes the canvas's own aspect ratio, clamped,
+  so a 4:1 workflow does not sit in a 16:9 letterbox). `renderVisual` still accepts a plain
+  string, so any frame can fall back to the drawn library.
+
+  Each page's set is chosen to match its sections and is **distinct within that page** — no
+  image repeats on a page, and no hero image reappears further down it.
+
+```
+assets/img/keypels-mark.png       Brand mark (header, footer, hero hub) — 128px, served at 32
+assets/img/favicon.png            Tab icon
+assets/img/apple-touch-icon.png   iOS home screen
+assets/img/keypels-logo.png       Supplied source lockup (not served)
+assets/img/preview/web/<slug>.webp        Tall page capture, one per website
+assets/img/preview/app/<slug>/NN.webp     Play Store screens, one folder per app
+assets/img/preview/crm/<slug>/NN.webp     Four sidebar pages, one folder per CRM
+assets/img/portfolio/<slug>.webp          Workflow canvas (the .png beside it is the source)
+```
+
+## Portfolio previews
+
+Each card in a `work.projects` array declares a `preview` type; `workGrid` in
+`tools/components.js` picks the matching renderer, so one component drives every grid:
+
+| `preview` | Asset | At rest | Engaged |
+|---|---|---|---|
+| `site` | one tall capture | hero of the page | scrolls down the page and back |
+| `app` | the app's store screens | screen 1 | swipes right-to-left through the screens |
+| `crm` | four pages from its own sidebar | page 1 | swipes right-to-left through the pages |
+| `flow` | the workflow canvas, filling the frame | its first nodes | pans left to right across the whole canvas |
+
+Cards with no `preview` key fall back to `renderVisual(pr.visual)` — the homepage work
+cards and the service-page illustrations still use that path.
+
+`app` and `crm` share one mechanic: a flex track translated by `--i`, so anything that
+declares `data-screens` is paged by the same code. `flow` computes `--pv-pan` at build
+time from the canvas aspect — exactly far enough for its right-hand end to reach the frame
+edge. A canvas that already fits the frame gets no pan and uses the left-to-right veil
+reveal instead.
+
+The scroll, the pan and the reveal are pure CSS on `transform`. `initPreviews()` in
+`main.js` adds only the two things CSS cannot do: hydrating `data-src` assets the first
+time a card is engaged, and stepping `--i`. On touch there is no hover, so a card engages
+when it settles in the middle of the viewport — no visible controls either way.
+Everything is disabled under `prefers-reduced-motion: reduce`.
+
+### Regenerating a preview
+
+Captures are produced outside the repo (headless Chrome — 1280 wide and scrolled for
+websites, 1440x900 per page for CRMs, Play Store images for apps). To swap one, replace the
+file and update the `w`/`h` on that project — they carry the `width`/`height` attributes
+that keep the grid free of layout shift, and they also drive the timing: `h` sets the
+website scroll duration at a constant speed, and `w`/`h` set the workflow pan distance.
 
 ## Interactions (`assets/js/main.js`)
 
@@ -154,20 +235,42 @@ pointer-driven effects are skipped on touch devices.
 
 ## Wiring the contact form
 
-`index.html` → `<form class="form" data-form>` validates and shows a success state
-client-side only. To deliver submissions, add an `action` and replace the marked block
-near the end of `initForm()` in `assets/js/main.js`:
+The enquiry form posts to **Web3Forms**, which delivers to the inbox its access key is
+registered to (`contact@keypels.com`). There are two copies of the same markup — the
+homepage contact section in `index.html`, and the contact page in `tools/components.js` —
+and both carry the same hidden fields:
 
-```js
-fetch(form.action, { method: 'POST', body: new FormData(form) })
-  .then(function (r) { if (!r.ok) throw new Error(); /* success UI */ })
-  .catch(function () { /* error UI */ });
-```
+| Field | Purpose |
+|---|---|
+| `access_key` | identifies the destination inbox. Public by design — it grants nothing but the right to post to that inbox, so it lives in the markup as the service intends |
+| `from_name` | sender name on the delivered mail |
+| `botcheck` | honeypot; hidden from people, filled in by bots |
+
+`initForm()` in `assets/js/main.js` handles the rest: it validates, POSTs the `FormData`,
+and drives the existing `.form__status` element for both outcomes. Three details worth
+knowing before editing it:
+
+- **Only fields carrying `required` are validated.** Company has none, so it submits
+  empty — the field is genuinely optional, not just missing a visual asterisk.
+- **`replyto` is set from the email field** at submit time, so replying to the notification
+  reaches the sender rather than the form.
+- **The form's own Subject field doubles as the email subject**, falling back to a generic
+  one when left blank. Do not add a hidden `subject` input — it would collide with the
+  visible field and Web3Forms would receive an array.
+
+The submit button is disabled and relabelled while a request is in flight, so a second
+click cannot fire a second submission.
+
+Web3Forms rejects requests that do not come from a browser, so the endpoint cannot be
+exercised with `curl` — test through a real page.
 
 ## Before going live
 
-- Replace `contact@keypels.com` and the `https://keypels.com/` URLs (`tools/site.config.js`
-  drives canonical, OG, sitemap; `robots.txt` has its own copy)
+- `BRAND.origin` in `tools/site.config.js` drives every canonical, OG url and sitemap
+  entry, and `robots.txt` carries its own copy. It is set to `https://www.keypels.com`
+  because the host 308-redirects the bare domain to www — a canonical pointing at a URL
+  that redirects away is what stops a page being indexed cleanly. If you ever switch the
+  redirect to serve the bare domain, change both places to match.
 - Point the LinkedIn / Instagram / X links at the real profiles
 - Add a real `og:image` (1200×630) and reference it from the `<head>`
 - Swap the placeholder client wordmarks in the homepage trust marquee for real logos
@@ -178,7 +281,26 @@ fetch(form.action, { method: 'POST', body: new FormData(form) })
   figures. Web and mobile mirror the reference pricing structure; the other four were set to
   fit each service. All of them live in `tools/services/<slug>.js` — check every number
   before this goes live.
-- Work/case-study cards on the homepage and every portfolio page are **representative
-  project profiles, not real named clients** — each portfolio grid carries a visible note
-  saying so. Swap them for genuine case studies as soon as you can name clients, and remove
-  the note when you do.
+- Work cards on the **homepage** are still representative project profiles rather than
+  named clients. Swap them for genuine case studies as soon as you can name clients.
+- Every portfolio grid now names **real third-party products** and shows captures of them. Confirm you have the right to present each one as
+  your work, and that the client is happy to be named, before this goes public. Trademarked
+  names and screenshots belong to their owners.
+
+## Search appearance
+
+Three things drive how the site shows up in Google, and all three are wired:
+
+- **Site name** — Google takes it from `WebSite` structured data on the homepage root. Without
+  it, it falls back to printing the bare URL. `index.html` carries a `WebSite` + `Organization`
+  graph with `name: "KeyPels"`; keep it on the root page and keep the `@id`s pointing at the
+  canonical host.
+- **Description** — every page has its own `<meta name="description">`. "No information is
+  available for this page" in a result means Google could not crawl the page, not that the tag
+  is missing; check `robots.txt`, the canonical host and Search Console coverage first.
+- **Favicon** — Google only accepts a square icon of 48px or a multiple of 48. `favicon.png` is
+  96×96 and `icon-192.png` is 192×192; both are referenced from every page. A 64px icon is
+  silently ignored, which is why none showed before.
+
+None of this takes effect until the site is deployed and Google recrawls. After deploying,
+request indexing for `/` in Search Console rather than waiting.

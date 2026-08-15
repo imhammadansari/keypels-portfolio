@@ -5,20 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI Agents Portfolio — Autonomous Agents In Production | KeyPels</title>
 <meta name="description" content="A view of the AI agents KeyPels builds — support resolution, internal copilots, lead qualification, research and triage agents, with the guardrails and evaluation behind them.">
-<meta name="theme-color" content="#05060c">
+<meta name="theme-color" content="#080807">
 <meta name="color-scheme" content="dark light">
-<link rel="canonical" href="https://keypels.com/portfolio/ai-agents/">
+<link rel="canonical" href="https://www.keypels.com/portfolio/ai-agents/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KeyPels">
 <meta property="og:title" content="AI Agents Portfolio — Autonomous Agents In Production | KeyPels">
 <meta property="og:description" content="A view of the AI agents KeyPels builds — support resolution, internal copilots, lead qualification, research and triage agents, with the guardrails and evaluation behind them.">
-<meta property="og:url" content="https://keypels.com/portfolio/ai-agents/">
+<meta property="og:url" content="https://www.keypels.com/portfolio/ai-agents/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Agents Portfolio — Autonomous Agents In Production | KeyPels">
 <meta name="twitter:description" content="A view of the AI agents KeyPels builds — support resolution, internal copilots, lead qualification, research and triage agents, with the guardrails and evaluation behind them.">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236366f1'/%3E%3Cstop offset='.55' stop-color='%238b5cf6'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2308091a'/%3E%3Cpath d='M20 15h7v14.5L40 15h9L34.5 31.5 49 49h-9L27 33.5V49h-7z' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../../assets/img/icon-192.png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +39,7 @@
       "@type": "CollectionPage",
       "name": "AI Agents Portfolio",
       "description": "A view of the AI agents KeyPels builds — support resolution, internal copilots, lead qualification, research and triage agents, with the guardrails and evaluation behind them.",
-      "url": "https://keypels.com/portfolio/ai-agents/",
+      "url": "https://www.keypels.com/portfolio/ai-agents/",
       "about": {
         "@type": "Service",
         "name": "AI Agents",
@@ -54,19 +56,19 @@
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://keypels.com/"
+          "item": "https://www.keypels.com/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Portfolio",
-          "item": "https://keypels.com/portfolio/"
+          "item": "https://www.keypels.com/portfolio/"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "AI Agents",
-          "item": "https://keypels.com/portfolio/ai-agents/"
+          "item": "https://www.keypels.com/portfolio/ai-agents/"
         }
       ]
     }
@@ -83,14 +85,7 @@
   <div class="container header__inner">
     <a class="brand" href="../../index.html" aria-label="KeyPels — home">
       <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
-          <defs>
-            <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#818cf8"/><stop offset=".55" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/>
-            </linearGradient>
-          </defs>
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="../../assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>
       <span class="brand__word">KeyPels</span>
     </a>
@@ -380,126 +375,129 @@
       <p class="section-lead" data-reveal data-delay="120">A selection of the agent patterns we put into production across industries.</p>
     </header>
     <div class="pfgrid">
-      <article class="pfcard" data-reveal data-delay="0">
-        <div class="pfcard__visual"><div class="viz viz--agent" aria-hidden="true">
-    <div class="run">
-      <div class="run__head"><span class="run__avatar"></span><span class="run__name">Support Agent</span><span class="viz__pill viz__pill--ok">Running</span></div>
-      <ul class="run__steps">
-        <li class="is-done"><span></span>Read request</li><li class="is-tool"><span></span>crm.lookupOrder()</li><li class="is-done"><span></span>Check refund policy</li><li class="is-active"><span></span>billing.refund()</li>
-      </ul>
-      <div class="run__foot"><span class="viz__pill">Guardrail: max £500</span></div>
-    </div></div></div>
+      <article class="pfcard pfcard--pv" data-pv-card data-reveal data-delay="0">
+        <div class="pfcard__visual pfcard__visual--pv"><div class="pv pv--flow pv--pans" data-preview style="--pv-pan:8.12%;--pv-dur:2.68s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="../../assets/img/portfolio/voice-booking-agent.webp"
+                   width="583" height="279" loading="lazy" decoding="async"
+                   alt="Voice Booking Agent workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div></div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">01</span>
-            <span class="pfcard__cat">Customer Support</span>
+            <span class="pfcard__cat">Voice AI</span>
           </div>
-          <h3 class="pfcard__title">Resolve<span>, Refund &amp; Returns Agent</span></h3>
-          <p class="pfcard__text">Verifies the order, checks eligibility against live policy, issues the refund within a hard value limit and updates the CRM — escalating anything unusual with context attached.</p>
-          <ul class="pfcard__tags"><li>Tool use</li><li>Policy RAG</li><li>Value limits</li></ul>
+          <h3 class="pfcard__title">Voice Booking Agent<span>, Dental Appointment Agent</span></h3>
+          <p class="pfcard__text">A voice agent that answers calls, checks live availability, books the appointment and writes the patient record back — memory and tools wired to one reasoning loop.</p>
+          <ul class="pfcard__tags"><li>n8n</li><li>Gemini</li><li>Calendar API</li></ul>
         </div>
       </article>
-      <article class="pfcard" data-reveal data-delay="70">
-        <div class="pfcard__visual"><div class="viz viz--chat" aria-hidden="true">
-    <div class="convo">
-      <div class="convo__head"><span class="convo__avatar"></span><span class="convo__name">Internal Copilot</span></div>
-      <div class="msg msg--in">What is our refund window for EU orders?</div><div class="msg msg--out">14 days from delivery, extended to 30 for damaged goods.</div><div class="msg msg--in">Raise a ticket for #48219</div>
-      <div class="msg msg--typing"><i></i><i></i><i></i></div>
-      <div class="convo__source">Source: Ops handbook</div>
-    </div></div></div>
+      <article class="pfcard pfcard--pv" data-pv-card data-reveal data-delay="70">
+        <div class="pfcard__visual pfcard__visual--pv"><div class="pv pv--flow pv--pans" data-preview style="--pv-pan:52.87%;--pv-dur:4.20s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="../../assets/img/portfolio/personal-assistant-agent.webp"
+                   width="1100" height="270" loading="lazy" decoding="async"
+                   alt="Personal Assistant Agent workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div></div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">02</span>
-            <span class="pfcard__cat">Internal Ops</span>
+            <span class="pfcard__cat">Personal AI</span>
           </div>
-          <h3 class="pfcard__title">Deskmate<span>, Internal Team Copilot</span></h3>
-          <p class="pfcard__text">An assistant embedded where the team already works, answering from internal documentation, drafting documents and completing the admin steps around a request.</p>
-          <ul class="pfcard__tags"><li>Slack</li><li>Permission-aware</li><li>Actions</li></ul>
+          <h3 class="pfcard__title">Personal Assistant Agent<span>, Voice &amp; Text Executive Assistant</span></h3>
+          <p class="pfcard__text">An assistant that takes voice or text over Telegram, transcribes it, then creates tasks, drafts email and manages the calendar through a shared tool set.</p>
+          <ul class="pfcard__tags"><li>n8n</li><li>Telegram</li><li>Google Workspace</li></ul>
         </div>
       </article>
-      <article class="pfcard" data-reveal data-delay="140">
-        <div class="pfcard__visual"><div class="viz viz--console viz--revops" aria-hidden="true">
-    <div class="panelapp">
-      <div class="panelapp__side"><b></b><i style="width:100%"></i><i style="width:80%"></i><i style="width:92%"></i><i style="width:68%"></i><i style="width:76%"></i></div>
-      <div class="panelapp__main">
-        <div class="panelapp__top"><span class="viz__pill">Pipeline health</span><span class="panelapp__avatars"><i></i><i></i><i></i></span></div>
-        <div class="panelapp__kpis"><i></i><i></i><i></i></div>
-        <div class="panelapp__chart"><i style="--h:42%"></i><i style="--h:66%"></i><i style="--h:54%"></i><i style="--h:88%"></i><i style="--h:61%"></i><i style="--h:94%" class="is-hot"></i><i style="--h:72%"></i></div>
-        <div class="panelapp__table"><i style="width:100%"></i><i style="width:100%"></i><i style="width:100%"></i><i style="width:100%"></i></div>
-      </div>
-    </div></div></div>
+      <article class="pfcard pfcard--pv" data-pv-card data-reveal data-delay="140">
+        <div class="pfcard__visual pfcard__visual--pv"><div class="pv pv--flow" data-preview style="--pv-pan:0.00%;--pv-dur:2.40s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="../../assets/img/portfolio/database-chat-agent.webp"
+                   width="871" height="511" loading="lazy" decoding="async"
+                   alt="Database Chat Agent workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div></div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">03</span>
-            <span class="pfcard__cat">Revenue Ops</span>
+            <span class="pfcard__cat">Data AI</span>
           </div>
-          <h3 class="pfcard__title">Qualify<span>, Lead Qualification Agent</span></h3>
-          <p class="pfcard__text">Qualifies and enriches inbound leads, keeps records current, drafts follow-ups in your voice for approval and flags deals that have gone quiet before the forecast does.</p>
-          <ul class="pfcard__tags"><li>Enrichment</li><li>CRM hygiene</li><li>Drafting</li></ul>
+          <h3 class="pfcard__title">Database Chat Agent<span>, Natural Language to SQL</span></h3>
+          <p class="pfcard__text">A conversational agent that answers business questions by querying Postgres directly, holding session memory so follow-up questions keep their context.</p>
+          <ul class="pfcard__tags"><li>n8n</li><li>OpenAI</li><li>PostgreSQL</li></ul>
         </div>
       </article>
-      <article class="pfcard" data-reveal data-delay="0">
-        <div class="pfcard__visual"><div class="viz viz--agent" aria-hidden="true">
-    <div class="run">
-      <div class="run__head"><span class="run__avatar"></span><span class="run__name">Research Agent</span><span class="viz__pill viz__pill--ok">Running</span></div>
-      <ul class="run__steps">
-        <li class="is-done"><span></span>Gather sources</li><li class="is-tool"><span></span>web.search()</li><li class="is-done"><span></span>Verify claims</li><li class="is-active"><span></span>Draft brief</li>
-      </ul>
-      <div class="run__foot"><span class="viz__pill">Guardrail: max £500</span></div>
-    </div></div></div>
+      <article class="pfcard pfcard--pv" data-pv-card data-reveal data-delay="0">
+        <div class="pfcard__visual pfcard__visual--pv"><div class="pv pv--flow" data-preview style="--pv-pan:0.00%;--pv-dur:2.40s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="../../assets/img/portfolio/gmail-email-agent.webp"
+                   width="1014" height="570" loading="lazy" decoding="async"
+                   alt="Gmail Email Agent workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div></div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">04</span>
-            <span class="pfcard__cat">Procurement</span>
+            <span class="pfcard__cat">Email AI</span>
           </div>
-          <h3 class="pfcard__title">Scout<span>, Supplier Research Agent</span></h3>
-          <p class="pfcard__text">Monitors sources, extracts structured supplier and pricing data into your systems and produces cited briefs, flagging what changed since the last run.</p>
-          <ul class="pfcard__tags"><li>Multi-source</li><li>Citations</li><li>Scheduled</li></ul>
+          <h3 class="pfcard__title">Gmail Email Agent<span>, Inbox Triage &amp; Reply Agent</span></h3>
+          <p class="pfcard__text">An agent that reads incoming mail, decides whether to file, escalate or answer it, and drafts the reply through a structured output parser.</p>
+          <ul class="pfcard__tags"><li>n8n</li><li>Claude</li><li>Gmail API</li></ul>
         </div>
       </article>
-      <article class="pfcard" data-reveal data-delay="70">
-        <div class="pfcard__visual"><div class="viz viz--inbox" aria-hidden="true">
-    <div class="tickets">
-      <div class="tickets__head"><span class="viz__pill">Queue</span><span class="viz__pill viz__pill--ok">SLA 98%</span></div>
-      <div class="ticket is-urgent"><span class="ticket__dot"></span><span class="ticket__t">Refund request</span><span class="ticket__time">2m</span></div><div class="ticket "><span class="ticket__dot"></span><span class="ticket__t">Delivery delay</span><span class="ticket__time">14m</span></div><div class="ticket "><span class="ticket__dot"></span><span class="ticket__t">Account access</span><span class="ticket__time">31m</span></div><div class="ticket is-done"><span class="ticket__dot"></span><span class="ticket__t">Invoice query</span><span class="ticket__time">closed</span></div>
-    </div></div></div>
+      <article class="pfcard pfcard--pv" data-pv-card data-reveal data-delay="70">
+        <div class="pfcard__visual pfcard__visual--pv"><div class="pv pv--flow pv--pans" data-preview style="--pv-pan:13.02%;--pv-dur:2.84s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="../../assets/img/portfolio/woocommerce-ops-agent.webp"
+                   width="1075" height="487" loading="lazy" decoding="async"
+                   alt="WooCommerce Ops Agent workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div></div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">05</span>
-            <span class="pfcard__cat">Service Desk</span>
+            <span class="pfcard__cat">Commerce AI</span>
           </div>
-          <h3 class="pfcard__title">Frontline<span>, Tier-1 Triage Agent</span></h3>
-          <p class="pfcard__text">Classifies and routes inbound tickets, gathers the diagnostic detail an engineer would ask for first, and resolves the repetitive cases entirely within policy.</p>
-          <ul class="pfcard__tags"><li>Triage</li><li>Routing</li><li>Escalation</li></ul>
+          <h3 class="pfcard__title">WooCommerce Ops Agent<span>, Store Operations Agent</span></h3>
+          <p class="pfcard__text">A store agent reachable over Telegram that reads orders, updates products and reports on stock, with its own operating brief held in memory.</p>
+          <ul class="pfcard__tags"><li>n8n</li><li>Telegram</li><li>WooCommerce</li></ul>
         </div>
       </article>
-      <article class="pfcard" data-reveal data-delay="140">
-        <div class="pfcard__visual"><div class="viz viz--doc" aria-hidden="true">
-    <div class="paper">
-      <span class="paper__title"></span>
-      <i style="width:100%"></i><i style="width:88%"></i><i style="width:96%"></i><i style="width:62%"></i><i style="width:80%"></i>
-      <span class="paper__stamp">PDF</span>
-    </div>
-    <div class="extract">
-      <span class="extract__head">Extracted</span>
-      <span class="extract__row"><b>Invoice&nbsp;no.</b><i>INV-40218</i></span>
-      <span class="extract__row"><b>Total</b><i>£4,180.00</i></span>
-      <span class="extract__row is-low"><b>PO ref</b><i>review →</i></span>
-    </div></div></div>
+      <article class="pfcard pfcard--pv" data-pv-card data-reveal data-delay="140">
+        <div class="pfcard__visual pfcard__visual--pv"><div class="pv pv--flow" data-preview style="--pv-pan:0.00%;--pv-dur:2.40s">
+            <div class="pv__port">
+              <img class="pv__canvas" src="../../assets/img/portfolio/ai-coaching-agent.webp"
+                   width="1056" height="607" loading="lazy" decoding="async"
+                   alt="AI Coaching Agent workflow">
+              <span class="pv__veil" aria-hidden="true"></span>
+              <span class="pv__scan" aria-hidden="true"></span>
+            </div>
+          </div></div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
             <span class="pfcard__num">06</span>
-            <span class="pfcard__cat">Legal Ops</span>
+            <span class="pfcard__cat">Coaching AI</span>
           </div>
-          <h3 class="pfcard__title">Clausewise<span>, Contract Review Agent</span></h3>
-          <p class="pfcard__text">Extracts key terms, compares clauses against your playbook and surfaces deviations for a reviewer — never approving or committing to anything on its own.</p>
-          <ul class="pfcard__tags"><li>Extraction</li><li>Clause review</li><li>Human gate</li></ul>
+          <h3 class="pfcard__title">AI Coaching Agent<span>, Client Coaching Workflow</span></h3>
+          <p class="pfcard__text">A multi-stage coaching agent that intakes client context, plans a programme and follows up on progress across a long-running conversation.</p>
+          <ul class="pfcard__tags"><li>n8n</li><li>LLM</li><li>Multi-step</li></ul>
         </div>
       </article>
     </div>
     <p class="pfnote" data-reveal>
-      Representative project profiles showing the scope, stack and complexity we deliver in ai agents.
-      Named client work and references are shared under NDA on request.
+      Production agent builds. Each preview is the live workflow canvas — hover any card to watch it run left to right.
     </p>
   </div>
 </section>
@@ -604,65 +602,6 @@
   </div>
 </section>
 
-<section class="more section--dark" aria-labelledby="more-title">
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Keep exploring</p>
-        <h2 class="section-title section-title--light" id="more-title" data-reveal data-delay="60">Other Portfolios</h2>
-      </div>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">See the work behind our other service lines. <a href="../../portfolio/">All portfolio work</a>.</p>
-    </header>
-    <ul class="sgrid">
-      <li data-reveal data-delay="0">
-        <a class="scard" href="../../portfolio/web-development/">
-          <span class="scard__num">01</span>
-          <span class="scard__icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M7 6.5h.01M9.5 6.5h.01"/></svg></span>
-          <h3>Web Development</h3>
-          <p>SaaS platforms, storefronts and portals.</p>
-          <span class="scard__arrow"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-      </li>
-      <li data-reveal data-delay="60">
-        <a class="scard" href="../../portfolio/mobile-app-development/">
-          <span class="scard__num">02</span>
-          <span class="scard__icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="3"/><path d="M10.5 5.5h3M11 18.5h2"/></svg></span>
-          <h3>Mobile App Development</h3>
-          <p>FinTech, health, commerce and logistics apps.</p>
-          <span class="scard__arrow"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-      </li>
-      <li data-reveal data-delay="120">
-        <a class="scard" href="../../portfolio/crm-development/">
-          <span class="scard__num">03</span>
-          <span class="scard__icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V9m5 11V4m5 16v-7m5 7V7"/></svg></span>
-          <h3>CRM Development</h3>
-          <p>Sales, service and brokerage platforms.</p>
-          <span class="scard__arrow"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-      </li>
-      <li data-reveal data-delay="0">
-        <a class="scard" href="../../portfolio/ai-automation/">
-          <span class="scard__num">04</span>
-          <span class="scard__icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3" width="7" height="6" rx="2"/><rect x="14.5" y="15" width="7" height="6" rx="2"/><path d="M9.5 6h4a3 3 0 0 1 3 3v6"/><path d="M14 12.5 16.5 15l2.5-2.5"/></svg></span>
-          <h3>AI Automation</h3>
-          <p>Invoice, onboarding and triage workflows.</p>
-          <span class="scard__arrow"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-      </li>
-      <li data-reveal data-delay="60">
-        <a class="scard" href="../../portfolio/chatbots/">
-          <span class="scard__num">06</span>
-          <span class="scard__icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h16v11H9l-5 4z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></span>
-          <h3>Chatbots</h3>
-          <p>Product guides, support and booking assistants.</p>
-          <span class="scard__arrow"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
-
 </main>
 
 <footer class="footer" aria-labelledby="footer-title">
@@ -672,9 +611,7 @@
       <div class="footer__brand">
         <a class="brand brand--footer" href="../../index.html" aria-label="KeyPels — home">
           <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32" width="32" height="32" focusable="false">
-          <path d="M9 6h3.6v8.1L20 6h4.6l-7.9 9.1L25 26h-4.6l-6-8.4-1.8 2V26H9z" fill="url(#brandGrad)"/>
-        </svg>
+        <img src="../../assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
       </span>
           <span class="brand__word">KeyPels</span>
         </a>

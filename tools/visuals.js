@@ -251,7 +251,46 @@ const VISUALS = {
   'chat-detail': () => chat({})
 };
 
-function renderVisual(key) {
+/* --- real media -----------------------------------------------------------
+   Some frames show an actual capture of the thing the section is about rather
+   than a drawn approximation of it. A visual is then declared as an object:
+
+     { img: 'preview/web/steela.webp', kind: 'browser', label: 'steela.com.au',
+       w: 500, h: 1562, alt: '…' }
+
+   `kind` picks the chrome: a browser window for websites and CRM consoles, a
+   handset for app screens, a plain plate for workflow canvases. Each renders
+   at the same 420px cap as the drawn visuals, so no frame changes size.
+   -------------------------------------------------------------------------- */
+const CHROME = {
+  browser: (o) => `
+      <span class="mviz__bar" aria-hidden="true"><i></i><i></i><i></i><b>${o.label || ''}</b></span>`,
+  phone: () => '\n      <span class="mviz__notch" aria-hidden="true"></span>',
+  canvas: () => ''
+};
+
+function media(o, rel) {
+  const kind = o.kind || 'browser';
+
+  /* Workflow canvases run anywhere from square to 4:1. A fixed plate would
+     leave one end of that range swimming in dead space, so the plate takes the
+     canvas's own ratio — clamped, so nothing becomes a letterbox slot. */
+  let style = '';
+  if (kind === 'canvas' && o.w && o.h) {
+    const ar = Math.min(2.6, Math.max(1.3, o.w / o.h));
+    style = ` style="--mv-ar:${ar.toFixed(3)}"`;
+  }
+
+  return `<div class="mviz mviz--${kind}"${style}>${CHROME[kind](o)}
+      <div class="mviz__port">
+        <img src="${rel}assets/img/${o.img}" width="${o.w}" height="${o.h}"
+             loading="lazy" decoding="async" alt="${(o.alt || '').replace(/"/g, '&quot;')}">
+      </div>
+    </div>`;
+}
+
+function renderVisual(key, rel) {
+  if (key && typeof key === 'object') return media(key, rel || '');
   const fn = VISUALS[key];
   if (!fn) throw new Error('Unknown visual: ' + key);
   return fn();

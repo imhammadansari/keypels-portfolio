@@ -7,7 +7,13 @@ module.exports = {
   icon: 'chat',
   number: '06',
   accent: ['#22d3ee', '#8b5cf6'],
-  heroVisual: 'chat-panel',
+  heroVisual: {
+    img: 'portfolio/whatsapp-multimodal-chatbot.webp',
+    kind: 'canvas',
+    alt: 'Multimodal chatbot workflow',
+    w: 777,
+    h: 744
+  },
   cardVisual: 'chat',
 
   meta: {
@@ -16,7 +22,7 @@ module.exports = {
       'KeyPels builds intelligent chatbots for websites, support, lead generation, sales and internal operations — grounded in your own content and connected to your systems.'
   },
 
-  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'benefits', 'faq', 'cta', 'more'],
+  sections: ['hero', 'intro', 'offerings', 'assurance', 'pricing', 'process', 'benefits', 'faq', 'cta'],
 
   hero: {
     eyebrow: 'Chatbots',
@@ -45,7 +51,13 @@ module.exports = {
       { icon: 'plug', title: 'Connected, not decorative', body: 'Order lookups, bookings, quotes and CRM capture handled inside the conversation.' },
       { icon: 'chart', title: 'Measured properly', body: 'Resolution rate, escalation reasons and unanswered questions reported and used to improve it.' }
     ],
-    visual: 'chat-detail'
+    visual: {
+      img: 'portfolio/dental-scheduling-chatbot.webp',
+      kind: 'canvas',
+      alt: 'Clinic booking chatbot',
+      w: 976,
+      h: 577
+    }
   },
 
   offerings: {
@@ -61,7 +73,13 @@ module.exports = {
         body:
           'A guide that helps visitors find the right product, compare options, answer pre-sales questions and reach the next step — trained on your site, catalogue and documentation.',
         bullets: ['Product guidance and comparison', 'Pre-sales question handling', 'Content-grounded answers with sources', 'Direct routes to demo, quote or checkout'],
-        visual: 'chat-detail'
+        visual: {
+          img: 'portfolio/whatsapp-rag-support.webp',
+          kind: 'canvas',
+          alt: 'Knowledge-grounded product assistant',
+          w: 1100,
+          h: 337
+        }
       },
       {
         key: 'support',
@@ -71,7 +89,13 @@ module.exports = {
         body:
           'First-line support that genuinely resolves: order status, account questions, troubleshooting steps and policy answers, escalating to your team with full context when it should.',
         bullets: ['Order and account lookups', 'Guided troubleshooting flows', 'Ticket creation with conversation history', 'Escalation rules you configure'],
-        visual: 'support-console'
+        visual: {
+          img: 'portfolio/whatsapp-support-bot.webp',
+          kind: 'canvas',
+          alt: 'Customer support chatbot',
+          w: 981,
+          h: 243
+        }
       },
       {
         key: 'leadgen',
@@ -81,7 +105,13 @@ module.exports = {
         body:
           'Assistants that qualify interest conversationally rather than through a seven-field form, book meetings against live calendar availability and write everything into the CRM.',
         bullets: ['Conversational qualification', 'Calendar-aware meeting booking', 'Automatic CRM record creation', 'Routing by territory, product or value'],
-        visual: 'revops'
+        visual: {
+          img: 'portfolio/lead-capture-chatbot.webp',
+          kind: 'canvas',
+          alt: 'Lead generation chatbot',
+          w: 826,
+          h: 375
+        }
       },
       {
         key: 'internal',
@@ -91,7 +121,13 @@ module.exports = {
         body:
           'A Slack or Teams assistant for the questions your ops, HR and IT teams answer twenty times a week — grounded in internal documentation and aware of who is asking.',
         bullets: ['Policy and process answers from internal docs', 'Permission-aware responses per team', 'Request raising and status checks', 'Slack, Teams and intranet deployment'],
-        visual: 'copilot'
+        visual: {
+          img: 'portfolio/discord-ai-bot.webp',
+          kind: 'canvas',
+          alt: 'Internal helpdesk routing bot',
+          w: 1008,
+          h: 597
+        }
       }
     ]
   },

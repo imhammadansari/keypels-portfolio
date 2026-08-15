@@ -578,8 +578,35 @@
       });
     });
 
+    /* Only fields carrying `required` are checked — Company deliberately has
+       none, so an empty one submits cleanly. */
+    var submitBtn = $('button[type="submit"]', form);
+    var btnLabel = submitBtn ? submitBtn.querySelector('span') : null;
+    var idleLabel = btnLabel ? btnLabel.textContent : '';
+    var sending = false;
+
+    function setStatus(msg, isError) {
+      status.textContent = msg;
+      status.classList.add('is-visible');
+      status.classList.toggle('is-error', !!isError);
+    }
+
+    function setSending(on) {
+      sending = on;
+      if (!submitBtn) return;
+      submitBtn.disabled = on;                       // blocks a second click
+      submitBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+      if (btnLabel) btnLabel.textContent = on ? 'Sending…' : idleLabel;
+    }
+
+    function clearErrors() {
+      $$('.field', form).forEach(function (f) { f.classList.remove('has-error'); });
+      $$('[data-error-for]', form).forEach(function (s) { s.textContent = ''; });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (sending) return;
 
       var required = $$('[required]', form);
       var firstInvalid = null;
@@ -588,24 +615,45 @@
       });
 
       if (firstInvalid) {
-        status.textContent = 'Please fix the highlighted fields and try again.';
-        status.classList.add('is-visible', 'is-error');
+        setStatus('Please fix the highlighted fields and try again.', true);
         firstInvalid.focus();
         return;
       }
 
-      status.classList.remove('is-error');
-      status.classList.add('is-visible');
+      var name = (($('#f-name', form) || {}).value || '').trim().split(' ')[0];
+      setSending(true);
+      setStatus('Sending your message…', false);
 
-      var name = ($('#f-name', form).value || '').trim().split(' ')[0];
-      status.textContent = 'Thanks' + (name ? ', ' + name : '') +
-        ' — your inquiry is ready to send. We reply within one business day.';
+      var data = new FormData(form);
 
-      /* Replace this block with a real submission, e.g.:
-         fetch(form.action, { method: 'POST', body: new FormData(form) }) */
-      form.reset();
-      $$('.field', form).forEach(function (f) { f.classList.remove('has-error'); });
-      $$('[data-error-for]', form).forEach(function (s) { s.textContent = ''; });
+      /* so the reply-to on the delivered mail is the sender, not the form */
+      var email = ($('#f-email', form) || {}).value;
+      if (email) data.set('replyto', email.trim());
+
+      /* the form's own Subject field doubles as the email subject; fall back to
+         a useful one when the sender leaves it blank */
+      if (!(data.get('subject') || '').trim()) {
+        data.set('subject', 'New enquiry from keypels.com');
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' }
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (out) {
+          if (!out || out.success !== true) throw new Error(out && out.message);
+          setStatus('Thanks' + (name ? ', ' + name : '') +
+            ' — your message is on its way. We reply within one business day.', false);
+          form.reset();
+          clearErrors();
+        })
+        .catch(function () {
+          setStatus('Something went wrong sending that. Please try again, or email ' +
+            'contact@keypels.com directly.', true);
+        })
+        .then(function () { setSending(false); });
     });
   }
 
@@ -632,6 +680,89 @@
   }
 
   /* ------------------------------------------------------------------
+     Portfolio previews
+
+     The website scroll and the workflow reveal are pure CSS — this only
+     supplies the two things CSS cannot do:
+
+       1. hydration — every preview past the first app screen ships as
+          data-src and is fetched the first time a card is engaged, so a
+          26-card grid costs one image per card on load, not eight.
+       2. the app swipe — stepping --i through the screens. A transition on
+          the track handles both directions, so leaving slides back to
+          screen 1 rather than snapping.
+
+     On touch there is no hover, so a card "engages" when it settles in the
+     middle of the viewport and disengages when it leaves. No extra controls.
+     ------------------------------------------------------------------ */
+  function initPreviews() {
+    var cards = $$('[data-pv-card]');
+    if (!cards.length) return;
+
+    var STEP = 780;   // ms each app screen holds before the next swipes in
+
+    function hydrate(card) {
+      if (card.dataset.pvLoaded) return;
+      card.dataset.pvLoaded = '1';
+      $$('img[data-src]', card).forEach(function (img) {
+        img.src = img.getAttribute('data-src');
+        img.removeAttribute('data-src');
+      });
+    }
+
+    /* any preview that declares data-screens is a track: app screens, CRM pages */
+    function engage(card) {
+      hydrate(card);
+      var pv = $('[data-screens]', card);
+      if (!pv || reduceMotion) return;
+
+      var total = parseInt(pv.getAttribute('data-screens'), 10) || 1;
+      if (total < 2) return;
+
+      window.clearInterval(card._pvTimer);
+      var i = 0;
+      card._pvTimer = window.setInterval(function () {
+        i += 1;
+        if (i >= total) { window.clearInterval(card._pvTimer); return; }
+        pv.style.setProperty('--i', i);
+      }, STEP);
+    }
+
+    function release(card) {
+      window.clearInterval(card._pvTimer);
+      var pv = $('[data-screens]', card);
+      if (pv) pv.style.setProperty('--i', 0);
+    }
+
+    cards.forEach(function (card) {
+      if (!isCoarse) {
+        card.addEventListener('pointerenter', function () { engage(card); });
+        card.addEventListener('pointerleave', function () { release(card); });
+        /* keyboard users get the same preview when focus lands inside */
+        card.addEventListener('focusin', function () { card.classList.add('is-live'); engage(card); });
+        card.addEventListener('focusout', function () { card.classList.remove('is-live'); release(card); });
+      }
+    });
+
+    /* touch: play the card that is sitting in the middle band of the screen */
+    if (isCoarse && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var card = entry.target;
+          if (entry.isIntersecting) {
+            card.classList.add('is-live');
+            engage(card);
+          } else {
+            card.classList.remove('is-live');
+            release(card);
+          }
+        });
+      }, { rootMargin: '-35% 0px -35% 0px', threshold: 0 });
+      cards.forEach(function (card) { io.observe(card); });
+    }
+  }
+
+  /* ------------------------------------------------------------------
      Boot
      ------------------------------------------------------------------ */
   function boot() {
@@ -652,6 +783,7 @@
     initSpotlight();
     initMagnetic();
     initForm();
+    initPreviews();
     initAnchors();
     document.documentElement.classList.add('is-ready');
   }

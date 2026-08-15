@@ -7,7 +7,14 @@ module.exports = {
   icon: 'crm',
   number: '03',
   accent: ['#22d3ee', '#6366f1'],
-  heroVisual: 'crm-board',
+  heroVisual: {
+    img: 'preview/crm/dreams-crm/01.webp',
+    kind: 'browser',
+    label: 'Relay CRM',
+    alt: 'CRM pipeline dashboard',
+    w: 620,
+    h: 388
+  },
   cardVisual: 'crm',
 
   meta: {
@@ -16,7 +23,7 @@ module.exports = {
       'KeyPels builds custom CRM platforms that centralise customer data, streamline sales workflows and replace the spreadsheets your team works around.'
   },
 
-  sections: ['hero', 'intro', 'offerings', 'tech', 'pricing', 'process', 'benefits', 'faq', 'cta', 'more'],
+  sections: ['hero', 'intro', 'offerings', 'pricing', 'process', 'benefits', 'faq', 'cta'],
 
   hero: {
     eyebrow: 'CRM Development',
@@ -45,7 +52,14 @@ module.exports = {
       { icon: 'chart', title: 'Reporting leadership trusts', body: 'Pipeline, forecast, cohort and activity reporting built on one dataset instead of five exports.' },
       { icon: 'plug', title: 'Connected to everything else', body: 'Two-way sync with email, calendars, billing, support and the marketing stack you already run.' }
     ],
-    visual: 'crm-detail'
+    visual: {
+      img: 'preview/crm/salex-crm/01.webp',
+      kind: 'browser',
+      label: 'Salex',
+      alt: 'Sales overview dashboard',
+      w: 620,
+      h: 388
+    }
   },
 
   offerings: {
@@ -61,7 +75,14 @@ module.exports = {
         body:
           'Deal pipelines, activity tracking, quotas and forecasting shaped around how your reps actually sell — with the admin burden automated away so the data stays current without nagging.',
         bullets: ['Custom pipeline stages and deal logic', 'Lead scoring and routing rules', 'Quota tracking and forecasting', 'Activity capture from email and calendar'],
-        visual: 'crm-detail'
+        visual: {
+          img: 'preview/crm/deals-crm/04.webp',
+          kind: 'browser',
+          label: 'Relay Deals',
+          alt: 'Sales pipeline board',
+          w: 620,
+          h: 388
+        }
       },
       {
         key: 'service-crm',
@@ -71,7 +92,14 @@ module.exports = {
         body:
           'Case management with SLAs, queues and escalation paths, joined to the same customer record your sales team works from — so nobody has to ask the customer to repeat themselves.',
         bullets: ['Case queues, SLAs and escalation rules', 'Shared customer timeline across teams', 'Knowledge base and canned responses', 'Satisfaction tracking and reporting'],
-        visual: 'support-console'
+        visual: {
+          img: 'preview/crm/dreams-crm/04.webp',
+          kind: 'browser',
+          label: 'Relay CRM',
+          alt: 'Customer contact records',
+          w: 620,
+          h: 388
+        }
       },
       {
         key: 'custom-platform',
@@ -81,7 +109,14 @@ module.exports = {
         body:
           'When your business does not look like a standard sales funnel — brokerages, agencies, healthcare, logistics, multi-party marketplaces — we build the platform your operation actually needs.',
         bullets: ['Bespoke entities and relationship models', 'Role-based access and audit trails', 'Document generation and e-signature', 'Multi-team, multi-region configuration'],
-        visual: 'app-console'
+        visual: {
+          img: 'preview/crm/duralux-crm/01.webp',
+          kind: 'browser',
+          label: 'Duralux',
+          alt: 'Custom CRM console',
+          w: 620,
+          h: 388
+        }
       },
       {
         key: 'integration',
@@ -91,7 +126,14 @@ module.exports = {
         body:
           'Extending Salesforce, HubSpot or Dynamics with the logic they cannot express, and moving historical data across without losing relationships, attachments or the audit trail.',
         bullets: ['Two-way sync with existing CRMs', 'Deduplication and data cleansing', 'Historical migration with validation', 'Custom apps and middleware services'],
-        visual: 'integration'
+        visual: {
+          img: 'preview/crm/sales-crm/02.webp',
+          kind: 'browser',
+          label: 'Relay Insight',
+          alt: 'CRM analytics and data sync',
+          w: 620,
+          h: 388
+        }
       }
     ]
   },
