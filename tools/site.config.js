@@ -13,10 +13,10 @@ const BRAND = {
   /* PLACEHOLDER contact details — replace before launch.
      The number uses the 555-01xx range reserved for fictional use, so it can
      never dial a real line by accident. */
-  phone: '+1 (555) 010-2030',
-  phoneHref: '+15550102030',
-  whatsapp: '+1 (555) 010-2031',
-  whatsappHref: '15550102031',
+  // phone: '+1 (555) 010-2030',
+  // phoneHref: '+15550102030',
+  // whatsapp: '+1 (555) 010-2031',
+  // whatsappHref: '15550102031',
   offices: [
     { key: 'hq', label: 'Head Office', city: 'Remote-first HQ', lines: ['KeyPels HQ', 'Address line one', 'City, Postcode', 'Country'] },
     { key: 'studio', label: 'Delivery Studio', city: 'Engineering studio', lines: ['KeyPels Studio', 'Address line one', 'City, Postcode', 'Country'] }
@@ -59,7 +59,7 @@ const NAV = [
 ];
 
 const SOCIALS = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'linkedin' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/keypels/', icon: 'linkedin' },
   { label: 'Instagram', href: 'https://www.instagram.com/', icon: 'instagram' },
   { label: 'X', href: 'https://x.com/', icon: 'x' }
 ];

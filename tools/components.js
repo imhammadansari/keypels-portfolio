@@ -20,12 +20,12 @@ const serviceUrl = (rel, slug) => `${rel}services/${slug}/`;
 /* ==========================================================================
    Brand mark
    ========================================================================== */
-/* The mark is the supplied logo asset (assets/img/keypels-mark.png), served at
+/* The mark is the supplied logo asset (assets/img/logo.svg), served at
    32px and shipped at 128px so it stays crisp on high-density screens. `rel`
    is the path prefix back to the site root. */
 function brandMark(rel) {
-  return `<span class="brand__mark" aria-hidden="true">
-        <img src="${rel || ''}assets/img/keypels-mark.png" width="32" height="32" alt="" decoding="async">
+  return `<span class="" aria-hidden="true">
+        <img src="${rel || ''}assets/img/logo.svg" width="44" height="54" alt="" decoding="async">
       </span>`;
 }
 
@@ -611,7 +611,7 @@ ${pulses}
       <span class="hnet__rings" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="hnet__core">
         <span class="hnet__mark" aria-hidden="true">
-          <img src="${ctx.rel}assets/img/keypels-mark.png" width="26" height="26" alt="" decoding="async">
+          <img src="${ctx.rel}assets/img/logo.svg" width="26" height="26" alt="" decoding="async">
         </span>
         <span class="hnet__name">${BRAND.name}</span>
         <span class="hnet__sub"></span>

@@ -172,7 +172,7 @@ Two things are the exception, and both show real captures rather than a drawing 
   image repeats on a page, and no hero image reappears further down it.
 
 ```
-assets/img/keypels-mark.png       Brand mark (header, footer, hero hub) — 128px, served at 32
+assets/img/logo.svg       Brand mark (header, footer, hero hub) — 128px, served at 32
 assets/img/favicon.png            Tab icon
 assets/img/apple-touch-icon.png   iOS home screen
 assets/img/keypels-logo.png       Supplied source lockup (not served)
