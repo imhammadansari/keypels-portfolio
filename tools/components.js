@@ -82,7 +82,7 @@ function header(ctx) {
   <div class="container header__inner">
     <a class="brand" href="${rel}index.html" aria-label="${BRAND.name} — home">
       ${brandMark(rel)}
-      <span class="brand__word">${BRAND.name}</span>
+      <!-- <span class="brand__word">${BRAND.name}</span> -->
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -178,7 +178,7 @@ function footer(ctx) {
       <div class="footer__brand">
         <a class="brand brand--footer" href="${rel}index.html" aria-label="${BRAND.name} — home">
           ${brandMark(rel)}
-          <span class="brand__word">${BRAND.name}</span>
+          <!-- <span class="brand__word">${BRAND.name}</span> -->
         </a>
         <p class="footer__tag">${BRAND.tagline}</p>
         <ul class="socials">
@@ -213,8 +213,8 @@ ${portfolioLinks}
           <h3>Get in touch</h3>
           <ul>
             <li><a href="mailto:${BRAND.email}">${BRAND.email}</a></li>
-            <li><a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a></li>
-            <li><a href="${rel}${CONTACT_PATH}">Start a project</a></li>
+            ${BRAND.phone ? `<li><a href="tel:${BRAND.phoneHref}">${BRAND.phone}</a></li>
+            ` : ''}<li><a href="${rel}${CONTACT_PATH}">Start a project</a></li>
             <li><a href="${rel}${CONTACT_PATH}">Book a call</a></li>
           </ul>
         </div>
@@ -231,6 +231,26 @@ ${portfolioLinks}
     </div>
   </div>
 </footer>`;
+}
+
+/* Shared helpers for the redesigned page sections */
+const num = (i) => String(i + 1).padStart(2, '0');
+/* white / tinted / solid — the card rhythm used across every redesigned grid */
+const TONE = ['a', 'b', 'c', 'a'];
+const tone = (i) => TONE[i % TONE.length];
+
+/* Section heading: eyebrow + title on the left, lead on the right */
+function rdHead({ id, eyebrow, h2, lead, light, index }) {
+  const L = light ? ' eyebrow--light' : '';
+  const T = light ? ' section-title--light' : '';
+  const S = light ? ' section-lead--light' : '';
+  return `<header class="rd-head${lead ? '' : ' rd-head--solo'}">
+      <div class="rd-head__main">
+        <p class="eyebrow${L}" data-reveal>${index ? `<b class="eyebrow__idx">${index}</b>` : ''}<span class="eyebrow__line" aria-hidden="true"></span>${esc(eyebrow)}</p>
+        <h2 class="section-title${T}" id="${id}" data-reveal data-delay="60">${h2}</h2>
+      </div>
+      ${lead ? `<p class="section-lead${S} rd-head__lead" data-reveal data-delay="120">${lead}</p>` : ''}
+    </header>`;
 }
 
 /* ==========================================================================
@@ -255,17 +275,21 @@ function serviceHero(ctx, s) {
   const chips = h.chips.map((c, i) =>
     `        <li data-reveal data-delay="${380 + i * 50}">${esc(c)}</li>`).join('\n');
 
-  const stats = h.stats.map((st) =>
-    `        <li><strong data-count="${st.value}" data-suffix="${st.suffix}">0</strong><span>${esc(st.label)}</span></li>`).join('\n');
+  const stats = h.stats.map((st, i) =>
+    `        <li class="sv-stat sv-stat--${tone(i)}">
+          <span class="sv-stat__n">${num(i)}</span>
+          <strong><span data-count="${st.value}" data-suffix="${st.suffix}">0</span></strong>
+          <span class="sv-stat__l">${esc(st.label)}</span>
+        </li>`).join('\n');
 
-  return `<section class="shero section--dark" aria-labelledby="page-title">
+  return `<section class="shero sv-hero section--dark" aria-labelledby="page-title">
   <div class="shero__bg" aria-hidden="true">
     <span class="orb orb--sh1" data-parallax="0.12"></span>
     <span class="orb orb--sh2" data-parallax="-0.08"></span>
     <span class="grid-veil"></span>
   </div>
-  <div class="container shero__inner">
-    <div class="shero__copy">
+  <div class="container sv-hero__grid">
+    <div class="sv-hero__copy">
       ${breadcrumb(ctx, s)}
       <p class="pill" data-reveal>
         <span class="pill__dot" aria-hidden="true"></span>
@@ -281,20 +305,24 @@ ${lines}
           <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
-      <ul class="shero__chips">
+      <ul class="sv-chips">
 ${chips}
       </ul>
     </div>
 
-    <div class="shero__visual" data-reveal data-delay="220">
-      <div class="shero__stage" data-tilt>
-        ${renderVisual(s.heroVisual, ctx.rel)}
+    <div class="sv-hero__visual" data-reveal data-delay="220">
+      <div class="sv-frame" data-tilt>
+        <span class="sv-frame__corner sv-frame__corner--tl" aria-hidden="true"></span>
+        <span class="sv-frame__corner sv-frame__corner--br" aria-hidden="true"></span>
+        <div class="shero__stage">
+          ${renderVisual(s.heroVisual, ctx.rel)}
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <ul class="shero__stats" data-reveal data-delay="120">
+    <ul class="sv-stats" data-reveal data-delay="120">
 ${stats}
     </ul>
   </div>
@@ -304,23 +332,25 @@ ${stats}
 function serviceIntro(ctx, s) {
   const i = s.intro;
   const points = i.points.map((p, idx) => `
-        <li data-reveal data-delay="${idx * 60}">
-          <span class="ipoint__icon">${ICONS[p.icon]}</span>
-          <div><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></div>
+        <li class="sv-point sv-point--${tone(idx)}" data-reveal data-delay="${idx * 60}">
+          <span class="sv-point__icon">${ICONS[p.icon]}</span>
+          <span class="sv-point__n">${num(idx)}</span>
+          <h3>${esc(p.title)}</h3>
+          <p>${esc(p.body)}</p>
         </li>`).join('');
 
-  return `<section class="sintro section--light" aria-labelledby="intro-title">
-  <div class="container sintro__inner">
-    <div class="sintro__visual" data-reveal>
-      <div class="sintro__frame">${renderVisual(i.visual, ctx.rel)}</div>
-    </div>
-    <div class="sintro__copy">
+  return `<section class="sintro sv-intro section--light" aria-labelledby="intro-title">
+  <div class="container sv-intro__inner">
+    <div class="sv-intro__aside">
       <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(i.eyebrow)}</p>
       <h2 class="section-title" id="intro-title" data-reveal data-delay="60">${esc(i.h2)}</h2>
-      ${i.body.map((p, n) => `<p class="sintro__p" data-reveal data-delay="${120 + n * 60}">${esc(p)}</p>`).join('\n      ')}
-      <ul class="ipoints">${points}
-      </ul>
+      ${i.body.map((p, n) => `<p class="sv-intro__p" data-reveal data-delay="${120 + n * 60}">${esc(p)}</p>`).join('\n      ')}
+      <div class="sv-intro__visual" data-reveal data-delay="180">
+        <div class="sintro__frame">${renderVisual(i.visual, ctx.rel)}</div>
+      </div>
     </div>
+    <ul class="sv-points">${points}
+    </ul>
   </div>
 </section>`;
 }
@@ -329,41 +359,36 @@ function offerings(ctx, s) {
   const o = s.offerings;
 
   const tabs = o.items.map((it, i) => `
-          <button class="otab${i === 0 ? ' is-active' : ''}" type="button" role="tab"
+          <button class="sv-tab${i === 0 ? ' is-active' : ''}" type="button" role="tab"
                   id="tab-${it.key}" aria-selected="${i === 0}" aria-controls="panel-${it.key}" tabindex="${i === 0 ? 0 : -1}">
-            <span class="otab__icon">${ICONS[it.icon]}</span>
-            <span class="otab__label">${esc(it.tab)}</span>
-            <span class="otab__arrow">${linkArrow(13)}</span>
+            <span class="sv-tab__n">${num(i)}</span>
+            <span class="sv-tab__icon">${ICONS[it.icon]}</span>
+            <span class="sv-tab__label">${esc(it.tab)}</span>
           </button>`).join('');
 
   const panels = o.items.map((it, i) => `
-        <div class="opanel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="panel-${it.key}" aria-labelledby="tab-${it.key}"${i === 0 ? '' : ' hidden'}>
-          <div class="opanel__copy">
+        <div class="sv-panel${i === 0 ? ' is-active' : ''}" role="tabpanel" id="panel-${it.key}" aria-labelledby="tab-${it.key}"${i === 0 ? '' : ' hidden'}>
+          <div class="sv-panel__copy">
+            <span class="sv-panel__n" aria-hidden="true">${num(i)}</span>
             <h3>${esc(it.title)}</h3>
             <p>${esc(it.body)}</p>
-            <ul class="opanel__list">
+            <ul class="sv-panel__list">
               ${it.bullets.map((b) => `<li><span class="tick">${ICONS.check}</span>${esc(b)}</li>`).join('\n              ')}
             </ul>
-            <a class="opanel__cta" href="${ctx.rel}${CONTACT_PATH}"><span>Discuss this</span>${linkArrow(14)}</a>
+            <a class="sv-panel__cta" href="${ctx.rel}${CONTACT_PATH}"><span>Discuss this</span>${linkArrow(14)}</a>
           </div>
-          <div class="opanel__visual">${renderVisual(it.visual, ctx.rel)}</div>
+          <div class="sv-panel__visual"><div class="sv-panel__stage">${renderVisual(it.visual, ctx.rel)}</div></div>
         </div>`).join('');
 
-  return `<section class="offerings section--dark section--rounded" id="offerings" aria-labelledby="offerings-title">
+  return `<section class="offerings sv-off section--dark section--rounded" id="offerings" aria-labelledby="offerings-title">
   <div class="offerings__bg" aria-hidden="true"><span class="orb orb--of1"></span><span class="grid-veil"></span></div>
   <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(o.eyebrow)}</p>
-        <h2 class="section-title section-title--light" id="offerings-title" data-reveal data-delay="60">${esc(o.h2)}</h2>
-      </div>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(o.lead)}</p>
-    </header>
+    ${rdHead({ id: 'offerings-title', eyebrow: o.eyebrow, h2: esc(o.h2), lead: esc(o.lead), light: true })}
 
-    <div class="otabs" data-tabs data-reveal>
-      <div class="otabs__list" role="tablist" aria-label="${esc(o.h2)}">${tabs}
+    <div class="sv-tabs" data-tabs data-reveal>
+      <div class="sv-tabs__list" role="tablist" aria-label="${esc(o.h2)}">${tabs}
       </div>
-      <div class="otabs__panels">${panels}
+      <div class="sv-tabs__panels">${panels}
       </div>
     </div>
   </div>
@@ -373,21 +398,17 @@ function offerings(ctx, s) {
 function assurance(ctx, s) {
   const a = s.assurance;
   const items = a.items.map((it, i) => `
-      <li class="acard" data-reveal data-delay="${i * 60}">
-        <span class="acard__icon">${ICONS[it.icon]}</span>
-        <span class="acard__value"><span data-count="${it.value}" data-suffix="${it.suffix}">0</span></span>
+      <li class="sv-ledger__cell" data-reveal data-delay="${i * 60}">
+        <span class="sv-ledger__icon">${ICONS[it.icon]}</span>
+        <span class="sv-ledger__value"><span data-count="${it.value}" data-suffix="${it.suffix}">0</span></span>
         <h3>${esc(it.label)}</h3>
         <p>${esc(it.note)}</p>
       </li>`).join('');
 
-  return `<section class="assurance section--light" aria-labelledby="assurance-title">
+  return `<section class="assurance sv-assure section--light" aria-labelledby="assurance-title">
   <div class="container">
-    <header class="section-head">
-      <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(a.eyebrow)}</p>
-      <h2 class="section-title" id="assurance-title" data-reveal data-delay="60">${esc(a.h2)}</h2>
-      <p class="section-lead" data-reveal data-delay="120">${esc(a.lead)}</p>
-    </header>
-    <ul class="agrid">${items}
+    ${rdHead({ id: 'assurance-title', eyebrow: a.eyebrow, h2: esc(a.h2), lead: esc(a.lead) })}
+    <ul class="sv-ledger" style="--n:${a.items.length}">${items}
     </ul>
   </div>
 </section>`;
@@ -396,26 +417,17 @@ function assurance(ctx, s) {
 function processSection(ctx, s) {
   const p = s.process;
   const steps = p.steps.map((st, i) => `
-      <li class="pstep" data-reveal data-delay="${i * 60}">
-        <span class="pstep__num">${String(i + 1).padStart(2, '0')}</span>
-        <div class="pstep__body">
-          <h3>${esc(st.title)}</h3>
-          <p>${esc(st.body)}</p>
-        </div>
-        <span class="pstep__rail" aria-hidden="true"></span>
+      <li class="sv-step" data-reveal data-delay="${i * 70}">
+        <span class="sv-step__node"><span>${num(i)}</span></span>
+        <h3>${esc(st.title)}</h3>
+        <p>${esc(st.body)}</p>
       </li>`).join('');
 
-  return `<section class="sprocess section--dark section--rounded" aria-labelledby="process-title">
+  return `<section class="sprocess sv-process section--dark section--rounded" aria-labelledby="process-title">
   <div class="sprocess__bg" aria-hidden="true"><span class="orb orb--pr1"></span><span class="grid-veil"></span></div>
   <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(p.eyebrow)}</p>
-        <h2 class="section-title section-title--light" id="process-title" data-reveal data-delay="60">${esc(p.h2)}</h2>
-      </div>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(p.lead)}</p>
-    </header>
-    <ol class="psteps">${steps}
+    ${rdHead({ id: 'process-title', eyebrow: p.eyebrow, h2: esc(p.h2), lead: esc(p.lead), light: true })}
+    <ol class="sv-track" style="--n:${p.steps.length}">${steps}
     </ol>
   </div>
 </section>`;
@@ -424,23 +436,21 @@ function processSection(ctx, s) {
 function differentiators(ctx, s) {
   const d = s.differentiators;
   const items = d.items.map((it, i) => `
-        <div class="ac-item" data-reveal data-delay="${i * 40}">
-          <h3><button class="ac-trigger" type="button" aria-expanded="false" aria-controls="dif-${i}" id="dif-${i}-btn">
-            <span>${esc(it.title)}</span><span class="ac-icon" aria-hidden="true"></span></button></h3>
-          <div class="ac-panel" id="dif-${i}" role="region" aria-labelledby="dif-${i}-btn"><div class="ac-panel__inner">
-            <p>${esc(it.body)}</p>
-          </div></div>
-        </div>`).join('');
+      <li class="sv-point sv-point--${tone(i)}" data-reveal data-delay="${(i % 2) * 60}">
+        <span class="sv-point__n">${num(i)}</span>
+        <h3>${esc(it.title)}</h3>
+        <p>${esc(it.body)}</p>
+      </li>`).join('');
 
-  return `<section class="sdiff section--light" aria-labelledby="diff-title">
-  <div class="container faq__inner">
-    <header class="faq__head">
+  return `<section class="sdiff sv-diff section--light" aria-labelledby="diff-title">
+  <div class="container sv-split">
+    <header class="sv-split__aside">
       <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(d.eyebrow)}</p>
       <h2 class="section-title" id="diff-title" data-reveal data-delay="60">${esc(d.h2)}</h2>
       <p class="section-lead" data-reveal data-delay="120">${esc(d.lead)}</p>
     </header>
-    <div class="accordion" data-accordion>${items}
-    </div>
+    <ul class="sv-points sv-points--auto">${items}
+    </ul>
   </div>
 </section>`;
 }
@@ -448,23 +458,24 @@ function differentiators(ctx, s) {
 function benefits(ctx, s) {
   const b = s.benefits;
   const items = b.items.map((it, i) => `
-      <li class="bcard" data-reveal data-delay="${(i % 3) * 60}">
-        <span class="bcard__icon">${ICONS[it.icon]}</span>
-        <h3>${esc(it.title)}</h3>
-        <p>${esc(it.body)}</p>
+      <li class="sv-row" data-reveal data-delay="${(i % 3) * 60}">
+        <span class="sv-row__n">${num(i)}</span>
+        <span class="sv-row__icon">${ICONS[it.icon]}</span>
+        <div class="sv-row__body">
+          <h3>${esc(it.title)}</h3>
+          <p>${esc(it.body)}</p>
+        </div>
       </li>`).join('');
 
-  return `<section class="benefits section--dark section--rounded" aria-labelledby="benefits-title">
+  return `<section class="benefits sv-bene section--dark section--rounded" aria-labelledby="benefits-title">
   <div class="benefits__bg" aria-hidden="true"><span class="orb orb--bn1"></span><span class="orb orb--bn2"></span><span class="grid-veil"></span></div>
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(b.eyebrow)}</p>
-        <h2 class="section-title section-title--light" id="benefits-title" data-reveal data-delay="60">${esc(b.h2)}</h2>
-      </div>
+  <div class="container sv-split">
+    <header class="sv-split__aside">
+      <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(b.eyebrow)}</p>
+      <h2 class="section-title section-title--light" id="benefits-title" data-reveal data-delay="60">${esc(b.h2)}</h2>
       <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(b.lead)}</p>
     </header>
-    <ul class="bgrid">${items}
+    <ul class="sv-rows">${items}
     </ul>
   </div>
 </section>`;
@@ -473,36 +484,32 @@ function benefits(ctx, s) {
 function pricing(ctx, s) {
   const p = s.pricing;
   const tiers = p.tiers.map((t, i) => `
-      <article class="tier${t.featured ? ' tier--featured' : ''}" data-reveal data-delay="${i * 70}">
-        <span class="tier__top">
-          <span class="tier__badge">${esc(t.badge)}</span>
-          ${t.featured ? '<span class="tier__flag">Popular</span>' : ''}
-        </span>
-        <h3 class="tier__name">${esc(t.name)}</h3>
-        <p class="tier__desc">${esc(t.desc)}</p>
-        <p class="tier__price">
-          <span class="tier__from">from</span>
-          <span class="tier__amount">${esc(t.price)}</span>
-          <span class="tier__period">${esc(t.period || '/month')}</span>
+      <article class="sv-tier${t.featured ? ' sv-tier--featured' : ''}" data-reveal data-delay="${i * 70}">
+        <header class="sv-tier__top">
+          <span class="sv-tier__badge">${esc(t.badge)}</span>
+          ${t.featured ? '<span class="sv-tier__flag">Popular</span>' : ''}
+        </header>
+        <h3 class="sv-tier__name">${esc(t.name)}</h3>
+        <p class="sv-tier__desc">${esc(t.desc)}</p>
+        <p class="sv-tier__price">
+          <span class="sv-tier__from">from</span>
+          <span class="sv-tier__amount">${esc(t.price)}</span>
+          <span class="sv-tier__period">${esc(t.period || '/month')}</span>
         </p>
-        <p class="tier__tagline">${esc(t.tagline)}</p>
-        <ul class="tier__features">
+        <p class="sv-tier__tagline">${esc(t.tagline)}</p>
+        <a class="btn ${t.featured ? 'btn--dark' : 'btn--primary'} btn--block" href="${ctx.rel}${CONTACT_PATH}"><span>${esc(t.cta)}</span>${arrowSvg(14)}</a>
+        <ul class="sv-tier__features">
           ${t.features.map((f) => `<li><span class="tick">${ICONS.check}</span>${esc(f)}</li>`).join('\n          ')}
         </ul>
-        <a class="btn ${t.featured ? 'btn--primary' : 'btn--ghost'} btn--block" href="${ctx.rel}${CONTACT_PATH}"><span>${esc(t.cta)}</span>${arrowSvg(14)}</a>
       </article>`).join('');
 
-  return `<section class="pricing section--dark section--rounded" aria-labelledby="pricing-title">
+  return `<section class="pricing sv-pricing section--dark section--rounded" aria-labelledby="pricing-title">
   <div class="pricing__bg" aria-hidden="true"><span class="orb orb--pc1"></span><span class="grid-veil"></span></div>
   <div class="container">
-    <header class="section-head">
-      <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(p.eyebrow)}</p>
-      <h2 class="section-title section-title--light" id="pricing-title" data-reveal data-delay="60">${esc(p.h2)}</h2>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(p.lead)}</p>
-    </header>
-    <div class="tiers">${tiers}
+    ${rdHead({ id: 'pricing-title', eyebrow: p.eyebrow, h2: esc(p.h2), lead: esc(p.lead), light: true })}
+    <div class="sv-tiers">${tiers}
     </div>
-    <div class="pnote" data-reveal>
+    <div class="sv-pnote" data-reveal>
       <div><h3>${esc(p.note.title)}</h3><p>${esc(p.note.body)}</p></div>
       <a class="btn btn--glass" href="${ctx.rel}${CONTACT_PATH}"><span>Talk it through</span>${arrowSvg(14)}</a>
     </div>
@@ -510,31 +517,63 @@ function pricing(ctx, s) {
 </section>`;
 }
 
-function faq(ctx, s) {
-  const f = s.faq;
-  const items = f.items.map((it, i) => `
+/* numbered accordion rows, shared by the service and contact FAQs */
+function faqRows(items, prefix) {
+  return items.map((it, i) => `
         <div class="ac-item" data-reveal data-delay="${i * 35}">
-          <h3><button class="ac-trigger" type="button" aria-expanded="false" aria-controls="q-${i}" id="q-${i}-btn">
-            <span>${esc(it.q)}</span><span class="ac-icon" aria-hidden="true"></span></button></h3>
-          <div class="ac-panel" id="q-${i}" role="region" aria-labelledby="q-${i}-btn"><div class="ac-panel__inner">
+          <h3><button class="ac-trigger" type="button" aria-expanded="false" aria-controls="${prefix}-${i}" id="${prefix}-${i}-btn">
+            <span class="ac-num" aria-hidden="true">${num(i)}</span><span class="ac-q">${esc(it.q)}</span><span class="ac-icon" aria-hidden="true"></span></button></h3>
+          <div class="ac-panel" id="${prefix}-${i}" role="region" aria-labelledby="${prefix}-${i}-btn"><div class="ac-panel__inner">
             <p>${esc(it.a)}</p>
           </div></div>
         </div>`).join('');
+}
 
-  return `<section class="faq section--light" aria-labelledby="faq-title">
-  <div class="container faq__inner">
-    <header class="faq__head">
+function faq(ctx, s) {
+  const f = s.faq;
+  return `<section class="faq sv-faq section--light" aria-labelledby="faq-title">
+  <div class="container sv-split">
+    <header class="sv-split__aside">
       <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(f.eyebrow)}</p>
       <h2 class="section-title" id="faq-title" data-reveal data-delay="60">${esc(f.h2)}</h2>
       <p class="section-lead" data-reveal data-delay="120">Still unsure? <a href="${ctx.rel}${CONTACT_PATH}">Send us a note</a> — we reply personally.</p>
     </header>
-    <div class="accordion" data-accordion>${items}
+    <div class="accordion sv-accordion" data-accordion>${faqRows(f.items, 'q')}
     </div>
   </div>
 </section>`;
 }
 
+/* Redesigned closing panel — used by the service, portfolio, about and index
+   pages. The contact page keeps the centred original (ctaClassic). */
 function ctaSection(ctx, s) {
+  const c = s.cta;
+  const tags = c.services
+    ? `<ul class="rd-cta__tags">${c.services.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`
+    : '';
+  return `<section class="rd-cta section--light" aria-labelledby="cta-title">
+  <div class="container">
+    <div class="rd-cta__panel" data-reveal>
+      <div class="rd-cta__glow" aria-hidden="true"></div>
+      <div class="rd-cta__grid" aria-hidden="true"></div>
+      <div class="rd-cta__copy">
+        ${c.eyebrow ? `<p class="rd-cta__eyebrow">${esc(c.eyebrow)}</p>` : ''}
+        <h2 class="rd-cta__title" id="cta-title">${esc(c.h2[0])} <span class="grad">${esc(c.h2[1])}</span></h2>
+        ${tags}
+      </div>
+      <div class="rd-cta__side">
+        <p class="rd-cta__text">${esc(c.body)}</p>
+        <div class="rd-cta__actions">
+          <a class="btn btn--primary btn--lg" href="${ctx.rel}${CONTACT_PATH}" data-magnetic><span>${esc(c.primary || 'Start a Project')}</span>${arrowSvg(15)}</a>
+          <a class="btn btn--glass btn--lg" href="mailto:${BRAND.email}"><span>${esc(c.secondary || 'Email the team')}</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
+function ctaClassic(ctx, s) {
   const c = s.cta;
   return `<section class="cta section--light" aria-labelledby="cta-title">
   <div class="container">
@@ -611,9 +650,9 @@ ${pulses}
       <span class="hnet__rings" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="hnet__core">
         <span class="hnet__mark" aria-hidden="true">
-          <img src="${ctx.rel}assets/img/logo.svg" width="26" height="26" alt="" decoding="async">
+          <img src="${ctx.rel}assets/img/logo.svg" width="46" height="58" alt="" decoding="async">
         </span>
-        <span class="hnet__name">${BRAND.name}</span>
+        <!-- <span class="hnet__name">${BRAND.name}</span> -->
         <span class="hnet__sub"></span>
       </span>
     </div>
@@ -632,35 +671,38 @@ function aboutHero(ctx, a) {
     `        <span class="line" data-reveal data-delay="${80 + i * 90}"><span${i === a.hero.gradientLine ? ' class="grad"' : ''}>${esc(line)}</span></span>`).join('\n');
 
   const stats = a.hero.stats.map((s, i) => `
-        <li data-reveal data-delay="${120 + i * 70}">
+        <li class="ab-stat ab-stat--${tone(i)}" data-reveal data-delay="${120 + i * 70}">
+          <span class="ab-stat__n">${num(i)}</span>
           <strong><span data-count="${s.value}" data-suffix="${s.suffix}">0</span></strong>
-          <span class="abstat__label">${esc(s.label)}</span>
-          <span class="abstat__note">${esc(s.note)}</span>
+          <span class="ab-stat__label">${esc(s.label)}</span>
+          <span class="ab-stat__note">${esc(s.note)}</span>
         </li>`).join('');
 
-  return `<section class="shero abhero section--dark" aria-labelledby="page-title">
+  return `<section class="shero ab-hero section--dark" aria-labelledby="page-title">
   <div class="shero__bg" aria-hidden="true">
     <span class="orb orb--sh1" data-parallax="0.12"></span>
     <span class="orb orb--sh2" data-parallax="-0.08"></span>
     <span class="grid-veil"></span>
   </div>
-  <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="${ctx.rel}index.html">Home</a></li>
-        <li aria-current="page">About</li>
-      </ol>
-    </nav>
-    <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>${esc(a.hero.eyebrow)}</p>
-    <h1 class="shero__title shero__title--center abhero__title" id="page-title">
+  <div class="container ab-hero__grid">
+    <div class="ab-hero__copy">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="${ctx.rel}index.html">Home</a></li>
+          <li aria-current="page">About</li>
+        </ol>
+      </nav>
+      <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>${esc(a.hero.eyebrow)}</p>
+      <h1 class="shero__title" id="page-title">
 ${lines}
-    </h1>
-    <p class="shero__lead shero__lead--center" data-reveal data-delay="300">${esc(a.hero.lead)}</p>
-    <div class="shero__actions shero__actions--center" data-reveal data-delay="340">
-      <a class="btn btn--primary btn--lg" href="${ctx.rel}${CONTACT_PATH}" data-magnetic><span>Start a Project</span>${arrowSvg(15)}</a>
-      <a class="btn btn--ghost btn--lg" href="${ctx.rel}services/"><span>Explore services</span>${arrowSvg(15)}</a>
+      </h1>
+      <p class="shero__lead" data-reveal data-delay="300">${esc(a.hero.lead)}</p>
+      <div class="shero__actions" data-reveal data-delay="340">
+        <a class="btn btn--primary btn--lg" href="${ctx.rel}${CONTACT_PATH}" data-magnetic><span>Start a Project</span>${arrowSvg(15)}</a>
+        <a class="btn btn--ghost btn--lg" href="${ctx.rel}services/"><span>Explore services</span>${arrowSvg(15)}</a>
+      </div>
     </div>
-    <ul class="abstats">${stats}
+    <ul class="ab-stats">${stats}
     </ul>
   </div>
 </section>`;
@@ -668,42 +710,25 @@ ${lines}
 
 function journey(ctx, a) {
   const items = a.journey.milestones.map((m, i) => `
-      <li class="jstep" data-reveal data-delay="${i * 90}">
-        <span class="jstep__ghost" aria-hidden="true">${esc(m.year)}</span>
-
-        <div class="jstep__aside">
-          <span class="jstep__icon">${ICONS[m.icon]}</span>
-          <span class="jstep__label">Stage ${String(i + 1).padStart(2, '0')}</span>
+      <li class="ab-step" data-reveal data-delay="${i * 90}">
+        <span class="ab-step__node" aria-hidden="true"></span>
+        <div class="ab-step__when">
+          <span class="ab-step__year">${esc(m.year)}</span>
+          <span class="ab-step__chip"><span class="ab-step__icon">${ICONS[m.icon]}</span>${esc(m.label)}</span>
         </div>
-
-        <span class="jstep__node" aria-hidden="true">
-          <i class="jstep__ring jstep__ring--out"></i>
-          <i class="jstep__ring jstep__ring--in"></i>
-          <b class="jstep__core"></b>
-        </span>
-
-        <article class="jstep__card">
-          <header class="jstep__head">
-            <span class="jstep__year">${esc(m.year)}</span>
-            <span class="jstep__chip">${esc(m.label)}</span>
-          </header>
+        <article class="ab-step__card">
+          <span class="ab-step__n">Stage ${num(i)}</span>
           <h3>${esc(m.title)}</h3>
           <p>${esc(m.body)}</p>
-          <ul class="jstep__tags">${m.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
+          <ul class="ab-step__tags">${m.tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
         </article>
       </li>`).join('');
 
-  return `<section class="journey section--light" aria-labelledby="journey-title">
-  <div class="journey__glow" aria-hidden="true"></div>
+  return `<section class="journey ab-journey section--light" aria-labelledby="journey-title">
   <div class="container">
-    <header class="section-head section-head--center">
-      <p class="eyebrow eyebrow--chip" data-reveal><span class="eyebrow__dot" aria-hidden="true"></span>${esc(a.journey.eyebrow)}</p>
-      <h2 class="section-title" id="journey-title" data-reveal data-delay="60">${esc(a.journey.h2)}</h2>
-      <p class="section-lead" data-reveal data-delay="120">${esc(a.journey.lead)}</p>
-    </header>
-
-    <ol class="jline" data-journey>
-      <span class="jline__rail" aria-hidden="true"><i data-journey-fill></i></span>
+    ${rdHead({ id: 'journey-title', eyebrow: a.journey.eyebrow, h2: esc(a.journey.h2), lead: esc(a.journey.lead) })}
+    <ol class="ab-timeline" data-journey>
+      <span class="ab-timeline__rail" aria-hidden="true"><i data-journey-fill></i></span>
 ${items}
     </ol>
   </div>
@@ -712,24 +737,21 @@ ${items}
 
 function missionVision(ctx, a) {
   const cards = a.purpose.cards.map((c, i) => `
-      <article class="pcard${i === 0 ? ' pcard--accent' : ''}" data-reveal data-delay="${i * 80}">
-        <span class="pcard__tag">${esc(c.tag)}</span>
-        <span class="pcard__icon">${ICONS[c.icon]}</span>
+      <article class="ab-purpose__card${i === 0 ? ' ab-purpose__card--accent' : ''}" data-reveal data-delay="${i * 80}">
+        <span class="ab-purpose__ghost" aria-hidden="true">${esc(c.tag)}</span>
+        <header class="ab-purpose__top">
+          <span class="ab-purpose__icon">${ICONS[c.icon]}</span>
+          <span class="ab-purpose__tag">${esc(c.tag)}</span>
+        </header>
         <h3>${esc(c.title)}</h3>
         <p>${esc(c.body)}</p>
       </article>`).join('');
 
-  return `<section class="purpose section--dark section--rounded" aria-labelledby="purpose-title">
+  return `<section class="purpose ab-purpose section--dark section--rounded" aria-labelledby="purpose-title">
   <div class="purpose__bg" aria-hidden="true"><span class="orb orb--pu1"></span><span class="orb orb--pu2"></span><span class="grid-veil"></span></div>
   <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(a.purpose.eyebrow)}</p>
-        <h2 class="section-title section-title--light" id="purpose-title" data-reveal data-delay="60">${esc(a.purpose.h2)}</h2>
-      </div>
-      <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(a.purpose.lead)}</p>
-    </header>
-    <div class="pgrid">${cards}
+    ${rdHead({ id: 'purpose-title', eyebrow: a.purpose.eyebrow, h2: esc(a.purpose.h2), lead: esc(a.purpose.lead), light: true })}
+    <div class="ab-purpose__grid">${cards}
     </div>
   </div>
 </section>`;
@@ -737,74 +759,57 @@ function missionVision(ctx, a) {
 
 function values(ctx, a) {
   const cards = a.values.items.map((v, i) => `
-      <li class="vcard" data-reveal data-delay="${(i % 4) * 60}">
-        <span class="vcard__num">${String(i + 1).padStart(2, '0')}</span>
-        <span class="vcard__icon">${ICONS[v.icon]}</span>
+      <li class="sv-point sv-point--${tone(i)}" data-reveal data-delay="${(i % 2) * 60}">
+        <span class="sv-point__icon">${ICONS[v.icon]}</span>
+        <span class="sv-point__n">${num(i)}</span>
         <h3>${esc(v.title)}</h3>
         <p>${esc(v.body)}</p>
       </li>`).join('');
 
-  return `<section class="values section--light" aria-labelledby="values-title">
-  <div class="container">
-    <header class="section-head">
+  return `<section class="values ab-values section--light" aria-labelledby="values-title">
+  <div class="container sv-split">
+    <header class="sv-split__aside">
       <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(a.values.eyebrow)}</p>
       <h2 class="section-title" id="values-title" data-reveal data-delay="60">${esc(a.values.h2)}</h2>
       <p class="section-lead" data-reveal data-delay="120">${esc(a.values.lead)}</p>
     </header>
-    <ul class="vgrid">${cards}
+    <ul class="sv-points">${cards}
     </ul>
   </div>
 </section>`;
 }
 
 function whyUs(ctx, a) {
-  const cards = a.why.items.map((w, i) => `
-      <li class="wcard" data-reveal data-delay="${(i % 3) * 60}">
-        <span class="wcard__tag">${esc(w.tag)}</span>
-        <span class="wcard__icon">${ICONS[w.icon]}</span>
-        <h3>${esc(w.title)}</h3>
-        <p>${esc(w.body)}</p>
-        <span class="wcard__stat">
+  const rows = a.why.items.map((w, i) => `
+      <li class="ab-why__row" data-reveal data-delay="${(i % 3) * 60}">
+        <span class="ab-why__n">${num(i)}</span>
+        <div class="ab-why__main">
+          <span class="ab-why__tag"><span class="ab-why__icon">${ICONS[w.icon]}</span>${esc(w.tag)}</span>
+          <h3>${esc(w.title)}</h3>
+          <p>${esc(w.body)}</p>
+        </div>
+        <span class="ab-why__stat">
           <b>${esc(w.stat)}</b>
           <i>${esc(w.statLabel)}</i>
         </span>
       </li>`).join('');
 
-  return `<section class="whyus section--dark section--rounded" aria-labelledby="whyus-title">
+  return `<section class="whyus ab-why section--dark section--rounded" aria-labelledby="whyus-title">
   <div class="whyus__bg" aria-hidden="true"><span class="orb orb--wu1"></span><span class="grid-veil"></span></div>
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(a.why.eyebrow)}</p>
-        <h2 class="section-title section-title--light" id="whyus-title" data-reveal data-delay="60">${esc(a.why.h2)}</h2>
-      </div>
+  <div class="container sv-split">
+    <header class="sv-split__aside">
+      <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${esc(a.why.eyebrow)}</p>
+      <h2 class="section-title section-title--light" id="whyus-title" data-reveal data-delay="60">${esc(a.why.h2)}</h2>
       <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(a.why.lead)}</p>
     </header>
-    <ul class="wgrid">${cards}
+    <ul class="ab-why__list">${rows}
     </ul>
   </div>
 </section>`;
 }
 
 function aboutCta(ctx, a) {
-  return `<section class="cta cta--spaced section--light" aria-labelledby="abcta-title">
-  <div class="container">
-    <div class="cta__panel" data-reveal>
-      <div class="cta__aurora" aria-hidden="true"></div>
-      <div class="cta__grid" aria-hidden="true"></div>
-      <div class="cta__content">
-        <p class="cta__eyebrow">${esc(a.cta.eyebrow)}</p>
-        <h2 class="cta__title" id="abcta-title">${esc(a.cta.h2[0])} <span class="grad">${esc(a.cta.h2[1])}</span></h2>
-        <p class="cta__text">${esc(a.cta.body)}</p>
-        <p class="cta__services">${a.cta.services.map((s) => `<span>${esc(s)}</span>`).join('')}</p>
-        <div class="cta__actions">
-          <a class="btn btn--primary btn--lg" href="${ctx.rel}${CONTACT_PATH}" data-magnetic><span>Start a Project</span>${arrowSvg(15)}</a>
-          <a class="btn btn--glass btn--lg" href="mailto:${BRAND.email}"><span>Email the team</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>`;
+  return ctaSection(ctx, { cta: Object.assign({ secondary: 'Email the team' }, a.cta) });
 }
 
 const ABOUT_SECTIONS = { hero: aboutHero, journey, purpose: missionVision, values, why: whyUs, cta: aboutCta };
@@ -1022,7 +1027,7 @@ function contactFaq(ctx, c) {
 </section>`;
 }
 
-const CONTACT_SECTIONS = { hero: contactHero, form: contactForm, offices, faq: contactFaq, cta: ctaSection };
+const CONTACT_SECTIONS = { hero: contactHero, form: contactForm, offices, faq: contactFaq, cta: ctaClassic };
 
 /* ==========================================================================
    Portfolio page sections
@@ -1043,16 +1048,16 @@ function portfolioHero(ctx, p) {
     `        <span class="line" data-reveal data-delay="${80 + i * 90}"><span${i === p.hero.h1.length - 1 ? ' class="grad"' : ''}>${esc(line)}</span></span>`).join('\n');
 
   const caps = p.capabilities.map((c, i) =>
-    `        <li data-reveal data-delay="${360 + i * 55}"><span class="pcap__dot" aria-hidden="true"></span>${esc(c)}</li>`).join('\n');
+    `        <li data-reveal data-delay="${160 + i * 55}"><span class="pcap__dot" aria-hidden="true"></span>${esc(c)}</li>`).join('\n');
 
-  return `<section class="shero pfhero section--dark" aria-labelledby="page-title">
+  return `<section class="shero sv-hero pf-hero section--dark" aria-labelledby="page-title">
   <div class="shero__bg" aria-hidden="true">
     <span class="orb orb--sh1" data-parallax="0.12"></span>
     <span class="orb orb--sh2" data-parallax="-0.08"></span>
     <span class="grid-veil"></span>
   </div>
-  <div class="container shero__inner">
-    <div class="shero__copy">
+  <div class="container sv-hero__grid">
+    <div class="sv-hero__copy">
       ${portfolioCrumb(ctx, p)}
       <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>Portfolio</p>
       <h1 class="shero__title" id="page-title">
@@ -1064,17 +1069,24 @@ ${lines}
         <a class="btn btn--ghost btn--lg" href="${ctx.rel}services/${p.slug}/"><span>${esc(p.service)} service</span>${arrowSvg(15)}</a>
       </div>
     </div>
-    <div class="shero__visual" data-reveal data-delay="220">
-      <div class="shero__stage" data-tilt>
-        ${renderVisual(p.heroVisual, ctx.rel)}
+    <div class="sv-hero__visual" data-reveal data-delay="220">
+      <div class="sv-frame" data-tilt>
+        <span class="sv-frame__corner sv-frame__corner--tl" aria-hidden="true"></span>
+        <span class="sv-frame__corner sv-frame__corner--br" aria-hidden="true"></span>
+        <div class="shero__stage">
+          ${renderVisual(p.heroVisual, ctx.rel)}
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <ul class="pcaps" data-reveal data-delay="120">
+    <div class="pf-caps" data-reveal data-delay="120">
+      <span class="pf-caps__label">Capabilities</span>
+      <ul class="pf-caps__list">
 ${caps}
-    </ul>
+      </ul>
+    </div>
   </div>
 </section>`;
 }
@@ -1182,11 +1194,11 @@ function cardVisual(ctx, pr) {
 
 function workGrid(ctx, p) {
   const cards = p.work.projects.map((pr, i) => `
-      <article class="pfcard${pr.preview ? ' pfcard--pv' : ''}"${pr.preview ? ' data-pv-card' : ''} data-reveal data-delay="${(i % 3) * 70}">
+      <article class="pfcard pf-item${pr.preview ? ' pfcard--pv' : ''}"${pr.preview ? ' data-pv-card' : ''} data-reveal data-delay="${(i % 2) * 70}">
         <div class="pfcard__visual${pr.preview ? ' pfcard__visual--pv' : ''}">${cardVisual(ctx, pr)}</div>
         <div class="pfcard__body">
           <div class="pfcard__meta">
-            <span class="pfcard__num">${String(i + 1).padStart(2, '0')}</span>
+            <span class="pfcard__num">${num(i)}</span>
             <span class="pfcard__cat">${esc(pr.category)}</span>
           </div>
           <h3 class="pfcard__title">${esc(pr.name)}<span>, ${esc(pr.sub)}</span></h3>
@@ -1195,16 +1207,10 @@ function workGrid(ctx, p) {
         </div>
       </article>`).join('');
 
-  return `<section class="pfwork section--light" id="work" aria-labelledby="work-title">
+  return `<section class="pfwork pf-work section--light" id="work" aria-labelledby="work-title">
   <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Selected work</p>
-        <h2 class="section-title" id="work-title" data-reveal data-delay="60">${esc(p.work.h2)}</h2>
-      </div>
-      <p class="section-lead" data-reveal data-delay="120">${esc(p.work.lead)}</p>
-    </header>
-    <div class="pfgrid">${cards}
+    ${rdHead({ id: 'work-title', eyebrow: 'Selected work', h2: esc(p.work.h2), lead: esc(p.work.lead) })}
+    <div class="pf-list">${cards}
     </div>
     <p class="pfnote" data-reveal>
       ${p.work.note ? esc(p.work.note) : `Representative project profiles showing the scope, stack and complexity we deliver in ${esc(p.service.toLowerCase())}.
@@ -1216,44 +1222,43 @@ function workGrid(ctx, p) {
 
 function approachGrid(ctx, p) {
   const steps = p.approach.steps.map((st, i) => `
-      <li class="apcard" data-reveal data-delay="${(i % 3) * 60}">
-        <span class="apcard__num">${String(i + 1).padStart(2, '0')}</span>
-        <span class="apcard__icon">${ICONS[st.icon]}</span>
-        <h3>${esc(st.title)}</h3>
-        <p>${esc(st.body)}</p>
+      <li class="sv-row" data-reveal data-delay="${(i % 3) * 60}">
+        <span class="sv-row__n">${num(i)}</span>
+        <span class="sv-row__icon">${ICONS[st.icon]}</span>
+        <div class="sv-row__body">
+          <h3>${esc(st.title)}</h3>
+          <p>${esc(st.body)}</p>
+        </div>
       </li>`).join('');
 
-  return `<section class="approach section--dark section--rounded" aria-labelledby="approach-title">
+  return `<section class="approach pf-approach section--dark section--rounded" aria-labelledby="approach-title">
   <div class="approach__bg" aria-hidden="true"><span class="orb orb--ap1"></span><span class="grid-veil"></span></div>
-  <div class="container">
-    <header class="section-head section-head--split">
-      <div>
-        <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Methodology</p>
-        <h2 class="section-title section-title--light" id="approach-title" data-reveal data-delay="60">${esc(p.approach.h2)}</h2>
-      </div>
+  <div class="container sv-split">
+    <header class="sv-split__aside">
+      <p class="eyebrow eyebrow--light" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Methodology</p>
+      <h2 class="section-title section-title--light" id="approach-title" data-reveal data-delay="60">${esc(p.approach.h2)}</h2>
       <p class="section-lead section-lead--light" data-reveal data-delay="120">${esc(p.approach.lead)}</p>
     </header>
-    <ol class="apgrid">${steps}
+    <ol class="sv-rows">${steps}
     </ol>
   </div>
 </section>`;
 }
 
 function outcomesGrid(ctx, p) {
+  const T3 = ['a', 'b', 'c'];
   const items = p.outcomes.items.map((it, i) => `
-      <li class="ocard" data-reveal data-delay="${(i % 3) * 60}">
-        <h3><span class="ocard__q" aria-hidden="true">?</span>${esc(it.title)}</h3>
+      <li class="sv-point sv-point--${T3[i % 3]}" data-reveal data-delay="${(i % 3) * 60}">
+        <span class="sv-point__icon sv-point__icon--q" aria-hidden="true">?</span>
+        <span class="sv-point__n">${num(i)}</span>
+        <h3>${esc(it.title)}</h3>
         <p>${esc(it.body)}</p>
       </li>`).join('');
 
-  return `<section class="outcomes section--light" aria-labelledby="outcomes-title">
+  return `<section class="outcomes pf-outcomes section--light" aria-labelledby="outcomes-title">
   <div class="container">
-    <header class="section-head">
-      <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>Common challenges</p>
-      <h2 class="section-title" id="outcomes-title" data-reveal data-delay="60">${esc(p.outcomes.h2[0])} <span class="grad">${esc(p.outcomes.h2[1])}</span></h2>
-      <p class="section-lead" data-reveal data-delay="120">${esc(p.outcomes.lead)}</p>
-    </header>
-    <ul class="ogrid">${items}
+    ${rdHead({ id: 'outcomes-title', eyebrow: 'Common challenges', h2: `${esc(p.outcomes.h2[0])} <span class="grad">${esc(p.outcomes.h2[1])}</span>`, lead: esc(p.outcomes.lead) })}
+    <ul class="sv-points sv-points--3">${items}
     </ul>
   </div>
 </section>`;

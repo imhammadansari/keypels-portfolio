@@ -22,7 +22,7 @@ const portfolios = SERVICE_SLUGS.map((slug) => require(`./portfolio/${slug}`));
 /* --------------------------------------------------------------------------
    Shared <head>
    -------------------------------------------------------------------------- */
-const favicon = (rel) => `<link rel="icon" type="image/png" href="${rel}assets/img/favicon.png">
+const favicon = (rel) => `<link rel="icon" type="image/png" href="${rel}assets/img/favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="${rel}assets/img/icon-192.png">
 <link rel="apple-touch-icon" href="${rel}assets/img/apple-touch-icon.png">`;
 
@@ -57,6 +57,7 @@ ${FONTS}
 <link rel="stylesheet" href="${rel}assets/css/base.css">
 <link rel="stylesheet" href="${rel}assets/css/sections.css">
 <link rel="stylesheet" href="${rel}assets/css/service.css">
+<link rel="stylesheet" href="${rel}assets/css/redesign.css">
 
 <script type="application/ld+json">
 ${JSON.stringify(jsonld, null, 2)}
@@ -219,6 +220,75 @@ function buildPortfolioPage(p) {
   return `portfolio/${p.slug}/index.html`;
 }
 
+
+/* --------------------------------------------------------------------------
+   Index pages (/services, /portfolio) — shared hero + list rows
+   -------------------------------------------------------------------------- */
+function indexHero({ rel, crumb, pill, lines, lead, anchor, anchorLabel }) {
+  return `<section class="shero sv-hero sv-hero--index section--dark" aria-labelledby="page-title">
+  <div class="shero__bg" aria-hidden="true">
+    <span class="orb orb--sh1" data-parallax="0.12"></span>
+    <span class="orb orb--sh2" data-parallax="-0.08"></span>
+    <span class="grid-veil"></span>
+  </div>
+  <div class="container sv-hero__grid">
+    <div class="sv-hero__copy">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="${rel}index.html">Home</a></li>
+          <li aria-current="page">${crumb}</li>
+        </ol>
+      </nav>
+      <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>${pill}</p>
+      <h1 class="shero__title" id="page-title">
+        <span class="line" data-reveal data-delay="80"><span>${lines[0]}</span></span>
+        <span class="line" data-reveal data-delay="170"><span class="grad">${lines[1]}</span></span>
+      </h1>
+    </div>
+    <div class="sv-hero__aside">
+      <p class="shero__lead" data-reveal data-delay="280">${lead}</p>
+      <div class="shero__actions" data-reveal data-delay="340">
+        <a class="btn btn--primary btn--lg" href="${rel}${CONTACT_PATH}" data-magnetic><span>Start a Project</span>${C.arrowSvg(15)}</a>
+        <a class="btn btn--ghost btn--lg" href="#all"><span>${anchorLabel}</span>
+          <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+
+function indexList(rows) {
+  return `<ul class="rd-list">${rows.map((r, i) => `
+      <li data-reveal data-delay="${(i % 3) * 50}">
+        <a class="rd-list__item" href="${r.href}">
+          <span class="rd-list__n">${r.num}</span>
+          <span class="rd-list__icon">${r.icon}</span>
+          <span class="rd-list__body">
+            <h2>${C.esc(r.title)}</h2>
+            <p>${C.esc(r.text)}</p>
+          </span>
+          <span class="rd-list__link"><span>${C.esc(r.link)}</span>${C.linkArrow(15)}</span>
+        </a>
+      </li>`).join('')}
+    </ul>`;
+}
+
+function indexBody({ id, eyebrow, h2, lead, list }) {
+  return `<section class="more rd-index section--light" id="all" aria-labelledby="all-title">
+  <div class="container">
+    <header class="rd-head">
+      <div class="rd-head__main">
+        <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>${eyebrow}</p>
+        <h2 class="section-title" id="all-title" data-reveal data-delay="60">${h2}</h2>
+      </div>
+      <p class="section-lead rd-head__lead" data-reveal data-delay="120">${lead}</p>
+    </header>
+    ${list}
+  </div>
+</section>`;
+}
+
 /* --------------------------------------------------------------------------
    /portfolio index
    -------------------------------------------------------------------------- */
@@ -227,63 +297,30 @@ function buildPortfolioIndex() {
   const ctx = { rel, services, active: null, activeSection: 'portfolio' };
   const url = `${BRAND.origin}/portfolio/`;
 
-  const cards = services.map((s, i) => {
-    const p = portfolios[i];
-    return `
-      <li data-reveal data-delay="${(i % 3) * 70}">
-        <a class="scard scard--lg" href="${rel}portfolio/${s.slug}/">
-          <span class="scard__num">${s.number}</span>
-          <span class="scard__icon">${C.ICONS[s.icon]}</span>
-          <h2>${C.esc(s.navTitle)}</h2>
-          <p>${C.esc(p.hero.lead.split('—')[0].trim())}</p>
-          <span class="scard__link">View ${C.esc(s.navTitle)} work${C.linkArrow(14)}</span>
-          <span class="scard__arrow">${C.linkArrow(15)}</span>
-        </a>
-      </li>`;
-  }).join('');
+  const list = indexList(services.map((s, i) => ({
+    href: `${rel}portfolio/${s.slug}/`,
+    num: s.number,
+    icon: C.ICONS[s.icon],
+    title: s.navTitle,
+    text: portfolios[i].hero.lead.split('—')[0].trim(),
+    link: `View ${s.navTitle} work`
+  })));
 
-  const main = `<section class="shero shero--index section--dark" aria-labelledby="page-title">
-  <div class="shero__bg" aria-hidden="true">
-    <span class="orb orb--sh1" data-parallax="0.12"></span>
-    <span class="orb orb--sh2" data-parallax="-0.08"></span>
-    <span class="grid-veil"></span>
-  </div>
-  <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="${rel}index.html">Home</a></li>
-        <li aria-current="page">Portfolio</li>
-      </ol>
-    </nav>
-    <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>Selected work</p>
-    <h1 class="shero__title shero__title--center" id="page-title">
-      <span class="line" data-reveal data-delay="80"><span>The Work Behind</span></span>
-      <span class="line" data-reveal data-delay="170"><span class="grad">Every Service Line</span></span>
-    </h1>
-    <p class="shero__lead shero__lead--center" data-reveal data-delay="280">
-      Six portfolios covering the platforms, apps, workflows and agents we build — the scope,
-      the stack and the engineering decisions behind each one.
-    </p>
-    <div class="shero__actions shero__actions--center" data-reveal data-delay="340">
-      <a class="btn btn--primary btn--lg" href="${rel}${CONTACT_PATH}" data-magnetic><span>Start a Project</span>${C.arrowSvg(15)}</a>
-      <a class="btn btn--ghost btn--lg" href="#all"><span>Browse portfolios</span>
-        <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+  const main = `${indexHero({
+    rel,
+    crumb: 'Portfolio',
+    pill: 'Selected work',
+    lines: ['The Work Behind', 'Every Service Line'],
+    lead: 'Six portfolios covering the platforms, apps, workflows and agents we build — the scope, the stack and the engineering decisions behind each one.',
+    anchorLabel: 'Browse portfolios'
+  })}
 
-<section class="more section--light" id="all" aria-labelledby="all-title">
-  <div class="container">
-    <header class="section-head">
-      <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>All portfolios</p>
-      <h2 class="section-title" id="all-title" data-reveal data-delay="60">Browse Work By Discipline</h2>
-      <p class="section-lead" data-reveal data-delay="120">Each portfolio covers the project types, the approach behind them and the problems they were built to solve.</p>
-    </header>
-    <ul class="sgrid sgrid--index">${cards}
-    </ul>
-  </div>
-</section>
+${indexBody({
+    eyebrow: 'All portfolios',
+    h2: 'Browse Work By Discipline',
+    lead: 'Each portfolio covers the project types, the approach behind them and the problems they were built to solve.',
+    list
+  })}
 
 ${C.PORTFOLIO_SECTIONS.cta({ rel, services }, {
     cta: {
@@ -328,60 +365,30 @@ function buildServicesIndex() {
   const ctx = { rel, services, active: null, activeSection: 'services' };
   const url = `${BRAND.origin}/services/`;
 
-  const cards = services.map((s, i) => `
-      <li data-reveal data-delay="${(i % 3) * 70}">
-        <a class="scard scard--lg" href="${C.serviceUrl(rel, s.slug)}">
-          <span class="scard__num">${s.number}</span>
-          <span class="scard__icon">${ICONS[s.icon]}</span>
-          <h2>${C.esc(s.navTitle)}</h2>
-          <p>${C.esc(s.navDesc)}</p>
-          <span class="scard__link">Explore ${C.esc(s.navTitle)}${C.linkArrow(14)}</span>
-          <span class="scard__arrow">${C.linkArrow(15)}</span>
-        </a>
-      </li>`).join('');
+  const list = indexList(services.map((s) => ({
+    href: C.serviceUrl(rel, s.slug),
+    num: s.number,
+    icon: ICONS[s.icon],
+    title: s.navTitle,
+    text: s.navDesc,
+    link: `Explore ${s.navTitle}`
+  })));
 
-  const main = `<section class="shero shero--index section--dark" aria-labelledby="page-title">
-  <div class="shero__bg" aria-hidden="true">
-    <span class="orb orb--sh1" data-parallax="0.12"></span>
-    <span class="orb orb--sh2" data-parallax="-0.08"></span>
-    <span class="grid-veil"></span>
-  </div>
-  <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="${rel}index.html">Home</a></li>
-        <li aria-current="page">Services</li>
-      </ol>
-    </nav>
-    <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>Six ways we help</p>
-    <h1 class="shero__title shero__title--center" id="page-title">
-      <span class="line" data-reveal data-delay="80"><span>Technology That Moves</span></span>
-      <span class="line" data-reveal data-delay="170"><span class="grad">Your Business Forward</span></span>
-    </h1>
-    <p class="shero__lead shero__lead--center" data-reveal data-delay="280">
-      From scalable software to intelligent automation, KeyPels builds technology that solves real business
-      problems. Every engagement is custom-built, owned by you, and designed to keep earning after launch.
-    </p>
-    <div class="shero__actions shero__actions--center" data-reveal data-delay="340">
-      <a class="btn btn--primary btn--lg" href="${rel}${CONTACT_PATH}" data-magnetic><span>Start a Project</span>${C.arrowSvg(15)}</a>
-      <a class="btn btn--ghost btn--lg" href="#all"><span>Browse services</span>
-        <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
+  const main = `${indexHero({
+    rel,
+    crumb: 'Services',
+    pill: 'Six ways we help',
+    lines: ['Technology That Moves', 'Your Business Forward'],
+    lead: 'From scalable software to intelligent automation, KeyPels builds technology that solves real business problems. Every engagement is custom-built, owned by you, and designed to keep earning after launch.',
+    anchorLabel: 'Browse services'
+  })}
 
-<section class="more section--light" id="all" aria-labelledby="all-title">
-  <div class="container">
-    <header class="section-head">
-      <p class="eyebrow" data-reveal><span class="eyebrow__line" aria-hidden="true"></span>All services</p>
-      <h2 class="section-title" id="all-title" data-reveal data-delay="60">Pick The Problem You Need Solved</h2>
-      <p class="section-lead" data-reveal data-delay="120">Most engagements combine two or three of these — a custom platform with an AI agent on top, or a mobile app feeding a CRM you actually own.</p>
-    </header>
-    <ul class="sgrid sgrid--index">${cards}
-    </ul>
-  </div>
-</section>
+${indexBody({
+    eyebrow: 'All services',
+    h2: 'Pick The Problem You Need Solved',
+    lead: 'Most engagements combine two or three of these — a custom platform with an AI agent on top, or a mobile app feeding a CRM you actually own.',
+    list
+  })}
 
 ${C.SECTIONS.cta({ rel, services }, {
     cta: {

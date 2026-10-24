@@ -361,7 +361,7 @@
     var fill = $('[data-journey-fill]');
     if (!root || !fill) return;
 
-    var steps = $$('.jstep', root);
+    var steps = $$('.ab-step', root);
     var ticking = false;
 
     function update() {

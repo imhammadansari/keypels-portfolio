@@ -60,7 +60,7 @@ const NAV = [
 
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/keypels/', icon: 'linkedin' },
-  { label: 'Instagram', href: 'https://www.instagram.com/', icon: 'instagram' },
+  { label: 'Instagram', href: 'https://www.instagram.com/keypelsofficial', icon: 'instagram' },
   { label: 'X', href: 'https://x.com/', icon: 'x' }
 ];
 
